@@ -18,6 +18,7 @@
   --overlay-background-color: #dc002d;
   --highlight-background-color: #ccc;
   --text-color: #000;
+  --text-title-color: #002F6C;
 
   /* fonts */
   --body-font-family: 'helvetica neue', helvetica, ubuntu, roboto, noto, sans-serif;
@@ -64,6 +65,7 @@ h1, h2, h3,
 h4, h5, h6 {
   font-family: var(--heading-font-family);
   font-weight: 600;
+  color: var(--text-title-color);
   line-height: 1.25;
   margin-top: 1em;
   margin-bottom: .5em;
@@ -212,12 +214,12 @@ main img {
 
 @media (min-width: 900px) {
   :root {
-    --heading-font-size-xxl: 60px;
-    --heading-font-size-xl: 48px;
-    --heading-font-size-l: 36px;
-    --heading-font-size-m: 30px;
-    --heading-font-size-s: 24px;
-    --heading-font-size-xs: 22px;  
+    --heading-font-size-xxl: 48px;
+    --heading-font-size-xl: 36px;
+    --heading-font-size-l: 30px;
+    --heading-font-size-m: 24px;
+    --heading-font-size-s: 22px;
+    --heading-font-size-xs: 20px;  
   }
   
   .section > div {
