@@ -27,6 +27,11 @@ const createMetadata = (main, document) => {
   if (img) {
     const el = document.createElement('img');
     el.src = img.content;
+
+    const alt = document.querySelector('[property="og:image:alt"], [property="twitter:image:alt"]');
+    if (alt) {
+      el.alt = alt.content;
+    }
     meta.Image = el;
   }
 
@@ -150,7 +155,7 @@ export default {
    * @param {HTMLDocument} document The document
    * @returns {HTMLElement} The root element
    */
-  transformDOM: ({ document }) => {
+  transformDOM: async ({ document }) => {
     const host = 'https://fcbayern.com';
     const main = document.querySelector('.layout__PageWrapperLayout-sc-qwcvwt-0');
 
