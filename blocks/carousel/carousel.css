@@ -1,0 +1,73 @@
+.carousel {
+    width: 100%;
+    height: 355px;
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel .carousel-item {
+    min-width: 292px;
+    max-width: 355px;
+    
+    height: 100%;
+    width: 100%;
+
+    position: absolute;
+    transition: all 0.5s;
+    
+}
+
+.carousel .carousel-item p {
+    margin: 0;
+}
+
+.carousel .carousel-item picture {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.carousel .carousel-item .carousel-body {
+    margin-right: 8px;
+}
+.carousel.news .carousel-item h3 {
+    font-size: var(--heading-font-size-s);
+    font-weight: 600;
+}
+
+.carousel.news .carousel-item h4 {
+    font-size: var(--heading-font-size-s);
+    font-weight: 600;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+}
+
+.carousel .btn {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    border: none;
+    z-index: 10px;
+    cursor: pointer;
+    background-color: var(--text-title-color);
+    font-size: 18px;
+    border-radius: 0;
+}
+
+.carousel .btn:active {
+    transform: scale(1.1);
+}
+
+.carousel .btn-prev {
+    top: 10%;
+    left: 0;
+}
+
+.carousel .btn-next {
+    top: 10%;
+    right: 0;
+}
