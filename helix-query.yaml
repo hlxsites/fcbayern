@@ -7,6 +7,7 @@ indices:
       - '**/news/**'
     exclude:
       - '**/Document.*'
+    target: /de/news/query-index
     properties:
       title:
         select: head > meta[property="og:title"]
