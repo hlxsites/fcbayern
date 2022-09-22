@@ -37,7 +37,7 @@ const createMetadata = (main, document) => {
 
   const date = document.querySelector('.article-header__Date-sc-1f6j4tn-3');
   if (date) {
-    meta.Date = date.textContent;
+    meta.Date = date.textContent.replace('Uhr', '').trim();
   }
 
   const tags = document.querySelector('.meta-section__Tags-sc-m65hdj-4');
