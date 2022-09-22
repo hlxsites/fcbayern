@@ -12,3 +12,43 @@ footer .footer {
 footer .footer p {
   margin: 0;
 }
+
+footer .partner-container ul {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    gap: 20px;
+}
+
+footer .partner-container li:last-child {
+    justify-self: flex-end;
+}
+
+footer .partner-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+footer .socialmedia-container ul {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    gap: 20px;
+}
+
+footer .socialmedia-container li:last-child {
+    justify-self: flex-end;
+}
+
+footer .socialmedia-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+footer .socialmedia-container svg {
+  fill: #fff;
+}
