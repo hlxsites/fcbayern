@@ -16,7 +16,7 @@ indices:
       publicationDate:
         select: head > meta[name="date"]
         value: |
-          dateValue(attribute(el, 'content'), 'DD.MM.YY, HH:mm')
+          parseTimestamp(attribute(el, 'content'), 'DD.MM.YY, HH:mm')
       image:
         select: head > meta[property="og:image"]
         value: |
