@@ -1,0 +1,30 @@
+@font-face {
+  font-family: FCBayernSans;
+  src: local('FC Bayern Sans Light'), url(/fonts/FCBayernSans-Light.woff2) format('woff2');
+  font-weight: 300;
+  font-style: normal
+}
+
+@font-face {
+  font-family: FCBayernSans;
+  src: local('FC Bayern Sans Regular'), url(/fonts/FCBayernSans-Regular.woff2) format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap
+}
+
+@font-face {
+  font-family: FCBayernSans;
+  src: local('FC Bayern Sans SemiBold'), url(/fonts/FCBayernSans-SemiBold.woff2) format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap
+}
+
+@font-face {
+  font-family: FCBayernSans;
+  src: local('FC Bayern Sans Bold'), url(/fonts/FCBayernSans-Bold.woff2) format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap
+}
