@@ -94,6 +94,33 @@ export function loadCSS(href, callback) {
   }
 }
 
+let language;
+
+const LANG = {
+  EN: 'en',
+  DE: 'de',
+};
+
+/**
+ * Extract current language from page URL.
+ * @returns {string} the language
+ */
+export function getLanguage() {
+  if (language) return language;
+  language = LANG.EN;
+  const segs = window.location.pathname.split('/');
+  if (segs && segs.length > 0) {
+    // eslint-disable-next-line no-restricted-syntax
+    for (const [, value] of Object.entries(LANG)) {
+      if (value === segs[1]) {
+        language = value;
+        break;
+      }
+    }
+  }
+  return language;
+}
+
 /**
  * Retrieves the content of metadata tags.
  * @param {string} name The metadata name (or property)
@@ -705,26 +732,26 @@ function loadDelayed() {
   // load anything that can be postponed to the latest here
 }
 /**
- * helper for different feeds 
+ * helper for different feeds
  */
 export async function lookupPages(pathnames, collection) {
-    const indexPaths = {
-        'news-de': '/de/news/data.json?sheet=news',
-        'news-en': '/en/news/data.json?sheet=news'
-    };
-    const indexPath = indexPaths[collection];
-    window.pageIndex = window.pageIndex || {};
-    if (!window.pageIndex[collection]) {
-        const resp = await fetch(indexPath);
-        const json = await resp.json();
-        const lookup = {};
-        json.data.forEach((row) => {
-            lookup[row.path] = row;
-        });
-        window.pageIndex[collection] = { data: json.data, lookup };
-    }
- 
-    const { lookup } = window.pageIndex[collection];
-    const result = pathnames.map((path) => lookup[path]).filter((e) => e);
-    return result;
+  const indexPaths = {
+    'news-de': '/de/news/data.json?sheet=news',
+    'news-en': '/en/news/data.json?sheet=news',
+  };
+  const indexPath = indexPaths[collection];
+  window.pageIndex = window.pageIndex || {};
+  if (!window.pageIndex[collection]) {
+    const resp = await fetch(indexPath);
+    const json = await resp.json();
+    const lookup = {};
+    json.data.forEach((row) => {
+      lookup[row.path] = row;
+    });
+    window.pageIndex[collection] = { data: json.data, lookup };
+  }
+
+  const { lookup } = window.pageIndex[collection];
+  const result = pathnames.map((path) => lookup[path]).filter((e) => e);
+  return result;
 }

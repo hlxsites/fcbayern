@@ -1,0 +1,189 @@
+.configurator-container {
+    max-width: 100vw;
+    box-sizing: border-box;
+    margin: 0px;
+    width: 100%;
+}
+.configurator-container .fcb-carousel.fcb-carousel {
+    overflow: hidden;
+    padding: 0px !important;
+    margin: 0px !important;
+}
+.configurator-container .fcb-carousel__container.fcb-carousel__container {
+    margin: 0px !important;
+}
+.configurator-container .fcb-carousel__arrow.fcb-carousel__arrow {
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    background: rgb(0, 47, 108);
+    width: 32px;
+    height: 40px;
+    top: 50%;
+    outline: none;
+    cursor: pointer;
+}
+.configurator-container .fcb-carousel__arrow.fcb-carousel__arrow::after {
+    content: '';
+    display: flex;
+    flex: 0 0 24px;
+    height: 24px;
+    background-image: url("data:image/svg+xml,%3Csvg width='8' height='14' viewBox='0 0 8 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M4.33359 6.99997L0.933594 2.46664L3.06693 0.866638L7.06693 6.19997C7.42248 6.67405 7.42248 7.3259 7.06693 7.79997L3.06693 13.1333L0.933594 11.5333L4.33359 6.99997Z' fill='%23ffffff'/%3E%3C/svg%3E%0A");
+    background-position: 10px 5px;
+    background-repeat: no-repeat;
+}
+.configurator-container .fcb-carousel__arrow.fcb-carousel__arrow svg {
+    display: none;
+}
+.configurator-container .fcb-carousel__arrow.fcb-carousel__arrow.fcb-carousel__arrow--right {
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+}
+.configurator-container .fcb-carousel__arrow.fcb-carousel__arrow.fcb-carousel__arrow--left {
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+.configurator-container
+    .fcb-carousel__arrow.fcb-carousel__arrow.fcb-carousel__arrow--left::after {
+    transform-origin: center center;
+    transform: rotateZ(180deg);
+}
+.configurator-container .fcb-product-tile.fcb-product-tile {
+    position: relative;
+    padding: 0px;
+    margin-right: 16px;
+}
+@media (min-width: 1025px) {
+    .configurator-container .fcb-product-tile.fcb-product-tile {
+        flex-basis: calc(25% - 24px);
+        width: calc(25% - 24px);
+    }
+}
+@media (hover: hover) {
+    .configurator-container
+        .fcb-product-tile.fcb-product-tile:hover
+        .fcb-product-tile__img-wrapper--zoom.fcb-product-tile__img-wrapper--zoom {
+        transform: translateY(-8px) scale(1.05);
+    }
+}
+@media (hover: none) {
+    .configurator-container .fcb-product-tile.fcb-product-tile {
+        -webkit-tap-highlight-color: transparent;
+    }
+    .configurator-container
+        .fcb-product-tile.fcb-product-tile:active
+        .fcb-product-tile__img-wrapper--zoom.fcb-product-tile__img-wrapper--zoom {
+        transform: translateY(-8px) scale(1.05);
+    }
+}
+.configurator-container .fcb-product-tile__top.fcb-product-tile__top {
+    overflow: visible;
+}
+.configurator-container .fcb-product-tile__top.fcb-product-tile__top::before {
+    content: '';
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: rgb(255, 255, 255);
+}
+.configurator-container .fcb-product-tile__top.fcb-product-tile__top::after {
+    content: '';
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 4px 16px;
+    opacity: 0;
+    transition: box-shadow 0.25s ease 0s;
+}
+@media (hover: hover) {
+    .configurator-container .fcb-product-tile__top.fcb-product-tile__top:hover::after {
+        opacity: 1;
+    }
+}
+@media (hover: none) {
+    .configurator-container .fcb-product-tile__top.fcb-product-tile__top {
+        -webkit-tap-highlight-color: transparent;
+    }
+    .configurator-container .fcb-product-tile__top.fcb-product-tile__top:active::after {
+        opacity: 1;
+    }
+}
+.configurator-container .fcb-carousel__products.fcb-carousel__products {
+    margin-left: 8px;
+    margin-right: 16px;
+}
+@media (min-width: 1025px) {
+    .configurator-container .fcb-carousel__products.fcb-carousel__products {
+        box-sizing: border-box;
+        margin-left: 24px;
+        margin-right: 24px;
+        width: calc(100% - 14px);
+    }
+}
+.configurator-container .fcb-carousel__products.fcb-carousel__products::after {
+    content: '';
+    display: flex;
+    flex: 0 0 24px;
+}
+.configurator-container .fcb-product-tile__bottom.fcb-product-tile__bottom {
+    color: rgb(0, 47, 108);
+}
+.configurator-container .fcb-product-tile__bottom.fcb-product-tile__bottom > * {
+    color: inherit;
+}
+.configurator-container .fcb-product-tile__name.fcb-product-tile__name {
+    font-family: FCBayernSans, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.1;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 16px;
+}
+.configurator-container .fcb-product-tile__price-row.fcb-product-tile__price-row {
+    font-family: FCBayernSans, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.1;
+    margin-bottom: 0px;
+    font-weight: bold;
+    font-size: 24px;
+}
+.configurator-container .fcb-product-tile__price.fcb-product-tile__price {
+    color: rgb(0, 47, 108);
+}
+.configurator-container .fcb-product-tile__price.fcb-product-tile__price.unit {
+    color: rgba(0, 47, 108, 0.65);
+}
+.configurator-container .fcb-product-tile__top.fcb-product-tile__top {
+    margin-bottom: 0px;
+}
+.configurator-container .fcb-product-tile__bottom.fcb-product-tile__bottom {
+    margin-top: 13px;
+    padding: 0px;
+}
+.configurator-container .fcb-product-tile__flags.fcb-product-tile__flags {
+    left: 8px;
+    bottom: 8px;
+}
+.configurator-container .fcb-product-tile__flag.fcb-product-tile__flag {
+    font-family: FCBayernSans, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.1;
+    font-weight: bold;
+    font-size: 12px;
+    color: rgb(255, 255, 255);
+    background: rgb(0, 47, 108);
+    border: 0px;
+    margin: 0px;
+    border-radius: 3px;
+    text-transform: uppercase;
+}
+.configurator-container .fcb-product-tile__flag.fcb-product-tile__flag.new,
+.configurator-container .fcb-product-tile__flag.fcb-product-tile__flag.sale {
+    color: rgb(255, 255, 255);
+    background: rgb(220, 5, 45);
+}
