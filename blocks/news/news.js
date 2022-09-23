@@ -38,10 +38,9 @@ function isCardOnPage(article) {
 export async function filterNewsItems(config, feed, limit) {
   const result = [];
 
-  /* filter posts by category, tag and author */
   const filters = {};
   Object.keys(config).forEach((key) => {
-    const filterNames = ['tags', 'author', 'category'];
+    const filterNames = ['tags'];
     if (filterNames.includes(key)) {
       const vals = config[key];
       if (vals) {
@@ -63,14 +62,16 @@ export async function filterNewsItems(config, feed, limit) {
     const indexChunk = index.data.slice(feed.cursor);
 
     /* filter and ignore if already in result */
-    const feedChunk = indexChunk.filter((article) => {
+    const feedChunk = indexChunk.filter((newsItem) => {
       const matchedAll = Object.keys(filters).every((key) => {
         const matchedFilter = filters[key].some(
-          (val) => article[key] && article[key].toLowerCase().includes(val),
+          (val) => newsItem[key] && newsItem[key].toLowerCase().includes(val),
         );
         return matchedFilter;
       });
-      return matchedAll && !result.includes(article) && !isCardOnPage(article);
+      return (
+        matchedAll && !result.includes(newsItem) && !isCardOnPage(newsItem)
+      );
     });
     feed.cursor = index.data.length;
     feed.complete = true;
@@ -79,17 +80,10 @@ export async function filterNewsItems(config, feed, limit) {
 }
 
 async function decorateNewsFeed(
-  articleFeedEl,
+  block,
   config,
   feed = { data: [], complete: false, cursor: 0 },
 ) {
-  let articleCards = articleFeedEl.querySelector('.news-feed-cards');
-  if (!articleCards) {
-    articleCards = document.createElement('div');
-    articleCards.className = 'news-feed-cards';
-    articleFeedEl.appendChild(articleCards);
-  }
-
   const limit = 8;
   const largeCards = 2;
 
@@ -108,30 +102,50 @@ async function decorateNewsFeed(
   cards.forEach((card) => {
     cardGrid.innerHTML += card;
   });
-  articleFeedEl.append(cardGrid);
+  block.append(cardGrid);
+}
+
+function createNewsFilters(items) {
+  const filter = document.createElement('div');
+  filter.classList.add(`news-feed-filters`);
+
+  if (Array.isArray(items)) {
+    const filterList = document.createElement('ul');
+
+    items.forEach((e) => {
+      const filterItem = document.createElement('li');
+      const filterItemButton = document.createElement('button');
+      filterItemButton.classList.add('secondary');
+      if (e.selected) {
+        filterItemButton.classList.add('selected');
+        filterItemButton.setAttribute('aria-pressed', 'true');
+      }
+      filterItemButton.innerText = e.label;
+      filterItem.append(filterItemButton);
+      filterList.append(filterItem);
+    });
+
+    filter.append(filterList);
+  }
+  return filter;
 }
 
 export default async function decorate(block) {
-  //const config = readBlockConfig(block);
   const config = {};
-  block.innerHTML = '';
+  block.innerHTML = ``;
+
+  /* create buttons for filter options */
+  let filterItems = [
+    { label: 'all', selected: true },
+    { label: 'News' },
+    { label: 'Club' },
+    { label: 'Bundesliga' },
+    { label: 'Champions League' },
+    { label: 'FC Bayern.tv' },
+    { label: 'Photo gallery' },
+  ];
+  const newsFilters = createNewsFilters(filterItems);
+  block.appendChild(newsFilters);
+
   await decorateNewsFeed(block, config);
 }
-
-// export default async function decorate(block) {
-//     const newsBucket = 'news-' + getLanguage();
-//     await lookupPages([], newsBucket);
-//     const news = window.pageIndex[newsBucket];
-//     block.textContent = '';
-
-//     if (news && Array.isArray(news.data)) {
-//         const newsList = document.createElement('ul');
-//         news.data.slice(0,8).forEach((e) => {
-//           const newsItem = document.createElement('li');
-//           const newsCard = createNewsCard(e, 'news');
-//           newsItem.innerHTML = newsCard.outerHTML;
-//           newsList.append(newsItem);
-//         });
-//         block.append(newsList);
-//     }
-// }

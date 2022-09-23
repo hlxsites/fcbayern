@@ -23,6 +23,15 @@
   --text-color: #002f6c;
   --text-title-color: #002f6c;
 
+  --colors-interactions-secondary-color: #0066b2;
+  --colors-interactions-secondary-background: rgba(0, 102, 178, 0.05);
+  --colors-interactions-secondary-hover-color: #0066b2;
+  --colors-interactions-secondary-hover-background: rgba(0, 102, 178, 0.15);
+  --colors-interactions-secondary-disabled-color: rgba(0, 102, 178, 0.55);
+  --colors-interactions-secondary-disabled-background: rgba(0, 102, 178, 0.05);
+  --colors-interactions-secondary-selected-color: #ffffff;
+  --colors-interactions-secondary-selected-background: #dc052d;
+
   /* fonts */
   --body-font-family: 'helvetica neue', helvetica, ubuntu, roboto, noto,
     sans-serif;
@@ -100,13 +109,13 @@ h6 {
 }
 
 .hnBTBc {
-    font-family: FCBayernSans, 'Helvetica Neue', Arial, sans-serif;
-    line-height: 1.1;
-    font-weight: bold;
-    font-size: 28px;
-    margin: 0px 0px 16px;
-    text-transform: uppercase;
-    color: var(--colors-text-title);
+  font-family: FCBayernSans, 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.1;
+  font-weight: bold;
+  font-size: 28px;
+  margin: 0px 0px 16px;
+  text-transform: uppercase;
+  color: var(--colors-text-title);
 }
 
 p,
@@ -184,9 +193,50 @@ button:disabled:hover {
 
 a.button.secondary,
 button.secondary {
-  background-color: unset;
-  border: 2px solid currentcolor;
-  color: var(--text-color);
+  color: var(--colors-interactions-secondary-color);
+  background: var(--colors-interactions-secondary-background);
+}
+
+a.button.secondary:hover,
+button.secondary:hover {
+  color: var(--colors-interactions-secondary-hover-color);
+  background: var(--colors-interactions-secondary-hover-background);
+}
+
+a.button.secondary:active,
+button.secondary:active {
+  color: var(--colors-interactions-secondary-hover-color);
+  background: var(--colors-interactions-secondary-hover-background);
+}
+
+button.secondary:disabled,
+button.secondary:disabled:hover {
+  color: var(--colors-interactions-secondary-disabled-color);
+  background: var(--colors-interactions-secondary-disabled-background);
+}
+
+a.button.secondary.selected,
+button.secondary.selected {
+  color: var(--colors-interactions-secondary-selected-color);
+  background: var(--colors-interactions-secondary-selected-background);
+}
+
+a.button.secondary.selected:hover,
+button.secondary.selected:hover {
+  color: var(--colors-interactions-secondary-selected-color);
+  background: var(--colors-interactions-secondary-selected-background);
+}
+
+a.button.secondary.selected:active,
+button.secondary.selected:active {
+  color: var(--colors-interactions-secondary-selected-color);
+  background: var(--colors-interactions-secondary-selected-background);
+}
+
+button.secondary.selected:disabled,
+button.secondary.selected:disabled:hover {
+  color: var(--colors-interactions-secondary-disabled-color);
+  background: var(--colors-interactions-secondary-disabled-background);
 }
 
 main {
