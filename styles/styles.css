@@ -10,20 +10,25 @@
  * governing permissions and limitations under the License.
  */
 
- :root {
+:root {
   /* colors */
-    --link-color: #035fe6;
+  --link-color: #035fe6;
   --link-hover-color: #136ff6;
   --background-color: #fff;
+  --body-background-color: #ebedf0;
+  --card-background-color: #fff;
   --overlay-background-color: #dc002d;
   --highlight-background-color: #ccc;
-  --text-color: #000;
-  --text-title-color: #002F6C;
+  --section-backgrounds-color: #f5f7f9;
+  --text-color: #002f6c;
+  --text-title-color: #002f6c;
 
   /* fonts */
-  --body-font-family: 'helvetica neue', helvetica, ubuntu, roboto, noto, sans-serif;
+  --body-font-family: 'helvetica neue', helvetica, ubuntu, roboto, noto,
+    sans-serif;
   --heading-font-family: var(--body-font-family);
-  --fixed-font-family: 'Roboto Mono', menlo, consolas, 'Liberation Mono', monospace;
+  --fixed-font-family: 'Roboto Mono', menlo, consolas, 'Liberation Mono',
+    monospace;
 
   /* body sizes */
   --body-font-size-m: 22px;
@@ -40,7 +45,6 @@
 
   /* nav height */
   --nav-height: 64px;
-
 }
 
 body {
@@ -49,7 +53,7 @@ body {
   font-family: var(--body-font-family);
   line-height: 1.6;
   color: var(--text-color);
-  background-color: var(--background-color);
+  background-color: var(--body-background-color);
   display: none;
 }
 
@@ -61,25 +65,46 @@ header {
   height: var(--nav-height);
 }
 
-h1, h2, h3,
-h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--heading-font-family);
   font-weight: 600;
   color: var(--text-title-color);
   line-height: 1.25;
   margin-top: 1em;
-  margin-bottom: .5em;
+  margin-bottom: 0.5em;
   scroll-margin: calc(var(--nav-height) + 1em);
 }
 
-h1 { font-size: var(--heading-font-size-xxl) }
-h2 { font-size: var(--heading-font-size-xl) }
-h3 { font-size: var(--heading-font-size-l) }
-h4 { font-size: var(--heading-font-size-m) }
-h5 { font-size: var(--heading-font-size-s) }
-h6 { font-size: var(--heading-font-size-xs) }
+h1 {
+  font-size: var(--heading-font-size-xxl);
+}
+h2 {
+  font-size: var(--heading-font-size-xl);
+}
+h3 {
+  font-size: var(--heading-font-size-l);
+}
+h4 {
+  font-size: var(--heading-font-size-m);
+}
+h5 {
+  font-size: var(--heading-font-size-s);
+}
+h6 {
+  font-size: var(--heading-font-size-xs);
+}
 
-p, dl, ol, ul, pre, blockquote {
+p,
+dl,
+ol,
+ul,
+pre,
+blockquote {
   margin-top: 1em;
   margin-bottom: 1em;
 }
@@ -94,13 +119,16 @@ a:hover {
   color: var(--link-hover-color);
 }
 
-code, pre, samp {
+code,
+pre,
+samp {
   font-family: var(--fixed-font-family);
   font-size: var(--body-font-size-s);
 }
 
-code, samp {
-  padding: .125em;
+code,
+samp {
+  padding: 0.125em;
 }
 
 pre {
@@ -109,7 +137,8 @@ pre {
 
 /* buttons */
 
-a.button:any-link, button {
+a.button:any-link,
+button {
   font-family: var(--font-family-body);
   display: inline-block;
   box-sizing: border-box;
@@ -117,7 +146,7 @@ a.button:any-link, button {
   border: 2px solid transparent;
   padding: 5px 30px;
   text-align: center;
-  font-style: normal; 
+  font-style: normal;
   font-weight: 600;
   cursor: pointer;
   color: var(--background-color);
@@ -129,22 +158,31 @@ a.button:any-link, button {
   border-radius: 30px;
 }
 
-a.button:hover, a.button:focus, button:hover, button:focus  {
+a.button:hover,
+a.button:focus,
+button:hover,
+button:focus {
   background-color: var(--link-hover-color);
   cursor: pointer;
 }
 
-button:disabled, button:disabled:hover {
+button:disabled,
+button:disabled:hover {
   background-color: var(--overlay-background-color);
   cursor: unset;
 }
 
-a.button.secondary, button.secondary {
+a.button.secondary,
+button.secondary {
   background-color: unset;
   border: 2px solid currentcolor;
-  color: var(--text-color)
-} 
+  color: var(--text-color);
+}
 
+main {
+  max-width: 1280px;
+  margin: auto;
+}
 
 main input {
   font-size: 1.25rem;
@@ -152,7 +190,7 @@ main input {
   max-width: 50rem;
   display: block;
   margin-bottom: 1rem;
-  padding: 0.75rem 0.6rem;    
+  padding: 0.75rem 0.6rem;
   border-radius: 0.25rem;
   box-sizing: border-box;
   border: 1px solid var(--text-color);
@@ -165,13 +203,19 @@ main input:hover {
 }
 
 main .section {
-  padding: 64px 16px;
+  padding: 0 24px 64px 24px;
+  width: 100%;
+  max-width: 100vw;
+  margin: 0px auto;
+  min-height: inherit;
+  color: var(--text-color);
+  background: var(--section-backgrounds-color);
 }
 
 main pre {
   background-color: var(--overlay-background-color);
   padding: 1em;
-  border-radius: .25em;
+  border-radius: 0.25em;
   overflow-x: auto;
   white-space: pre;
 }
@@ -184,12 +228,12 @@ main blockquote {
 }
 
 main blockquote p::before {
-  content: "“";
+  content: '“';
   line-height: 0;
 }
 
 main blockquote p::after {
-  content: "”";
+  content: '”';
   line-height: 0;
 }
 
@@ -208,8 +252,8 @@ main img {
 
 @media (min-width: 600px) {
   main .section {
-    padding: 64px 32px;
-  }  
+    padding: 0 16px 64px 16px;
+  }
 }
 
 @media (min-width: 900px) {
@@ -219,11 +263,11 @@ main img {
     --heading-font-size-l: 30px;
     --heading-font-size-m: 24px;
     --heading-font-size-s: 22px;
-    --heading-font-size-xs: 20px;  
+    --heading-font-size-xs: 20px;
   }
-  
-  .section > div {
-    max-width: 1200px;
+
+  main {
+    max-width: 1280px;
     margin: auto;
   }
 }
