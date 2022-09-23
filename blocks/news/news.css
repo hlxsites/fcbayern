@@ -85,7 +85,7 @@ main .news-teaser-card-info {
 main h3.news-teaser-card-title {
   line-height: 1.1;
   font-weight: 600;
-  font-size: 16px;
+  font-size: var(--heading-font-size-m);
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
@@ -106,7 +106,7 @@ main .news-teaser-card-subtitle {
 main .news-teaser-card-subtitle span {
   line-height: 1.1;
   font-weight: 600;
-  font-size: 14px;
+  font-size: var(--heading-font-size-s);
   margin: 0px;
   color: #dc002d;
   white-space: nowrap;
@@ -167,16 +167,9 @@ main .news-teaser-card-subtitle span {
     padding: 24px calc(80px) 24px 24px;
   }
 
-  main h3.news-teaser-card-title {
-    line-height: 1.1;
-    margin-bottom: 0px;
-    font-weight: 600;
-    font-size: 20px;
-  }
-
   main .large h3.news-teaser-card-title {
     line-height: 1.1;
-    font-size: 24px;
+    font-size: var(--heading-font-size-l);
     font-weight: 600;
     width: 90%;
     display: -webkit-box;
@@ -199,7 +192,7 @@ main .news-teaser-card-subtitle span {
   main .large .news-teaser-card-subtitle span {
     line-height: 1.1;
     font-weight: 600;
-    font-size: 14px;
+    font-size: var(--heading-font-size-s);
     margin: 0px;
     color: rgb(255, 255, 255);
     white-space: nowrap;
