@@ -1,3 +1,5 @@
+import { getLanguage } from '../../scripts/scripts.js';
+
 export default async function decorate(block) {
   block.firstElementChild.id = 'configurator';
   block.firstElementChild.setAttribute('data-component', 'comp_00007B4A');
@@ -5,7 +7,7 @@ export default async function decorate(block) {
     'data-base-url',
     'https://fcbayern.com/shop',
   );
-  block.firstElementChild.setAttribute('data-locale', 'de');
+  block.firstElementChild.setAttribute('data-locale', getLanguage());
   block.firstElementChild.classList.add('configurator-container');
 
   block.firstElementChild.firstElementChild.remove();
