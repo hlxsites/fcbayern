@@ -46,7 +46,7 @@ const createMetadata = (main, url, document) => {
   } else {
     const m = url.match(/(\d{1,2})\/(\d{1,2})\//);
     if (m && m.length > 2) {
-      meta.Date = `${m[1]}.${m[2]}.01, 09:00`;
+      meta.Date = `01.${m[2]}.${m[1]}, 09:00`;
     }
   }
 
