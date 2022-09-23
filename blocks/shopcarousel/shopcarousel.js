@@ -2,7 +2,6 @@ import { getLanguage } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
   block.firstElementChild.id = 'shop-carousel';
-  block.firstElementChild.setAttribute('data-component', 'comp_00007B4A');
   block.firstElementChild.setAttribute(
     'data-url',
     'https://fcbayern.com/shop/api/component/carousel/DE/Teamline',
@@ -18,10 +17,10 @@ export default async function decorate(block) {
 
   block.firstElementChild.firstElementChild.remove();
 
-  const configuratorScript = document.createElement('script');
-  configuratorScript.type = 'module';
-  configuratorScript.crossorigin = 'use-credentials';
-  configuratorScript.src = '/blocks/shopcarousel/fcbProductCarousel.js';
+  const shopCarouselScript = document.createElement('script');
+  shopCarouselScript.type = 'module';
+  shopCarouselScript.crossorigin = 'use-credentials';
+  shopCarouselScript.src = '/blocks/shopcarousel/fcbProductCarousel.js';
 
-  block.append(configuratorScript);
+  document.head.appendChild(shopCarouselScript);
 }

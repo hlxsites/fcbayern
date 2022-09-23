@@ -17,5 +17,5 @@ export default async function decorate(block) {
   configuratorScript.crossorigin = 'use-credentials';
   configuratorScript.src = '/blocks/configurator/shirt-configurator.js';
 
-  block.append(configuratorScript);
+  document.head.appendChild(configuratorScript);
 }
