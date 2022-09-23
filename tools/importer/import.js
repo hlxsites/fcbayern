@@ -10,7 +10,7 @@ const reorganiseHero = (main, document) => {
   }
 };
 
-const createMetadata = (main, document) => {
+const createMetadata = (main, url, document) => {
   const meta = {};
 
   const title = document.querySelector('title');
@@ -43,6 +43,11 @@ const createMetadata = (main, document) => {
   const date = document.querySelector('.article-header__Date-sc-1f6j4tn-3');
   if (date) {
     meta.Date = date.textContent.replace('Uhr', '').trim();
+  } else {
+    const m = url.match(/(\d{1,2})\/(\d{1,2})\//);
+    if (m && m.length > 2) {
+      meta.Date = `${m[1]}.${m[2]}.01, 09:00`;
+    }
   }
 
   const tags = document.querySelector('.meta-section__Tags-sc-m65hdj-4');
@@ -155,13 +160,13 @@ export default {
    * @param {HTMLDocument} document The document
    * @returns {HTMLElement} The root element
    */
-  transformDOM: async ({ document }) => {
+  transformDOM: async ({ document, url }) => {
     const host = 'https://fcbayern.com';
     const main = document.querySelector('.layout__PageWrapperLayout-sc-qwcvwt-0');
 
     reorganiseHero(main, document);
     // createRelatedStoriesBlock(main, document);
-    createMetadata(main, document);
+    createMetadata(main, url, document);
     createVideoBlock(main, host, document);
     createTeaserBlock(main, document);
     createCaption(main, document);
