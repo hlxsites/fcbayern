@@ -16,11 +16,15 @@ indices:
       publicationDate:
         select: head > meta[name="date"]
         value: |
-          dateValue(attribute(el, 'content'), 'DD.MM.YY, HH:mm')
+          parseTimestamp(attribute(el, 'content'), 'DD.MM.YY, HH:mm')
       image:
         select: head > meta[property="og:image"]
         value: |
           match(attribute(el, 'content'), 'https:\/\/[^/]+(\/.*)')
+      imageAlt:
+        select: head > meta[property="og:image:alt"]
+        value: |
+          attribute(el, 'content')
       description:
         select: head > meta[name="description"]
         value: |
