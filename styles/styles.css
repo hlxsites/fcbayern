@@ -158,23 +158,26 @@ pre {
 
 a.button:any-link,
 button {
-  font-family: var(--font-family-body);
-  display: inline-block;
-  box-sizing: border-box;
   text-decoration: none;
-  border: 2px solid transparent;
+  border: 3px solid transparent;
+  border-radius: 3px;
   padding: 5px 30px;
   text-align: center;
   font-style: normal;
   font-weight: 600;
+  font-size: 16px;
   cursor: pointer;
-  color: var(--background-color);
-  background-color: var(--link-color);
-  margin: 16px 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  border-radius: 30px;
+  display: inline-flex;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin: 0px;
 }
 
 a.button:hover,
