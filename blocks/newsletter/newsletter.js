@@ -18,7 +18,5 @@ export default function decorate(block) {
     </label>
     <button type="submit"><span>Abonnieren</span></button>`;
 
-  // block.querySelector('h2').parentElement.append(form);
-
   heading.parentNode.insertBefore(form, heading.nextSibling);
 }
