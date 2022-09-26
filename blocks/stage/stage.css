@@ -149,14 +149,7 @@ main .large .stage-news-card-subtitle span {
     transition: transform 300ms ease-in-out 0s;
   }
 
-  main .card-2 .stage-news-card > div.stage-news-card-picture {
-    width: 70%;
-    padding: 0px 20px;
-    margin: 0px -20px;
-    transform: skewX(-7.2deg);
-    transition: transform 300ms ease-in-out 0s;
-  }
-
+  main .card-2 .stage-news-card > div.stage-news-card-picture,
   main .card-3 .stage-news-card > div.stage-news-card-picture {
     width: 70%;
     padding: 0px 20px;
@@ -165,14 +158,7 @@ main .large .stage-news-card-subtitle span {
     transition: transform 300ms ease-in-out 0s;
   }
 
-  main .card-2 .stage-news-card > div.stage-news-card-picture > div {
-    position: relative;
-    left: -50px;
-    width: calc(100% + 50px);
-    cursor: pointer;
-    transform: skewX(7.67deg) translateX(-4%);
-  }
-
+  main .card-2 .stage-news-card > div.stage-news-card-picture > div,
   main .card-3 .stage-news-card > div.stage-news-card-picture > div {
     position: relative;
     left: -50px;
