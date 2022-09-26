@@ -23,7 +23,7 @@ export function createNewsCard(newsItem, classPrefix, large = false) {
   ).outerHTML;
 
   cardContent.innerHTML = `
-    <div class="${classPrefix}-card-picture">${pictureString}</div>
+    <div class="${classPrefix}-card-picture"><div>${pictureString}</div></div>
     <div class="${classPrefix}-card-info">
       <div class="${classPrefix}-card-subtitle"><span>${newsItem.subtitle}</span></div>
       <h3 class="${classPrefix}-card-title">${newsItem.title}</h3>

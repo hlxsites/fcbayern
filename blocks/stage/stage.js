@@ -17,6 +17,7 @@ export default async function decorate(block) {
       if (news.length) {
         const [newsItem] = news;
         const card = createNewsCard(newsItem, 'stage-news', true);
+        card.classList.add('card-' + (i + 1));
         contents.push(card.outerHTML);
       }
     } else {
@@ -25,7 +26,7 @@ export default async function decorate(block) {
   }
 
   // pad array with empty strings
-  for (let i = contents.length; i < 4; i += 1) {
+  for (let i = contents.length; i < 3; i += 1) {
     contents[i] = '';
   }
 
@@ -34,9 +35,23 @@ export default async function decorate(block) {
     ${contents[0]}
     ${contents[1]}
     ${contents[2]}
-    ${contents[3]}
     </div>
     `;
   block.innerHTML = html;
-}
 
+  /* special mouse over behaviour */
+  const cards = block.querySelectorAll('a');
+  cards.forEach((card) => {
+    card.addEventListener('mouseover', (event) => {
+      block
+        .querySelectorAll('a')
+        .forEach((c) => c.classList.remove('active'));
+      let currentTarget = event.currentTarget;
+      currentTarget.classList.add('active');
+      while (currentTarget.previousElementSibling) {
+        currentTarget = currentTarget.previousElementSibling;
+        currentTarget.classList.add('active');
+      }
+    });
+  });
+}
