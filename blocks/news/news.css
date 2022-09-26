@@ -1,6 +1,7 @@
 main .news {
   text-decoration: none;
   outline: none;
+  padding-top: 10px;
 }
 
 main .news a:hover {
