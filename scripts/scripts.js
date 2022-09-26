@@ -169,6 +169,7 @@ export function toCamelCase(name) {
 /**
  * Replace icons with inline SVG and prefix with codeBasePath.
  * @param {Element} element
+ * @return {Element} element
  */
 export function decorateIcons(element = document) {
   element.querySelectorAll('span.icon').forEach(async (span) => {
@@ -189,6 +190,8 @@ export function decorateIcons(element = document) {
       }
     }
   });
+  
+  return element;
 }
 
 /**
