@@ -133,3 +133,9 @@ main .newsletter button {
     border-bottom: 1.5px solid currentcolor;
   }
 }
+
+@media (min-width: 764px) {
+  main .newsletter label{
+    margin-right: 1rem;
+  }
+}
