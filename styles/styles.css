@@ -11,6 +11,100 @@
  */
 
 :root {
+  /* FCB light theme */
+  --colors-brand: #DC052D;
+  --colors-interactions-focus: #0083E5;
+  --colors-interactions-stroke: rgba(0, 47, 108, 0.1);
+  --colors-interactions-tapHighlightColor: transparent;
+  --colors-interactions-primary-color: #FFFFFF;
+  --colors-interactions-primary-background: #0066B2;
+  --colors-interactions-primary-hover-color: #FFFFFF;
+  --colors-interactions-primary-hover-background: #0083E5;
+  --colors-interactions-primary-disabled-color: rgba(255, 255, 255, 0.55);
+  --colors-interactions-primary-disabled-background: #0066B2;
+  --colors-interactions-secondary-color: #0066B2;
+  --colors-interactions-secondary-background: rgba(0, 102, 178, 0.05);
+  --colors-interactions-secondary-hover-color: #0066B2;
+  --colors-interactions-secondary-hover-background: rgba(0, 102, 178, 0.15);
+  --colors-interactions-secondary-disabled-color: rgba(0, 102, 178, 0.55);
+  --colors-interactions-secondary-disabled-background: rgba(0, 102, 178, 0.05);
+  --colors-interactions-secondary-selected-color: #FFFFFF;
+  --colors-interactions-secondary-selected-background: #DC052D;
+  --colors-interactions-tertiary-color: #0066B2;
+  --colors-interactions-tertiary-background: rgba(255, 255, 255, 0.001);
+  --colors-interactions-tertiary-hover-color: #0066B2;
+  --colors-interactions-tertiary-hover-background: rgba(0, 102, 178, 0.05);
+  --colors-interactions-tertiary-disabled-color: rgba(0, 102, 178, 0.55);
+  --colors-interactions-tertiary-disabled-background: rgba(255, 255, 255, 0.001);
+  --colors-interactions-tertiary-selected-color: #0066B2;
+  --colors-interactions-tertiary-selected-background: rgba(0, 102, 178, 0.05);
+  --colors-interactions-delete-color: #FFFFFF;
+  --colors-interactions-delete-background: #DC052D;
+  --colors-interactions-delete-hover-color: #FFFFFF;
+  --colors-interactions-delete-hover-background: #FF4D5B;
+  --colors-interactions-delete-disabled-color: rgba(255, 255, 255, 0.55);
+  --colors-interactions-delete-disabled-background: #DC052D;
+  --colors-interactions-success-color: #000E29;
+  --colors-interactions-success-background: #8AE599;
+  --colors-interactions-error-color: #DC052D;
+  --colors-interactions-error-background: rgba(220, 5, 45, 0.1);
+  --colors-interactions-error-border: #DC052D;
+  --colors-interactions-error-hover-color: #DC052D;
+  --colors-interactions-error-hover-background: rgba(220, 5, 45, 0.2);
+  --colors-interactions-switchOn-color: #FFFFFF;
+  --colors-interactions-switchOn-background: #0066B2;
+  --colors-interactions-switchOn-boxShadow: 0px 2px 4px rgba(0, 0, 0, 0.24);
+  --colors-interactions-switchOn-border: #000000;
+  --colors-interactions-switchOn-hover-color: #FFFFFF;
+  --colors-interactions-switchOn-hover-background: #0083E5;
+  --colors-interactions-switchOn-hover-boxShadow: 0px 2px 4px rgba(0, 0, 0, 0.24);
+  --colors-interactions-switchOn-disabled-color: rgba(255, 255, 255, 0.5);
+  --colors-interactions-switchOn-disabled-background: #0066B2;
+  --colors-interactions-switchOn-disabled-boxShadow: 0px 2px 4px rgba(0, 0, 0, 0);
+  --colors-interactions-switchOff-color: #FFFFFF;
+  --colors-interactions-switchOff-background: rgba(0, 102, 178, 0.05);
+  --colors-interactions-switchOff-boxShadow: 0px 2px 4px rgba(0, 0, 0, 0.24);
+  --colors-interactions-switchOff-border: none;
+  --colors-interactions-switchOff-hover-color: #FFFFFF;
+  --colors-interactions-switchOff-hover-background: rgba(0, 102, 178, 0.15);
+  --colors-interactions-switchOff-hover-boxShadow: 0px 2px 4px rgba(0, 0, 0, 0.24);
+  --colors-interactions-switchOff-disabled-color: rgba(255, 255, 255, 0.5);
+  --colors-interactions-switchOff-disabled-background: rgba(0, 102, 178, 0.05);
+  --colors-interactions-switchOff-disabled-boxShadow: 0px 2px 4px rgba(0, 0, 0, 0);
+  --colors-backgrounds-content: #FFF;
+  --colors-backgrounds-card: #F5F7F9;
+  --colors-backgrounds-outside: #EBEDF0;
+  --colors-canvas-playerCard: linear-gradient(180deg, #76232f 0%, #dc052d 100%);
+  --colors-canvas-playerCardAwayTeam: linear-gradient(180deg, #002f6c 0%, #2b6bbd 100%);
+  --colors-canvas-contentLayoutCard-background: #F2F5F8;
+  --colors-canvas-contentLayoutCard-hover-background: #F2F5F8;
+  --colors-canvas-contentLayoutCard-hover-boxShadow: 0px 4px 16px rgba(0, 0, 0, 0.16);
+  --colors-canvas-cardLayoutCard-background: #FFF;
+  --colors-canvas-cardLayoutCard-boxShadow: 0px 2px 8px rgba(0, 0, 0, 0.04);
+  --colors-canvas-cardLayoutCard-hover-background: #FFF;
+  --colors-canvas-cardLayoutCard-hover-boxShadow: 0px 4px 16px rgba(0, 0, 0, 0.16);
+  --colors-canvas-promotionCard-background: linear-gradient(0deg, #76232f 0%, #dc052d 100%);
+  --colors-canvas-skeleton-backgroundColor: #DCE1E6;
+  --colors-canvas-skeleton-backgroundPosition: 0 0;
+  --colors-canvas-skeleton-backgroundSize: 300% 300%;
+  --colors-canvas-skeleton-backgroundImage: linear-gradient(135deg, rgba(249, 250, 251, 0) 40%, rgba(249, 250, 251, 0.4) 50%, rgba(249, 250, 251, 0) 60%);
+  --colors-canvas-placeholder: linear-gradient(134.82deg, rgba(220, 225, 230, 0) 0%, #DCE1E6 100%);
+  --colors-text-title: #002F6C;
+  --colors-text-default: #002F6C;
+  --colors-text-article: rgba(0, 0, 0, 0.8);
+  --colors-text-secondary: rgba(0, 47, 108, 0.65);
+  --colors-text-category: #DC052D;
+  --colors-text-error: #DC052D;
+  --colors-text-errorMessage: #DC052D;
+  --colors-text-link: #0066B2;
+  --colors-text-linkSecondary: #002F6C;
+  --colors-text-linkFocus: #FFFFFF;
+  --colors-sonderotto-accordionHover: linear-gradient(180deg, rgba(0, 102, 178, 0.05) 0%, rgba(0, 102, 178, 0) 100%);
+  --colors-sonderotto-matchCenterJersey: rgba(255, 255, 255, 0.55);
+  --colors-sonderotto-matchBarBackground: rgba(0, 47, 108, 0.2);
+  --colors-sonderotto-matchSubFor: rgba(0, 72, 133, 0.55);
+  --colors-sonderotto-matchLineupIcons: #000;
+
   /* colors */
   --link-color: #035fe6;
   --link-hover-color: #136ff6;
@@ -23,21 +117,11 @@
   --text-color: #002f6c;
   --text-title-color: #002f6c;
 
-  --colors-interactions-secondary-color: #0066b2;
-  --colors-interactions-secondary-background: rgba(0, 102, 178, 0.05);
-  --colors-interactions-secondary-hover-color: #0066b2;
-  --colors-interactions-secondary-hover-background: rgba(0, 102, 178, 0.15);
-  --colors-interactions-secondary-disabled-color: rgba(0, 102, 178, 0.55);
-  --colors-interactions-secondary-disabled-background: rgba(0, 102, 178, 0.05);
-  --colors-interactions-secondary-selected-color: #ffffff;
-  --colors-interactions-secondary-selected-background: #dc052d;
-
   /* fonts */
-  --body-font-family: 'helvetica neue', helvetica, ubuntu, roboto, noto,
-    sans-serif;
+  --body-font-family: FCBayernSans, Arial, Helvetica, sans-serif;
   --heading-font-family: var(--body-font-family);
   --fixed-font-family: 'Roboto Mono', menlo, consolas, 'Liberation Mono',
-    monospace;
+  monospace;
 
   /* body sizes */
   --body-font-size-m: 22px;
@@ -51,27 +135,28 @@
   --heading-font-size-m: 16px;
   --heading-font-size-s: 14px;
   --heading-font-size-xs: 12px;
+}
 
-  /* nav height */
-  --nav-height: 64px;
+html, body {
+  overscroll-behavior-y: none;
 }
 
 body {
-  font-size: var(--body-font-size-m);
   margin: 0;
+  display: none;
   font-family: var(--body-font-family);
+  width: 100%;
+  min-height: 100vh;
+  min-width: 312px;
+  background: var(--colors-backgrounds-outside);
+  font-size: var(--body-font-size-m);
   line-height: 1.6;
   color: var(--text-color);
-  background-color: var(--body-background-color);
   display: none;
 }
 
 body.appear {
   display: unset;
-}
-
-header {
-  height: var(--nav-height);
 }
 
 h1,
