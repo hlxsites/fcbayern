@@ -82,7 +82,11 @@ async function decorateNewsFeed(
   feed = { data: [], complete: false, cursor: 0 },
 ) {
   let limit = 8;
-  const largeCards = 2;
+  let largeCards = 0;
+
+  if (config.layout) {
+    largeCards = config.layout === 'news' ? 3 : 2;
+  }
 
   await filterNewsItems(config, feed, limit);
   const articles = feed.data;
@@ -102,7 +106,10 @@ async function decorateNewsFeed(
     cardGrid.innerHTML = '';
   } else {
     cardGrid = document.createElement('div');
-    cardGrid.className = 'news-feed-card-grid';
+    cardGrid.classList.add('news-feed-card-grid');
+    if (config.layout) {
+      cardGrid.classList.add(config.layout);
+    }
     block.append(cardGrid);
   }
   cards.forEach((card) => {
