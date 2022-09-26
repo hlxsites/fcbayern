@@ -180,5 +180,6 @@ export default async function decorate(block) {
   );
   block.appendChild(newsFilters);
 
+  /* load and decorate news feed */
   await decorateNewsFeed(block, config);
 }
