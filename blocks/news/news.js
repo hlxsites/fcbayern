@@ -1,5 +1,6 @@
 import {
   lookupPages,
+  readBlockConfig,
   createOptimizedPicture,
   getLanguage,
 } from '../../scripts/scripts.js';
@@ -44,11 +45,7 @@ export async function filterNewsItems(config, feed, limit) {
     if (filterNames.includes(key)) {
       const vals = config[key];
       if (vals) {
-        let v = vals;
-        if (!Array.isArray(vals)) {
-          v = [vals];
-        }
-        filters[key] = v.map((e) => e.toLowerCase().trim());
+        filters[key] = vals.split(',').map((e) => e.toLowerCase().trim());
       }
     }
   });
@@ -84,11 +81,14 @@ async function decorateNewsFeed(
   config,
   feed = { data: [], complete: false, cursor: 0 },
 ) {
-  const limit = 8;
+  let limit = 8;
   const largeCards = 2;
 
   await filterNewsItems(config, feed, limit);
   const articles = feed.data;
+  if (feed.data.length < limit) {
+    limit = feed.data.length;
+  }
   const cards = [];
   for (let i = 0; i < limit; i += 1) {
     const article = articles[i];
@@ -97,12 +97,17 @@ async function decorateNewsFeed(
     );
   }
 
-  const cardGrid = document.createElement('div');
-  cardGrid.className = 'news-feed-card-grid';
+  let cardGrid = block.querySelector('div.news-feed-card-grid');
+  if (cardGrid) {
+    cardGrid.innerHTML = '';
+  } else {
+    cardGrid = document.createElement('div');
+    cardGrid.className = 'news-feed-card-grid';
+    block.append(cardGrid);
+  }
   cards.forEach((card) => {
     cardGrid.innerHTML += card;
   });
-  block.append(cardGrid);
 }
 
 function createNewsFilters(items) {
@@ -115,6 +120,7 @@ function createNewsFilters(items) {
     items.forEach((e) => {
       const filterItem = document.createElement('li');
       const filterItemButton = document.createElement('button');
+      filterItemButton.setAttribute('data-value', e.label.toLowerCase().trim());
       filterItemButton.classList.add('secondary');
       if (e.selected) {
         filterItemButton.classList.add('selected');
@@ -130,21 +136,41 @@ function createNewsFilters(items) {
   return filter;
 }
 
+function updateNewsFilters(buttons, newSelection) {
+  buttons.forEach((b) => {
+    if (b.getAttribute('data-value') === newSelection) {
+      b.classList.add('selected');
+      b.setAttribute('aria-pressed', 'true');
+    } else {
+      b.classList.remove('selected');
+      delete b.dataset['aria-pressed'];
+    }
+  });
+}
+
 export default async function decorate(block) {
-  const config = {};
+  const config = readBlockConfig(block);
   block.innerHTML = ``;
 
   /* create buttons for filter options */
   let filterItems = [
     { label: 'all', selected: true },
-    { label: 'News' },
-    { label: 'Club' },
-    { label: 'Bundesliga' },
-    { label: 'Champions League' },
-    { label: 'FC Bayern.tv' },
-    { label: 'Photo gallery' },
+    ...config.tags.split(',').map((f) => ({ label: f })),
   ];
   const newsFilters = createNewsFilters(filterItems);
+  newsFilters.querySelectorAll('button').forEach((b) =>
+    b.addEventListener('click', () => {
+      const selectedFilter =
+        b.getAttribute('data-value') === 'all'
+          ? config
+          : { tags: b.getAttribute('data-value') };
+      updateNewsFilters(
+        newsFilters.querySelectorAll('button'),
+        b.getAttribute('data-value'),
+      );
+      decorateNewsFeed(block, selectedFilter);
+    }),
+  );
   block.appendChild(newsFilters);
 
   await decorateNewsFeed(block, config);
