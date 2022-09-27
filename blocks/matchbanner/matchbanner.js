@@ -1,47 +1,47 @@
 import { lookupPages, getLanguage } from '../../scripts/scripts.js';
 
 export function createMatchCard(matchItem) {
-  const card = document.createElement('a');
-  card.href = matchItem.path;
-
-  card.innerHTML = `
-    <p class="match-card-info">Matchcenter aufrufen für ${matchItem.team1} gegen ${matchItem.team2}</p>
-    <div class="match-stripe-match">
-      <div class="match-stripe-emblemes">
+  return document.createRange().createContextualFragment(`
+    <a href="${matchItem.path}">
+      <p class="match-card-info">Matchcenter aufrufen für ${matchItem.team1} gegen ${matchItem.team2}</p>
+      <div class="match-stripe-match">
+        <div class="match-stripe-emblemes">
+          <img src="${matchItem.team1emblems}" alt="${matchItem.team1}" />
+          <img src="${matchItem.team2emblems}" alt="${matchItem.team2}" />
+        </div>
+        <div class="match-stripe-scores">
+          <span class="final">${matchItem.finalscore.split(':').join(' : ')}</span>
+          <span class="halftime">(${matchItem.halftimescore})</span>
+        </div>
       </div>
-      <div class="match-stripe-scores">
-        <div>${matchItem.finalscore}</div>
-        <p>${matchItem.halftimescore}</p>
-      </div>
-    </div>`;
-  return card;
+    </a>
+  `);
 }
 
 export default async function decorate(block) {
-  const matchDataBucket = 'matches-' + getLanguage();
+  const matchDataBucket = `matches-${getLanguage()}`;
   await lookupPages([], matchDataBucket);
   const index = window.pageIndex[matchDataBucket];
-
-  const matches = index.data.slice(0, 10);
+  let matches = index.data.slice(0, 10);
+  matches = [...matches, ...matches];
 
   const cards = [];
   for (let i = 0; i < matches.length; i += 1) {
     const match = matches[i];
-    console.log(match);
 
     const listItem = document.createElement('li');
     listItem.appendChild(createMatchCard(match));
     cards.push(listItem.outerHTML);
   }
 
-  const html = `
+  const content = document.createRange().createContextualFragment(`
     <div id="matchdata" class="match-stripe">
-    <div class="match-stripe-layout">
-      <ul class="match-stripe-list">
-       ${cards.join("")}
-      </ul>
+      <div class="match-stripe-layout">
+        <ul class="match-stripe-list">${cards.join('')}</ul>
+      </div>
     </div>
-    </div>
-    `;
-  block.innerHTML = html;
+  `);
+
+  block.textContent = '';
+  block.appendChild(content);
 }
