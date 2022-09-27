@@ -7,6 +7,7 @@ main .stage {
   padding-top: 10px;
   opacity: 1;
   transition: opacity 500ms ease-in 0s;
+  overflow: hidden;
 }
 
 main .stage a:hover {
@@ -25,10 +26,6 @@ main .stage-news-card {
 @media (max-width: 763px) {
   main .stage-news-card {
     position: relative;
-  }
-
-  main .stage-news-card:first-child {
-    display: contents;
   }
 
   main .stage-news-card:not(:last-child) {
@@ -55,8 +52,10 @@ main .large .stage-news-card-info {
   width: 100%;
   overflow: hidden;
   flex: 1 1 auto;
-  position: relative;
-  bottom: 8rem;
+  height: 97px;
+  min-height: 107px;
+  position: absolute;
+  bottom: 0px;
   left: 0px;
   z-index: 4;
   -webkit-box-pack: end;
@@ -70,15 +69,10 @@ main .large h3.stage-news-card-title {
   font-weight: 600;
   width: 90%;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
   margin: 0px;
-  color: rgb(255, 255, 255);
-  flex-direction: row;
-  align-content: flex-end;
-  max-width: 100%;
-  margin: 0px 32px 0px 0px;
   color: rgb(255, 255, 255);
 }
 
@@ -169,7 +163,6 @@ main .large .stage-news-card-subtitle span {
 
   main .large .stage-news-card-info {
     left: 10px;
-    bottom: 10rem;
     width: 50%;
     z-index: 3;
     padding: 40px 20px;
