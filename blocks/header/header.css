@@ -1,6 +1,8 @@
 /* header and nav layout */
 header {
-  padding-bottom: 22px;
+  position: relative;
+  padding-bottom: 34px;
+  z-index: 10;
 }
 
 header .header {
