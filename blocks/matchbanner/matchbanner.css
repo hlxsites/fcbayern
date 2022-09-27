@@ -1,7 +1,6 @@
 main .matchbanner-wrapper {
   padding: 0 !important;
   scroll-snap-type: x mandatory;
-  overflow: auto hidden;
   width: 100%;
   margin-bottom: 10px;
 }
@@ -13,10 +12,6 @@ main .matchbanner {
   height: 145px;
   margin-bottom: 10px;
   padding-bottom: 2px;
-}
-
-main .match-strip-layout {
-  overflow-y: auto;
 }
 
 main .matchbanner a {
@@ -47,10 +42,11 @@ main .matchbanner .match-stripe-scores .halftime {
 main .match-stripe-layout {
   display: flex;
   position: relative;
-  width: fit-content;
   padding: 20px;
   height: 105px;
   margin: 0px auto;
+  overflow-y: auto;
+  width: auto;
 }
 
 main .match-stripe ul.match-stripe-list {
