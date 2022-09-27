@@ -22,6 +22,7 @@ function toggleNav(nav) {
  */
 
 export default async function decorate(block) {
+  const header = document.querySelector('header');
   const cfg = readBlockConfig(block);
   block.textContent = '';
 
@@ -37,9 +38,8 @@ export default async function decorate(block) {
     nav.innerHTML = html;
     
     const types = ['brand', 'overview', 'sections'];
-    const header = document.querySelector('header');
-    const quickLinks = document.createElement('div');
-    quickLinks.className = 'quickLinks';
+    const navMain = document.createElement('div');
+    navMain.className = 'nav-main';
     
     types.forEach((type, i) => {
       const section = nav.children[i];
@@ -89,19 +89,23 @@ export default async function decorate(block) {
           form.appendChild(input);
           form.appendChild(clearButton);
           
-          quickLinks.appendChild(form);
+          navMain.appendChild(form);
         }
         else if (type === 'sections') {
           const sections = section.cloneNode(true);
   
-          const list = document.createElement('ul');
+          const secondaryList = document.createElement('ul');
           [...sections.querySelectorAll('li:has(.icon-fans), li:has(.icon-store), li:has(.icon-tickets)')]
             .slice(-3)
-            .forEach(el => list.appendChild(el));
+            .forEach(el => secondaryList.appendChild(el.cloneNode(true)));
           
-          sections.appendChild(list);
+          const form = navMain.querySelector('form').cloneNode(true);
+          addToggleClear(form.querySelector('input'));
           
-          quickLinks.appendChild(sections);
+          sections.appendChild(form);
+          sections.appendChild(secondaryList);
+          
+          navMain.appendChild(sections);
         }
       }
     });
@@ -158,7 +162,7 @@ export default async function decorate(block) {
     const navUser = nav.querySelector('li:has(.icon-user)');
     navSettings.appendChild(navUser.querySelector('ul'));
     const user = document.createElement('button');
-    const form = quickLinks.querySelector('form').cloneNode(true);
+    const form = navMain.querySelector('form').cloneNode(true);
     user.onclick = () => {
       toggleHidden(navSettings);
       toggleHidden(form);
@@ -178,7 +182,7 @@ export default async function decorate(block) {
     navMenu.appendChild(decorateIcons(navMenuHeader));
     navMenu.appendChild(navSettings);
     navMenu.appendChild(decorateIcons(form));
-    addToggleClear(navMenu.querySelector('input[type="search"]'));
+    addToggleClear(navMenu.querySelector('input'));
   
     const navMenuList = nav.querySelector('.nav-sections ul');
     navMenuList.className = 'nav-menu-list';
@@ -225,11 +229,11 @@ export default async function decorate(block) {
     block.append(navMenu);
     block.append(navMenuBackdrop);
     
-    header.append(quickLinks);
+    header.append(navMain);
   
     decorateIcons(overview);
     decorateIcons(store);
     decorateIcons(nav);
-    decorateIcons(quickLinks);
+    decorateIcons(navMain);
   }
 }

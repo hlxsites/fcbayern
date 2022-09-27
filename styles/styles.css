@@ -192,6 +192,22 @@ body.appear {
   display: unset;
 }
 
+header {
+  height: 386px;
+  position: relative;
+  z-index: 100;
+  overflow: hidden;
+}
+
+/* tablet */
+@media (min-width: 764px) {
+  header {
+    background-color: var(--colors-brand);
+    height: 140px;
+    padding: 0;
+  }
+}
+
 h1,
 h2,
 h3,
@@ -363,7 +379,15 @@ button.secondary.selected:disabled:hover {
 main {
   max-width: 1280px;
   margin: auto;
+  margin-top: -20px;
 }
+
+@media (min-width: 764px) {
+  main {
+    margin-top: 0;
+  }
+}
+
 
 main input,
 main select {
