@@ -741,6 +741,7 @@ export async function lookupPages(pathnames, collection) {
   const indexPaths = {
     'news-de': '/de/news/query-index.json',
     'news-en': '/en/news/query-index.json',
+    'matches-de': '/de/data.json?sheet=matches',
   };
   const indexPath = indexPaths[collection];
   window.pageIndex = window.pageIndex || {};

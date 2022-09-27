@@ -1,0 +1,58 @@
+main .matchbanner-wrapper {
+  padding: 0 !important;
+  scroll-snap-type: x mandatory;
+  background-color: chartreuse;
+  overflow: auto hidden;
+  width: 100%;
+  max-width: 100vw;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.04);
+  margin-bottom: 10px;
+}
+
+main .match-stripe-layout {
+  display: flex;
+  position: relative;
+  width: fit-content;
+  padding: 20px;
+  margin: 0px auto;
+}
+
+main .match-stripe ul.match-stripe-list {
+  display: flex;
+  flex-flow: row wrap;
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+}
+
+main .match-stripe ul.match-stripe-list li {
+  display: flex;
+  flex: 0 0 auto;
+  min-width: fit-content;
+  margin: 0px 12px;
+  padding: 0px;
+}
+
+main .match-card-info {
+  position: absolute;
+  left: -300vw;
+  top: -300vh;
+  color: transparent;
+}
+
+main .match-stripe-match .match-stripe-emblemes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 8px;
+}
+main .match-stripe-match .match-stripe-scores {
+  position: relative;
+  margin-top: 12px;
+  text-align: center;
+}
+
+@media (min-width: 680px) {
+  main .match-stripe ul.match-stripe-list li {
+    margin: 0px 24px;
+  }
+}
