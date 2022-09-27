@@ -7,11 +7,13 @@ import {
 
 export function createNewsCard(newsItem, classPrefix, large = false) {
   const card = document.createElement('a');
-  card.classList.add(`${classPrefix}-card`);
-  if (large) {
-    card.classList.add(`large`);
-  }
   card.href = newsItem.path;
+
+  const cardContent = document.createElement('div');
+  cardContent.classList.add(`${classPrefix}-card`);
+  if (large) {
+    cardContent.classList.add(`large`);
+  }
 
   const pictureString = createOptimizedPicture(
     newsItem.image,
@@ -20,12 +22,13 @@ export function createNewsCard(newsItem, classPrefix, large = false) {
     [{ width: 750 }],
   ).outerHTML;
 
-  card.innerHTML = `
-    <div class="${classPrefix}-card-picture">${pictureString}</div>
+  cardContent.innerHTML = `
+    <div class="${classPrefix}-card-picture"><div>${pictureString}</div></div>
     <div class="${classPrefix}-card-info">
       <div class="${classPrefix}-card-subtitle"><span>${newsItem.subtitle}</span></div>
       <h3 class="${classPrefix}-card-title">${newsItem.title}</h3>
     </div>`;
+  card.append(cardContent);
   return card;
 }
 
@@ -45,7 +48,11 @@ export async function filterNewsItems(config, feed, limit) {
     if (filterNames.includes(key)) {
       const vals = config[key];
       if (vals) {
-        filters[key] = vals.split(',').map((e) => e.toLowerCase().trim());
+        if (Array.isArray(vals)) {
+          filters[key] = vals;
+        } else {
+          filters[key] = vals.split(',').map((e) => e.toLowerCase().trim());
+        }
       }
     }
   });
@@ -89,15 +96,15 @@ async function decorateNewsFeed(
   }
 
   await filterNewsItems(config, feed, limit);
-  const articles = feed.data;
+  const newsItems = feed.data;
   if (feed.data.length < limit) {
     limit = feed.data.length;
   }
   const cards = [];
   for (let i = 0; i < limit; i += 1) {
-    const article = articles[i];
+    const newsItem = newsItems[i];
     cards.push(
-      createNewsCard(article, 'news-teaser', i < largeCards).outerHTML,
+      createNewsCard(newsItem, 'news-teaser', i < largeCards).outerHTML,
     );
   }
 

@@ -64,6 +64,10 @@ main .news-teaser-card-picture img {
   main .news-teaser-card-picture {
     flex: 0 0 129px;
   }
+
+  main .news-teaser-card-picture > div {
+    display: contents;
+  }
 }
 
 @media (hover: hover) {
