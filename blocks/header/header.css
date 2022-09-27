@@ -301,7 +301,7 @@ header .nav-menu-backdrop .nav-menu-close {
   position: fixed;
   top: 0;
   height: 64px;
-  right: 4px;
+  right: 0px;
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -348,6 +348,101 @@ header .nav-menu-header a:has(.icon-fcbayern) div span:last-of-type {
   display: none;
 }
 
+header .nav-menu-header button:has(.icon-user) {
+  border: 0;
+  background: none;
+  padding: 0;
+  color: white;
+}
+
+header .nav-menu-header .icon-fcbayern,
+header .nav-menu-header .icon-user {
+  display: flex;
+}
+
+header .nav-menu .nav-settings {
+  background: rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+header .nav-menu .nav-settings[hidden] {
+  display: none;
+}
+
+header .nav-menu .nav-settings ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+header .nav-menu .nav-settings ul li {
+  width: 100%;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0);
+  display: inline-flex;
+  position: relative;
+  box-sizing: border-box;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  border-radius: 3px;
+  font-family: FCBayernSans, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  margin: 0px;
+  height: 40px;
+  line-height: 40px;
+  padding-left: 14px;
+  padding-right: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+header .nav-menu .nav-settings ul li a {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+}
+
+header .nav-menu .theme-sel {
+  color: rgb(255, 255, 255);
+  background: rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  position: relative;
+  min-width: max-content;
+  border-radius: 3px;
+  height: 28px;
+  font-family: FCBayernSans, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.1;
+  font-weight: 600;
+  font-size: 14px;
+  margin: 12px;
+}
+
+header .nav-menu .theme-sel select {
+  width: 100%;
+  border: none;
+  border-radius: 0px;
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: 1;
+  outline: none;
+  appearance: none;
+  padding: 7px 34px 7px 10px;
+}
+
+header .nav-menu .theme-sel svg {
+  fill: currentColor;
+  position: absolute;
+  right: 4px;
+}
+
 header .nav-menu form {
   position: relative;
   height: 32px;
@@ -356,7 +451,7 @@ header .nav-menu form {
   font-weight: 600;
   font-size: 16px;
   color: rgb(255, 255, 255);
-  margin: 0px;
+  margin-bottom: 21px;
   padding: 0 16px;
 }
 
@@ -422,8 +517,7 @@ header .nav-menu form input:hover {
 header .nav-menu .nav-menu-list,
 header .nav-menu .nav-menu-list ul {
   padding: 0px;
-  margin-top: 21px;
-  margin-bottom: 0;
+  margin: 0px;
   color: rgb(255, 255, 255);
   list-style: none;
 }
@@ -525,7 +619,7 @@ header .nav-menu a .icon-shop {
   display: flex;
 }
 
-header .nav-menu .nav-settings ul {
+header .nav-menu .nav-overview ul {
   display: flex;
   flex-wrap: wrap;
   list-style-type: none;
@@ -534,7 +628,7 @@ header .nav-menu .nav-settings ul {
   margin: 10px 0;
 }
 
-header .nav-menu .nav-settings ul li {
+header .nav-menu .nav-overview ul li {
   display: inline-flex;
   list-style: none;
   padding: 0px;
@@ -542,7 +636,7 @@ header .nav-menu .nav-settings ul li {
   color: rgb(255, 255, 255);
 }
 
-header .nav-menu .nav-settings ul li a {
+header .nav-menu .nav-overview ul li a {
   font-family: FCBayernSans, "Helvetica Neue", Arial, sans-serif;
   line-height: 1.1;
   font-weight: 600;
@@ -556,11 +650,11 @@ header .nav-menu .nav-settings ul li a {
   text-decoration: none;
 }
 
-header .nav-menu .nav-settings ul li a .icon {
+header .nav-menu .nav-overview ul li a .icon {
   margin-left: 8px;
 }
 
-header .nav-menu .nav-settings ul li a .icon svg {
+header .nav-menu .nav-overview ul li a .icon svg {
   fill: currentColor;
 }
 

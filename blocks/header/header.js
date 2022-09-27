@@ -1,5 +1,9 @@
 import { readBlockConfig, decorateIcons } from '../../scripts/scripts.js';
 
+function toggleHidden(el) {
+  el.toggleAttribute('hidden', !el.hasAttribute('hidden'));
+}
+
 function addToggleClear(input) {
   input.oninput = () => {
     input.nextElementSibling.toggleAttribute('hidden', input.value.length === 0)
@@ -32,7 +36,7 @@ export default async function decorate(block) {
     nav.setAttribute('aria-expanded', 'false');
     nav.innerHTML = html;
     
-    const types = ['brand', 'settings', 'sections'];
+    const types = ['brand', 'overview', 'sections'];
     const header = document.querySelector('header');
     const quickLinks = document.createElement('div');
     quickLinks.className = 'quickLinks';
@@ -121,7 +125,7 @@ export default async function decorate(block) {
     const hamburgerIcon = document.createElement('span');
     hamburgerIcon.setAttribute('aria-label', 'toggle menu');
     hamburgerIcon.className = 'icon hamburger-icon';
-    hamburgerIcon.innerHTML = '<svg height="24" width="24" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" role="img" xmlns="http://www.w3.org/2000/svg" class="base-icon__StyledIconSvg-sc-fzrbhv-0 iZmRxR"><title>icon</title><path d="M20 8H4V6H20V8ZM20 13H4V11H20V13ZM4 18H20V16H4V18Z"></path></svg>';
+    hamburgerIcon.innerHTML = '<svg height="24" width="24" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg"><path d="M20 8H4V6H20V8ZM20 13H4V11H20V13ZM4 18H20V16H4V18Z"></path></svg>';
     hamburger.appendChild(hamburgerIcon);
     hamburger.addEventListener('click', () => {
       toggleNav(nav);
@@ -146,10 +150,34 @@ export default async function decorate(block) {
     const navMenuHeader = document.createElement('div');
     navMenuHeader.className = 'nav-menu-header';
     navMenuHeader.appendChild(nav.querySelector('a:has(.icon-fcbayern)').cloneNode(true));
-    navMenuHeader.appendChild(nav.querySelector('.icon-user'));
+    
+    // Settings
+    const navSettings = document.createElement('div');
+    navSettings.className = 'nav-settings';
+    navSettings.setAttribute('hidden', '');
+    const navUser = nav.querySelector('li:has(.icon-user)');
+    navSettings.appendChild(navUser.querySelector('ul'));
+    const user = document.createElement('button');
+    const form = quickLinks.querySelector('form').cloneNode(true);
+    user.onclick = () => {
+      toggleHidden(navSettings);
+      toggleHidden(form);
+    };
+    user.appendChild(navUser.querySelector('.icon-user'));
+    navMenuHeader.appendChild(user);
+    const themeSel = document.createElement('div');
+    themeSel.className = 'theme-sel';
+    themeSel.innerHTML = `<select>
+      <option value="auto">Auto Dark Mode</option>
+      <option value="fcb-light-theme" selected>Light Mode</option>
+      <option value="fcb-dark-theme">Dark Mode</option
+    ></select>
+    <svg height="21" width="21" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg"><title>icon</title><path d="M12 15L8 8H16L12 15Z"></path></svg>`;
+    navSettings.appendChild(themeSel);
     
     navMenu.appendChild(decorateIcons(navMenuHeader));
-    navMenu.appendChild(decorateIcons(quickLinks.querySelector('form').cloneNode(true)));
+    navMenu.appendChild(navSettings);
+    navMenu.appendChild(decorateIcons(form));
     addToggleClear(navMenu.querySelector('input[type="search"]'));
   
     const navMenuList = nav.querySelector('.nav-sections ul');
@@ -160,7 +188,7 @@ export default async function decorate(block) {
       if (subItems) {
         const link = navMenuItem.querySelector('a');
         const button = document.createElement('button');
-        button.innerHTML = `<span>${link.textContent}</span><svg height="24" width="24" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" role="img" xmlns="http://www.w3.org/2000/svg" class="base-icon__StyledIconSvg-sc-fzrbhv-0 iZmRxR"><title>icon</title><path d="M11.2929 14.7071L7.29289 10.7071L8.70711 9.29289L12 12.5858L15.2929 9.29289L16.7071 10.7071L12.7071 14.7071C12.3166 15.0976 11.6834 15.0976 11.2929 14.7071Z"></path></svg>`;
+        button.innerHTML = `<span>${link.textContent}</span><svg height="24" width="24" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg"><path d="M11.2929 14.7071L7.29289 10.7071L8.70711 9.29289L12 12.5858L15.2929 9.29289L16.7071 10.7071L12.7071 14.7071C12.3166 15.0976 11.6834 15.0976 11.2929 14.7071Z"></path></svg>`;
         button.onclick = () => {
           button.classList.toggle('is-open', !button.classList.contains('is-open'));
         };
@@ -172,11 +200,11 @@ export default async function decorate(block) {
     
     // setting & online store & lang sel
     const store = nav.querySelector('.nav-brand a:has(.icon-shop)');
-    const settings = nav.querySelector('.nav-settings');
+    const overview = nav.querySelector('.nav-overview');
     const langSel = document.createElement('div');
     langSel.className = 'lang-sel';
     langSel.innerHTML = `
-    <svg height="21" width="21" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" role="img" xmlns="http://www.w3.org/2000/svg" class="base-icon__StyledIconSvg-sc-fzrbhv-0 iZmRxR"><title>icon</title><path d="M11.2929 14.7071L7.29289 10.7071L8.70711 9.29289L12 12.5858L15.2929 9.29289L16.7071 10.7071L12.7071 14.7071C12.3166 15.0976 11.6834 15.0976 11.2929 14.7071Z"></path></svg>
+    <svg height="21" width="21" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg"><path d="M11.2929 14.7071L7.29289 10.7071L8.70711 9.29289L12 12.5858L15.2929 9.29289L16.7071 10.7071L12.7071 14.7071C12.3166 15.0976 11.6834 15.0976 11.2929 14.7071Z"></path></svg>
     <select>
       <option value="fcbayern.com-en-gb">English</option>
       <option value="fcbayern.com-es-es">Español</option>
@@ -186,7 +214,7 @@ export default async function decorate(block) {
     
     navMenu.appendChild(navMenuList);
     navMenu.appendChild(store);
-    navMenu.appendChild(settings);
+    navMenu.appendChild(overview);
     navMenu.appendChild(langSel);
     
     navMenuBackdrop.appendChild(navMenuClose);
@@ -199,7 +227,7 @@ export default async function decorate(block) {
     
     header.append(quickLinks);
   
-    decorateIcons(settings);
+    decorateIcons(overview);
     decorateIcons(store);
     decorateIcons(nav);
     decorateIcons(quickLinks);
