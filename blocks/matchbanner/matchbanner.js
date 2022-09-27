@@ -22,8 +22,7 @@ export default async function decorate(block) {
   const matchDataBucket = `matches-${getLanguage()}`;
   await lookupPages([], matchDataBucket);
   const index = window.pageIndex[matchDataBucket];
-  let matches = index.data.slice(0, 10);
-  matches = [...matches, ...matches];
+  const matches = index.data.slice(0, 10);
 
   const cards = [];
   for (let i = 0; i < matches.length; i += 1) {
