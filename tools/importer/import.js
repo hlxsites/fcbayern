@@ -175,10 +175,17 @@ export default {
 
     WebImporter.DOMUtils.remove(main, [
       'aside',
+      'header',
       '.article-header__ArticleMetaData-sc-1f6j4tn-1',
       '.article-page__ActionWrapper-sc-1zjme2-3',
       '.meta-section__Layout-sc-m65hdj-0',
       '.bskjoz',
+      '.webradio-sticky-player__WebradioPlayerRoot-sc-3y91hb-6',
+      '.page__Content-sc-afw92i-1',
+      '.page-header__PageHeaderAppView-sc-1akn7gm-0',
+      '.match-navigation-bar__Layout-sc-3z74jw-0',
+      '.match-stage-hero__Layout-sc-1i5avbw-0',
+      '.match-info__Layout-sc-rptmyj-0',
     ]);
 
     makeAbsoluteLinks(main, 'https://main--fcbayern--hlxsites.hlx.page');
