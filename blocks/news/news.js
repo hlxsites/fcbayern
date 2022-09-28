@@ -20,7 +20,7 @@ export function createNewsCard(newsItem, classPrefix, large = false) {
     newsItem.imageAlt,
     false,
     [{ width: 750 }],
-  ).outerHTML;
+  ).outerHTML; 
 
   cardContent.innerHTML = `
     <div class="${classPrefix}-card-picture"><div>${pictureString}</div></div>

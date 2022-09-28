@@ -1,13 +1,13 @@
 /* block specific CSS goes here */
 
-main .hero-container > div {
+main .hero-container>div {
     max-width: unset;
 }
-  
+
 main .hero-container {
     padding: 0;
 }
-  
+
 main .hero {
     position: relative;
     padding: 32px;
@@ -37,4 +37,256 @@ main .hero img {
     object-fit: cover;
     width: 100%;
     height: 100%;
+}
+
+/* news page hero specific settings */
+/* general fonts */
+.newstemplate main {
+    font-family: var(--body-font-family);
+    line-height: 1.5;
+    margin-bottom: 12px;
+    font-weight: normal;
+    font-size: 16px;
+    background-color: white;
+
+}
+
+.newstemplate a {
+  font-family: var(--body-font-family);
+  line-height: 1.1;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--colors-text-link);
+  display: inline;
+  box-sizing: border-box;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  outline: none;
+  margin: 0px -2px -3px !important;
+  padding: 0px 2px !important;
+}
+
+.newstemplate a:hover {
+  color: var(--colors-text-link);
+  border-bottom: 2px solid currentcolor;
+}
+
+.newstemplate :not(.news-header) h2 {
+  font-family: var(--body-font-family);
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--colors-text-title);
+  margin: 32px 0px 16px;
+  line-height: 130%;
+}
+
+/* widths */
+.newstemplate main .section {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 100%;
+    width: 100%;
+    margin: 0px auto;
+    min-height: inherit;
+    color: var(--colors-text-default);
+    background-color: white;
+}
+
+@media (min-width: 764px) {
+    .newstemplate main {
+        padding-top: 0px;
+    }
+}
+
+@media (min-width: 680px) {
+    .newstemplate main {
+        max-width: 1280px;
+    }
+}
+
+.newstemplate main .hero {
+    padding : 0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.newstemplate main .hero-wrapper {
+    padding : 0;
+}
+
+.newstemplate main .section.hero-container+.section {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 calc(100% - 32px);
+    width: calc(100% - 32px);
+    align-content: flex-start;
+    align-items:center;
+    max-width: 816px;
+    background:white;
+}
+
+@media (min-width: 680px) {
+    .newstemplate main .section.hero-container+.section {
+        flex: 1 1 100%;
+    }
+}
+
+@media (min-width: 1368px) {
+    .newstemplate main .section.hero-container+.section {
+        max-width: 816px;
+    }
+}
+
+.newstemplate main .section.hero-container+.section .default-content-wrapper {
+    padding:0;
+}
+
+/* news image */
+.newstemplate main .news-image {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-width: 100vw;
+    margin: 0px 0px 32px;
+    margin-top: -1px;
+    -webkit-box-pack: center;
+    justify-content: center;
+    flex: 1 1 100%;
+}
+
+@media (min-width: 764px) {
+    .newstemplate main .news-image {
+        margin-bottom: 48px;
+    }
+}
+
+.newstemplate main .news-image picture {
+    position: relative;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index:1;
+}
+
+.newstemplate main .news-image img {
+    position: relative;
+    top: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 100%;
+}
+
+/* news header */
+.newstemplate main .news-header {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 calc(100% - 32px);
+    width: calc(100% - 32px);
+    align-content: flex-start;
+    max-width: 816px;
+    padding: 0px;
+    margin-bottom: 24px;
+}
+
+@media (min-width: 680px) {
+    .newstemplate main .news-header {
+        flex: 1 1 100%;
+    }
+}
+
+@media (min-width: 1368px) {
+    .newstemplate main .news-header {
+    max-width: 816px;
+    }
+}
+
+.newstemplate main .news-header .metadata {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+
+@media (min-width: 680px) {
+    .newstemplate main .news-header .metadata {
+        margin-bottom: 8px;
+    }
+}
+
+.newstemplate main .news-header .subtitle {
+    font-family: var(--body-font-family);
+    line-height: 1.1;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--colors-text-category);
+    margin: 0px 8px 4px 0px;
+}
+
+.newstemplate main .news-header .date {
+    font-family: var(--body-font-family);
+    line-height: 1.1;
+    font-weight: normal;
+    font-size: 14px;
+    color: var(--colors-text-secondary);
+    min-width: 70px;
+    margin: 0px 12px 4px 0px;
+}
+
+.newstemplate main .news-header .title {
+    font-family: var(--body-font-family);
+    line-height: 1.1;
+    margin: 0;
+    margin-bottom: 24px;
+    font-weight: 600;
+    font-size: 32px;
+    color: var(--colors-text-title);
+}
+
+/* accessiblity links */
+.newstemplate main .news-header .a11y {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    margin-bottom: 14px;
+}
+
+@media (min-width: 680px) {
+    .newstemplate main .news-header .a11y {
+        margin-bottom: 8px;
+    }
+}
+
+.newstemplate main .news-header .a11y .read,.resize {
+    color: var(--colors-text-link);
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    margin-right: 24px !important;
+}
+
+.newstemplate main .news-header .a11y .read .read-descr,.resize-descr {
+    font-family: var(--body-font-family);
+    line-height: 1.1;
+    font-weight: 600;
+    font-size: 14px;
+    display: inline;
+    box-sizing: border-box;
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1.5px solid transparent;
+    outline: none;
+    margin: 0px -2px -3px !important;
+    padding: 0px 2px !important;
+}
+
+.newstemplate main .news-header .a11y .read .icon-speaker,icon-text-resize {
+    display: inline-flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-tap-highlight-color: var(--colors-interactions-tapHighlightColor);
 }
