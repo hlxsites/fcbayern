@@ -19,7 +19,7 @@ function createStageCard(newsItem, classPrefix, large = false, first = false) {
     newsItem.imageAlt,
     first ? true : false,
     [
-      { media: '(max-width: 679px)', width: '700' },
+      { media: '(max-width: 679px)', width: '650' },
       { media: '(min-width: 680px) and (max-width: 763px)', width: '945' },
       { media: '(min-width: 764px) and (max-width: 1015px)', width: '1269' },
       { media: '(min-width: 1016px)', width: '1600' },
