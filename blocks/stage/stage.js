@@ -19,7 +19,7 @@ function createStageCard(newsItem, classPrefix, large = false, first = false) {
     newsItem.imageAlt,
     first ? true : false,
     [
-      { media: '(max-width: 679px)', width: '849' },
+      { media: '(max-width: 679px)', width: '700' },
       { media: '(min-width: 680px) and (max-width: 763px)', width: '945' },
       { media: '(min-width: 764px) and (max-width: 1015px)', width: '1269' },
       { media: '(min-width: 1016px)', width: '1600' },
@@ -50,7 +50,7 @@ export default async function decorate(block) {
       const news = await lookupPages([pathname], newsBucket);
       if (news.length) {
         const [newsItem] = news;
-        const card = createStageCard(newsItem, 'stage-news', true, i <=1 ? true : false);
+        const card = createStageCard(newsItem, 'stage-news', true, i < 1 ? true : false);
         card.classList.add('card-' + (i + 1));
         contents.push(card.outerHTML);
       }
