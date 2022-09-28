@@ -2,7 +2,7 @@ import { decorateIcons, getMetadata } from '../../scripts/scripts.js';
 
 export default function decorate(block){
   /* special treatment for block on news pages */
-  if(document.body.classList.contains('newstemplate')){
+  if(document.body.classList.contains('newstheme')){
     // extract h1 and picture
     const h1 = block.querySelector('h1');
     const picture = block.querySelector('picture');
