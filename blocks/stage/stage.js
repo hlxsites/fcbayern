@@ -1,6 +1,40 @@
-import { lookupPages, getLanguage } from '../../scripts/scripts.js';
+import {
+  lookupPages,
+  getLanguage,
+  createOptimizedPicture,
+} from '../../scripts/scripts.js';
 
-import { createNewsCard } from '../news/news.js';
+function createStageCard(newsItem, classPrefix, large = false) {
+  const card = document.createElement('a');
+  card.href = newsItem.path;
+
+  const cardContent = document.createElement('div');
+  cardContent.classList.add(`${classPrefix}-card`);
+  if (large) {
+    cardContent.classList.add(`large`);
+  }
+
+  const pictureString = createOptimizedPicture(
+    newsItem.image,
+    newsItem.imageAlt,
+    false,
+    [
+      { media: '(max-width: 679px)', width: '849' },
+      { media: '(min-width: 680px) and (max-width: 763px)', width: '945' },
+      { media: '(min-width: 764px) and (max-width: 1015px)', width: '1269' },
+      { media: '(min-width: 1016px)', width: '1600' },
+    ],
+  ).outerHTML;
+
+  cardContent.innerHTML = `
+    <div class="${classPrefix}-card-picture"><div>${pictureString}</div></div>
+    <div class="${classPrefix}-card-info">
+      <div class="${classPrefix}-card-subtitle"><span>${newsItem.subtitle}</span></div>
+      <h3 class="${classPrefix}-card-title">${newsItem.title}</h3>
+    </div>`;
+  card.append(cardContent);
+  return card;
+}
 
 export default async function decorate(block) {
   const newsBucket = 'news-' + getLanguage();
@@ -16,7 +50,7 @@ export default async function decorate(block) {
       const news = await lookupPages([pathname], newsBucket);
       if (news.length) {
         const [newsItem] = news;
-        const card = createNewsCard(newsItem, 'stage-news', true);
+        const card = createStageCard(newsItem, 'stage-news', true);
         card.classList.add('card-' + (i + 1));
         contents.push(card.outerHTML);
       }
@@ -43,9 +77,7 @@ export default async function decorate(block) {
   const cards = block.querySelectorAll('a');
   cards.forEach((card) => {
     card.addEventListener('mouseover', (event) => {
-      block
-        .querySelectorAll('a')
-        .forEach((c) => c.classList.remove('active'));
+      block.querySelectorAll('a').forEach((c) => c.classList.remove('active'));
       let currentTarget = event.currentTarget;
       currentTarget.classList.add('active');
       while (currentTarget.previousElementSibling) {

@@ -4,7 +4,6 @@ main .stage-wrapper {
 main .stage {
   text-decoration: none;
   outline: none;
-  padding-top: 10px;
   opacity: 1;
   transition: opacity 500ms ease-in 0s;
   overflow: hidden;

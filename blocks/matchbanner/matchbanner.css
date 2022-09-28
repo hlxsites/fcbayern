@@ -1,0 +1,95 @@
+main .matchbanner-wrapper {
+  padding: 0 !important;
+  scroll-snap-type: x mandatory;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+main .matchbanner {
+  background: var(--colors-canvas-cardLayoutCard-background);
+  box-shadow: var(--colors-canvas-cardLayoutCard-boxShadow);
+  color: var(--colors-text-default);
+  height: 145px;
+  margin-bottom: 10px;
+  padding-bottom: 2px;
+}
+
+main .matchbanner a {
+  color: var(--colors-text-default);
+  outline: none;
+}
+
+main .matchbanner a:hover {
+  text-decoration: none;
+}
+
+main .matchbanner .match-stripe-scores .large {
+  line-height: 1.1;
+  font-weight: bold;
+  font-size: var(--heading-font-size-l);
+  display: block;
+  text-align: center;
+}
+
+main .matchbanner .match-stripe-scores .small {
+  line-height: 1.1;
+  color: var(--colors-text-secondary);
+  font-size: var(--heading-font-size-s);;
+}
+
+main .match-stripe-layout {
+  display: flex;
+  position: relative;
+  padding: 20px;
+  height: 105px;
+  margin: 0px auto;
+  overflow-y: auto;
+  width: auto;
+}
+
+main .match-stripe ul.match-stripe-list {
+  display: flex;
+  flex-flow: row nowrap;
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+}
+
+main .match-stripe ul.match-stripe-list li {
+  display: flex;
+  flex: 0 0 auto;
+  min-width: fit-content;
+  margin: 0px 12px;
+  padding: 0px;
+}
+
+main .match-card-info {
+  position: absolute;
+  left: -300vw;
+  top: -300vh;
+  color: transparent;
+}
+
+main .match-stripe-match .match-stripe-emblemes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 8px;
+}
+main .match-stripe-match .match-stripe-scores {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  padding-top: 12px;
+  gap: 4px;
+}
+
+main .match-stripe .match-stripe-emblemes img {
+  width: 48px;
+  height: 48px;
+}
+
+@media (min-width: 680px) {
+  main .match-stripe ul.match-stripe-list li {
+    margin: 0px 24px;
+  }
+}
