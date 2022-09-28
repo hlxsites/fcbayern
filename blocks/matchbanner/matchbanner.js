@@ -1,6 +1,35 @@
 import { lookupPages, getLanguage } from '../../scripts/scripts.js';
 
+function formatDate(dateStr) {
+  return new Date(Math.round((+dateStr - (1 + 25567 + 1)) * 86400 * 1000));
+}
+
 export function createMatchCard(matchItem) {
+  let stripeInfo = '';
+  /* details for previous match */
+  if (matchItem.finalscore) {
+    stripeInfo = `<span class="large">${matchItem.finalscore
+      .split(':')
+      .join(' : ')}</span>
+          <span class="small">(${matchItem.halftimescore})</span>`;
+  }
+
+  /* details for upcoming match */
+  if (matchItem.matchtime) {
+    const matchDate = formatDate(matchItem.matchtime);
+    const matchDay = new Intl.DateTimeFormat(getLanguage(), {
+      weekday: 'short',
+      month: '2-digit',
+      day: '2-digit',
+    }).format(matchDate);
+    const matchTime = new Intl.DateTimeFormat(getLanguage(), {
+      timeStyle: 'short',
+    }).format(matchDate);
+
+    stripeInfo = `<span class="large">${matchDay}</span>
+          <span class="small">${matchTime} Uhr</span>`;
+  }
+
   return document.createRange().createContextualFragment(`
     <a href="${matchItem.path}">
       <p class="match-card-info">Matchcenter aufrufen für ${matchItem.team1} gegen ${matchItem.team2}</p>
@@ -10,8 +39,7 @@ export function createMatchCard(matchItem) {
           <img src="${matchItem.team2emblems}" alt="${matchItem.team2}" />
         </div>
         <div class="match-stripe-scores">
-          <span class="final">${matchItem.finalscore.split(':').join(' : ')}</span>
-          <span class="halftime">(${matchItem.halftimescore})</span>
+          ${stripeInfo}
         </div>
       </div>
     </a>
@@ -20,14 +48,20 @@ export function createMatchCard(matchItem) {
 
 export default async function decorate(block) {
   const matchDataBucket = `matches-${getLanguage()}`;
-  await lookupPages([], matchDataBucket);
-  const index = window.pageIndex[matchDataBucket];
-  const matches = index.data.slice(0, 10);
+  /* load previous and upcomming matches */
+  await lookupPages([], matchDataBucket, ['matches', 'matches-upcoming']);
+  const previousMatches = window.pageIndex[
+    (matchDataBucket, 'matches')
+  ].data.slice(0, 10);
+  const upcomingMatches = window.pageIndex[
+    (matchDataBucket, 'matches-upcoming')
+  ].data.slice(0, 10);
+  const matches = [...previousMatches, ...upcomingMatches];
 
+  /* map match data to cards */
   const cards = [];
   for (let i = 0; i < matches.length; i += 1) {
     const match = matches[i];
-
     const listItem = document.createElement('li');
     listItem.appendChild(createMatchCard(match));
     cards.push(listItem.outerHTML);
@@ -41,6 +75,5 @@ export default async function decorate(block) {
     </div>
   `);
 
-  block.textContent = '';
-  block.appendChild(content);
+  block.replaceChildren(content);
 }

@@ -737,11 +737,11 @@ function loadDelayed() {
 /**
  * helper for different feeds
  */
-export async function lookupPages(pathnames, collection) {
+export async function lookupPages(pathnames, collection, sheets = []) {
   const indexPaths = {
     'news-de': '/de/news/query-index.json',
     'news-en': '/en/news/query-index.json',
-    'matches-de': '/de/data.json?sheet=matches',
+    'matches-de': '/de/data.json?sheet=matches&sheet=matches-upcoming',
   };
   const indexPath = indexPaths[collection];
   window.pageIndex = window.pageIndex || {};
@@ -749,10 +749,23 @@ export async function lookupPages(pathnames, collection) {
     const resp = await fetch(indexPath);
     const json = await resp.json();
     const lookup = {};
-    json.data.forEach((row) => {
-      lookup[row.path] = row;
-    });
-    window.pageIndex[collection] = { data: json.data, lookup };
+    if (sheets.length > 0) {
+      sheets.forEach((sheetName) => {
+        json[sheetName].data.forEach((row) => {
+          lookup[row.path] = row;
+        });
+        window.pageIndex[(collection, sheetName)] = {
+          data: json[sheetName].data,
+          lookup,
+        };
+      });
+      window.pageIndex[collection] = { lookup };
+    } else {
+      json.data.forEach((row) => {
+        lookup[row.path] = row;
+      });
+      window.pageIndex[collection] = { data: json.data, lookup };
+    }
   }
 
   const { lookup } = window.pageIndex[collection];

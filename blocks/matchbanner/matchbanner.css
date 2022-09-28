@@ -23,20 +23,18 @@ main .matchbanner a:hover {
   text-decoration: none;
 }
 
-main .matchbanner .match-stripe-scores .final {
-  font-family: FCBayernSans, "Helvetica Neue", Arial, sans-serif;
+main .matchbanner .match-stripe-scores .large {
   line-height: 1.1;
   font-weight: bold;
-  font-size: 24px;
+  font-size: var(--heading-font-size-l);
   display: block;
   text-align: center;
 }
 
-main .matchbanner .match-stripe-scores .halftime {
-  font-family: FCBayernSans, "Helvetica Neue", Arial, sans-serif;
+main .matchbanner .match-stripe-scores .small {
   line-height: 1.1;
   color: var(--colors-text-secondary);
-  font-size: 14px;
+  font-size: var(--heading-font-size-s);;
 }
 
 main .match-stripe-layout {
