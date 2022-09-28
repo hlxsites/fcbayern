@@ -31,15 +31,17 @@ export default async function decorate(block) {
   
   // generate the dom
   const dom = document.createRange().createContextualFragment(`
-    <div class='teaser-image'>
-    </div>
-    <div class='teaser-info'>
-      <div class='teaser-metadata'>
-        <div class='teaser-subtitle'>${entry.subtitle}</div>
-        <div class='teaser-date'>${date}</div>
-      </div> 
-      <h3 class='teaser-title'>${entry.title}</h3> 
-    </div>
+    <a href=${path}>
+      <div class='teaser-image'>
+      </div>
+      <div class='teaser-info'>
+        <div class='teaser-metadata'>
+          <div class='teaser-subtitle'>${entry.subtitle}</div>
+          <div class='teaser-date'>${date}</div>
+        </div> 
+        <h3 class='teaser-title'>${entry.title}</h3> 
+      </div>
+    </a>
   `)
 
   // append the picture
