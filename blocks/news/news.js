@@ -19,17 +19,12 @@ export function createNewsCard(newsItem, classPrefix, large = false) {
     newsItem.image,
     newsItem.imageAlt,
     false,
-<<<<<<< HEAD
-    [{ width: 750 }],
-  ).outerHTML; 
-=======
     [
       { media: '(max-width: 763px)', width: '320' },
       { media: '(min-width: 764px) and (max-width: 1015px)', width: '640' },
       { media: '(min-width: 1016px)', width: '1600' },
     ],
   ).outerHTML;
->>>>>>> main
 
   cardContent.innerHTML = `
     <div class="${classPrefix}-card-picture">${pictureString}</div>
