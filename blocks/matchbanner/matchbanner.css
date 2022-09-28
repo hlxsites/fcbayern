@@ -2,6 +2,7 @@ main .matchbanner-wrapper {
   padding: 0 !important;
   scroll-snap-type: x mandatory;
   width: 100%;
+  height: 145px;
   margin-bottom: 10px;
 }
 
@@ -9,7 +10,6 @@ main .matchbanner {
   background: var(--colors-canvas-cardLayoutCard-background);
   box-shadow: var(--colors-canvas-cardLayoutCard-boxShadow);
   color: var(--colors-text-default);
-  height: 145px;
   margin-bottom: 10px;
   padding-bottom: 2px;
 }
