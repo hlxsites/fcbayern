@@ -1,4 +1,4 @@
-import { getMetadata } from '../../scripts/scripts.js';
+import { decorateIcons, getMetadata } from '../../scripts/scripts.js';
 
 export default function decorate(block){
   /* special treatment for block on news pages */
@@ -11,7 +11,6 @@ export default function decorate(block){
     const dom = document.createRange().createContextualFragment(`
     <div class='news-image'>
     </div>
-    <div>
     <div class='news-header'>
       <div class='metadata'>
         <div class='subtitle'>${getMetadata('subtitle')}</div>
@@ -29,10 +28,10 @@ export default function decorate(block){
         </div>
       </div>
     </div>
-    </div>
     `)
     dom.children[0].append(picture);
     block.append(dom);
+    decorateIcons(block);
   }
 }
 

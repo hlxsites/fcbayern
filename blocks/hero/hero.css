@@ -123,7 +123,7 @@ main .hero img {
     align-content: flex-start;
     align-items:center;
     max-width: 816px;
-    background:white;
+    padding:0;
 }
 
 @media (min-width: 680px) {
@@ -140,6 +140,16 @@ main .hero img {
 
 .newstemplate main .section.hero-container+.section .default-content-wrapper {
     padding:0;
+}
+
+.default-content-wrapper p {
+    font-family: FCBayernSans, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.5;
+    margin-bottom: 12px;
+    font-weight: normal;
+    font-size: 16px;
+    margin-top: 0px;
+    padding: 0px;
 }
 
 /* news image */
@@ -282,11 +292,9 @@ main .hero img {
     padding: 0px 2px !important;
 }
 
-.newstemplate main .news-header .a11y .read .icon-speaker,icon-text-resize {
+.newstemplate main .news-header .a11y .read .icon-speaker,.icon-text-resize {
     display: inline-flex;
-    -webkit-box-pack: center;
     justify-content: center;
-    -webkit-box-align: center;
     align-items: center;
-    -webkit-tap-highlight-color: var(--colors-interactions-tapHighlightColor);
+    fill: currentColor;
 }
