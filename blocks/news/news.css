@@ -218,7 +218,7 @@ main .news-feed-filters button {
   main .news-teaser-card-info {
     position: static;
     height: auto;
-    min-height: 107px;
+    min-height: 100px;
     -webkit-box-pack: start;
     justify-content: flex-start;
   }

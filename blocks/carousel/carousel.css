@@ -1,73 +1,106 @@
-.carousel {
-    width: 100%;
-    height: 355px;
-    position: relative;
-    overflow: hidden;
+main .carousel {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
 }
 
-.carousel .carousel-item {
-    min-width: 292px;
-    max-width: 355px;
-    
-    height: 100%;
-    width: 100%;
-
-    position: absolute;
-    transition: all 0.5s;
-    
+main .carousel a:hover {
+  text-decoration: none;
 }
 
-.carousel .carousel-item p {
-    margin: 0;
+main .carousel .carousel-wrapper {
+  position: relative;
+  width: 100%;
+  scroll-behavior: smooth;
+  overflow: auto hidden;
+}
+main .carousel .carousel-wrapper ::-webkit-scrollbar {
+  display: none;
 }
 
-.carousel .carousel-item picture {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+main .carousel-content {
+  display: flex;
+  flex-direction: row;
 }
 
-.carousel .carousel-item .carousel-body {
-    margin-right: 8px;
-}
-.carousel.news .carousel-item h3 {
-    font-size: var(--heading-font-size-s);
-    font-weight: 600;
-}
-
-.carousel.news .carousel-item h4 {
-    font-size: var(--heading-font-size-s);
-    font-weight: 600;
-    font-size: 14px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    text-transform: uppercase;
+main .carousel-content > * {
+  -webkit-box-flex: 0;
+  flex-grow: 0;
+  flex-shrink: 0;
+  margin-right: 8px;
 }
 
-.carousel .btn {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    padding: 10px;
-    border: none;
-    z-index: 10px;
-    cursor: pointer;
-    background-color: var(--text-title-color);
-    font-size: 18px;
-    border-radius: 0;
+main .featured-news .carousel-content > a {
+  min-width: 292px;
+  max-width: 355px;
+}
+main .events .carousel-content > a {
+  width: 248px;
+  background-color: red;
+  padding: 16px 48px 16px 16px;
+  transition: box-shadow 0.2s ease-in-out 0s;
+  background: var(--colors-canvas-cardLayoutCard-background);
+  box-shadow: var(--colors-canvas-cardLayoutCard-boxShadow);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  overflow: hidden;
 }
 
-.carousel .btn:active {
-    transform: scale(1.1);
+main .events .carousel-content > a:hover {
+  background: var(--colors-canvas-cardLayoutCard-hover-background);
+  box-shadow: var(--colors-canvas-cardLayoutCard-hover-boxShadow);
 }
 
-.carousel .btn-prev {
-    top: 10%;
-    left: 0;
+main .events .event-card-date {
+  line-height: 1.1;
+  font-weight: bold;
+  font-size: 20px;
+  color: var(--colors-text-default);
+  margin: 0px 0px 8px;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
-.carousel .btn-next {
-    top: 10%;
-    right: 0;
+main .events .event-card-title {
+  line-height: 1.1;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--colors-text-default);
+  margin: 0px 0px 4px;
+}
+
+main .events .event-card-type {
+  line-height: 1.1;
+  font-weight: normal;
+  font-size: 14px;
+  color: var(--colors-text-secondary);
+  margin: 0px;
+}
+
+main .events .event-card-icon {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: inline-flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-tap-highlight-color: var(--colors-interactions-tapHighlightColor);
+}
+
+@media (max-width: 763px) {
+  main .carousel-content {
+    flex-direction: column;
+  }
+
+  main .carousel-content > a {
+    width: 100% !important;
+    min-width: unset !important;
+    max-width: unset !important;
+    margin-right: 0;
+    margin-bottom: 8px;
+  }
 }
