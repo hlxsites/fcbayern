@@ -1,8 +1,8 @@
 import { decorateIcons, getMetadata } from '../../scripts/scripts.js';
 
-export default function decorate(block){
+export default function decorate(block) {
   /* special treatment for block on news pages */
-  if(document.body.classList.contains('newstheme')){
+  if (document.body.classList.contains('newstheme')) {
     // extract h1 and picture
     const h1 = block.querySelector('h1');
     const picture = block.querySelector('picture');
@@ -14,7 +14,7 @@ export default function decorate(block){
     <div class='news-header'>
       <div class='metadata'>
         <div class='subtitle'>${getMetadata('subtitle')}</div>
-        <div class='date'>${getMetadata('date') }</div>
+        <div class='date'>${getMetadata('date')}</div>
       </div>
       <h2 class='title'>${h1.innerText}</h2>
       <div class='a11y'>
@@ -28,10 +28,9 @@ export default function decorate(block){
         </div>
       </div>
     </div>
-    `)
+    `);
     dom.children[0].append(picture);
     block.append(dom);
     decorateIcons(block);
   }
 }
-
