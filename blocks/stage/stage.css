@@ -13,18 +13,21 @@ main .stage a:hover {
   text-decoration: none;
 }
 
+main .stage>div:not(.stage-news) {
+  width: 100%;
+  aspect-ratio: 500 / 261;
+  height: auto;
+}
+
 main .stage div.stage-wrapper {
   width: 100%;
   max-width: 100vw;
 }
 
-main .stage-news-card {
-  display: block;
-}
-
 @media (max-width: 763px) {
   main .stage-news-card {
     position: relative;
+    aspect-ratio: 500 / 261;
   }
 
   main .stage-news-card:not(:last-child) {
