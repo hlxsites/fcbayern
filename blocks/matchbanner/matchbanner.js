@@ -35,8 +35,8 @@ export function createMatchCard(matchItem) {
       <p class="match-card-info">Matchcenter aufrufen für ${matchItem.team1} gegen ${matchItem.team2}</p>
       <div class="match-stripe-match">
         <div class="match-stripe-emblemes">
-          <img src="${matchItem.team1emblems}" alt="${matchItem.team1}" />
-          <img src="${matchItem.team2emblems}" alt="${matchItem.team2}" />
+          <img loading="lazy" src="${matchItem.team1emblems}" alt="${matchItem.team1}" />
+          <img loading="lazy" src="${matchItem.team2emblems}" alt="${matchItem.team2}" />
         </div>
         <div class="match-stripe-scores">
           ${stripeInfo}
