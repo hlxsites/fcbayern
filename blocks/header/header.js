@@ -100,8 +100,21 @@ export default async function decorate(block) {
             .forEach(el => secondaryList.appendChild(el.cloneNode(true)));
           
           const form = navMain.querySelector('form').cloneNode(true);
+          form.querySelector('button').onclick = (e) => {
+            if (!form.querySelector('input').value.length) {
+              e.preventDefault();
+              form.classList.add('is-expanded');
+              form.querySelector('input').focus();
+            }
+            form.querySelector('button[type="reset"]').hidden = false;
+          };
+          form.querySelector('button[type="reset"]').onclick = () => {
+            form.classList.remove('is-expanded');
+            form.querySelector('button[type="reset"]').hidden = true;
+          };
           addToggleClear(form.querySelector('input'));
           
+          sections.prepend(nav.querySelector('a:has(.icon-fcbayern)').cloneNode(true));
           sections.appendChild(form);
           sections.appendChild(secondaryList);
           
@@ -115,13 +128,7 @@ export default async function decorate(block) {
     
     // telekom
     const telekom = nav.querySelector('a:has(.icon-telekom)');
-    const telekomTextNode = [...telekom.childNodes].find(n => n.nodeType === Node.TEXT_NODE);
-    if (telekomTextNode) {
-      const span = document.createElement('span');
-      span.appendChild(telekomTextNode);
-      telekom.appendChild(span);
-    }
-    navActions.append(telekom);
+    navActions.append(telekom.cloneNode(true));
 
     // hamburger for mobile
     const hamburger = document.createElement('button');
@@ -129,7 +136,7 @@ export default async function decorate(block) {
     const hamburgerIcon = document.createElement('span');
     hamburgerIcon.setAttribute('aria-label', 'toggle menu');
     hamburgerIcon.className = 'icon hamburger-icon';
-    hamburgerIcon.innerHTML = '<svg height="24" width="24" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg"><path d="M20 8H4V6H20V8ZM20 13H4V11H20V13ZM4 18H20V16H4V18Z"></path></svg>';
+    hamburgerIcon.innerHTML = '<svg height="24" width="24" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"><path d="M20 8H4V6H20V8ZM20 13H4V11H20V13ZM4 18H20V16H4V18Z"></path></svg>';
     hamburger.appendChild(hamburgerIcon);
     hamburger.addEventListener('click', () => {
       toggleNav(nav);
@@ -149,7 +156,7 @@ export default async function decorate(block) {
     const navMenuClose = document.createElement('button');
     navMenuClose.className = 'nav-menu-close';
     navMenuClose.setAttribute('aria-label', 'close menu');
-    navMenuClose.innerHTML = '<svg height="26" width="26" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" role="img" xmlns="http://www.w3.org/2000/svg" class="base-icon__StyledIconSvg-sc-fzrbhv-0 iZmRxR"><title>icon</title><path fill-rule="evenodd" clip-rule="evenodd" d="M12 13.0607L17.4697 18.5303L18.5303 17.4697L13.0607 12L18.5303 6.53033L17.4697 5.46967L12 10.9393L6.53033 5.46967L5.46967 6.53033L10.9393 12L5.46968 17.4697L6.53033 18.5303L12 13.0607Z"></path></svg>';
+    navMenuClose.innerHTML = '<svg height="26" width="26" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" role="img" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 13.0607L17.4697 18.5303L18.5303 17.4697L13.0607 12L18.5303 6.53033L17.4697 5.46967L12 10.9393L6.53033 5.46967L5.46967 6.53033L10.9393 12L5.46968 17.4697L6.53033 18.5303L12 13.0607Z"></path></svg>';
     
     const navMenuHeader = document.createElement('div');
     navMenuHeader.className = 'nav-menu-header';
@@ -159,7 +166,7 @@ export default async function decorate(block) {
     const navSettings = document.createElement('div');
     navSettings.className = 'nav-settings';
     navSettings.setAttribute('hidden', '');
-    const navUser = nav.querySelector('li:has(.icon-user)');
+    const navUser = nav.querySelector('li:has(.icon-user)').cloneNode(true);
     navSettings.appendChild(navUser.querySelector('ul'));
     const user = document.createElement('button');
     const form = navMain.querySelector('form').cloneNode(true);
@@ -176,14 +183,14 @@ export default async function decorate(block) {
       <option value="fcb-light-theme" selected>Light Mode</option>
       <option value="fcb-dark-theme">Dark Mode</option
     ></select>
-    <svg height="21" width="21" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg"><title>icon</title><path d="M12 15L8 8H16L12 15Z"></path></svg>`;
+    <svg height="21" width="21" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"><path d="M12 15L8 8H16L12 15Z"></path></svg>`;
     navSettings.appendChild(themeSel);
     
     navMenu.appendChild(decorateIcons(navMenuHeader));
     navMenu.appendChild(navSettings);
     navMenu.appendChild(decorateIcons(form));
     addToggleClear(navMenu.querySelector('input'));
-  
+
     const navMenuList = nav.querySelector('.nav-sections ul');
     navMenuList.className = 'nav-menu-list';
     const navMenuListItems = nav.querySelectorAll('.nav-sections > ul > li');
@@ -192,7 +199,7 @@ export default async function decorate(block) {
       if (subItems) {
         const link = navMenuItem.querySelector('a');
         const button = document.createElement('button');
-        button.innerHTML = `<span>${link.textContent}</span><svg height="24" width="24" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg"><path d="M11.2929 14.7071L7.29289 10.7071L8.70711 9.29289L12 12.5858L15.2929 9.29289L16.7071 10.7071L12.7071 14.7071C12.3166 15.0976 11.6834 15.0976 11.2929 14.7071Z"></path></svg>`;
+        button.innerHTML = `<span>${link.textContent}</span><svg height="24" width="24" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"><path d="M11.2929 14.7071L7.29289 10.7071L8.70711 9.29289L12 12.5858L15.2929 9.29289L16.7071 10.7071L12.7071 14.7071C12.3166 15.0976 11.6834 15.0976 11.2929 14.7071Z"></path></svg>`;
         button.onclick = () => {
           button.classList.toggle('is-open', !button.classList.contains('is-open'));
         };
@@ -201,25 +208,35 @@ export default async function decorate(block) {
         decorateIcons(subItems);
       }
     }
+    nav.querySelector('.nav-sections').remove();
     
-    // setting & online store & lang sel
-    const store = nav.querySelector('.nav-brand a:has(.icon-shop)');
+    // overview & online store & lang sel
     const overview = nav.querySelector('.nav-overview');
+    const overviewClone = overview.cloneNode(true);
+    const store = nav.querySelector('.nav-brand a:has(.icon-shop)');
+    const storeClone = store.cloneNode(true);
+  
     const langSel = document.createElement('div');
     langSel.className = 'lang-sel';
     langSel.innerHTML = `
-    <svg height="21" width="21" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg"><path d="M11.2929 14.7071L7.29289 10.7071L8.70711 9.29289L12 12.5858L15.2929 9.29289L16.7071 10.7071L12.7071 14.7071C12.3166 15.0976 11.6834 15.0976 11.2929 14.7071Z"></path></svg>
+    <svg height="21" width="21" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"><path d="M11.2929 14.7071L7.29289 10.7071L8.70711 9.29289L12 12.5858L15.2929 9.29289L16.7071 10.7071L12.7071 14.7071C12.3166 15.0976 11.6834 15.0976 11.2929 14.7071Z"></path></svg>
     <select>
       <option value="fcbayern.com-en-gb">English</option>
       <option value="fcbayern.com-es-es">Español</option>
       <option value="fcbayern.com-zh-cn">中文</option>
       <option selected="" value="fcbayern.com-de-de">Deutsch</option>
     </select>`;
+  
+    const subOverview = document.createElement('div');
+    subOverview.appendChild(telekom);
+    subOverview.appendChild(store);
+    overview.appendChild(subOverview);
+    overview.querySelector('li:has(.icon-handicap)').prepend(langSel);
     
     navMenu.appendChild(navMenuList);
-    navMenu.appendChild(store);
-    navMenu.appendChild(overview);
-    navMenu.appendChild(langSel);
+    navMenu.appendChild(storeClone);
+    navMenu.appendChild(overviewClone);
+    navMenu.appendChild(langSel.cloneNode(true));
     
     navMenuBackdrop.appendChild(navMenuClose);
     
@@ -231,9 +248,13 @@ export default async function decorate(block) {
     
     header.append(navMain);
   
-    decorateIcons(overview);
-    decorateIcons(store);
+    decorateIcons(overviewClone);
+    decorateIcons(storeClone);
     decorateIcons(nav);
     decorateIcons(navMain);
+  
+    window.onscroll = () => {
+      header.classList.toggle('is-sticky', window.scrollY > 96)
+    }
   }
 }

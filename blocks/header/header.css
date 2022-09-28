@@ -64,6 +64,11 @@ header nav .nav-brand ul {
   display: none;
 }
 
+/* overview */
+header nav .nav-overview {
+  display: none;
+}
+
 /* actions */
 header nav .nav-actions {
   display: flex;
@@ -84,8 +89,8 @@ header nav .nav-actions a .icon-telekom svg {
   height: 18px;
 }
 
-header nav .nav-actions a:has(.icon-telekom) span:last-of-type {
-  display: none;
+header nav .nav-actions a:has(.icon-telekom) {
+  font-size: 0;
 }
 
 header nav .hamburger {
@@ -195,6 +200,7 @@ header .nav-main .nav-sections {
   padding-bottom: 32px;
 }
 
+header .nav-sections a:has(.icon-fcbayern),
 header .nav-main .nav-sections form {
   display: none;
 }
@@ -640,6 +646,10 @@ header .nav-menu .nav-overview ul li {
   color: rgb(255, 255, 255);
 }
 
+header .nav-menu .nav-overview ul li:has(.icon-user) {
+  display: none;
+}
+
 header .nav-menu .nav-overview ul li a {
   font-family: FCBayernSans, "Helvetica Neue", Arial, sans-serif;
   line-height: 1.1;
@@ -742,6 +752,161 @@ header .nav-menu .lang-sel select option {
     display: inline;
   }
 
+  header nav .nav-actions {
+    display: none;
+  }
+
+  header nav .nav-overview {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  header nav .nav-overview ul {
+    margin: 0;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+
+  header nav .nav-overview ul li {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    font-family: FCBayernSans, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.1;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    border: 0px;
+    outline: none;
+    border-block-end: 1.5px solid transparent;
+    margin: 0px;
+    padding: 0px;
+    cursor: pointer;
+  }
+
+  header nav .nav-overview ul li:not(:has(.lang-sel)):not(:has(.icon-user)):hover {
+    border-color: currentColor;
+  }
+
+  header nav .nav-overview ul li a {
+    white-space: nowrap;
+    text-decoration: none;
+  }
+
+  header nav .nav-overview ul li:has(.icon-handicap) {
+    font-size: 0;
+  }
+
+  header nav .nav-overview ul li .icon-handicap svg {
+    fill: currentColor;
+  }
+
+  header nav .nav-overview ul li .icon-user + ul {
+    display: none;
+  }
+
+  header .nav-overview .lang-sel {
+    font-family: FCBayernSans, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.1;
+    font-weight: 600;
+    font-size: 14px;
+    color: rgb(255, 255, 255);
+    display: inline-flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    width: max-content;
+    height: 24px;
+    margin-left: -10px;
+  }
+
+  header .nav-overview .lang-sel svg {
+    display: flex;
+    fill: currentColor;
+    position: absolute;
+    pointer-events: none;
+  }
+
+  header .nav-overview .lang-sel select {
+    width: 100%;
+    border: none;
+    border-radius: 0px;
+    color: inherit;
+    font-style: inherit;
+    font-variant: inherit;
+    font-weight: inherit;
+    font-stretch: inherit;
+    font-size: inherit;
+    font-family: inherit;
+    line-height: 1.1;
+    outline: none;
+    appearance: none;
+    background: none;
+    cursor: pointer;
+    margin: 0px;
+    padding: 0px 21px;
+  }
+
+  header .nav-overview .lang-sel select option {
+    width: min-content;
+    padding-left: 0px;
+    padding-right: 0px;
+    color: rgb(0, 0, 0);
+  }
+
+  header nav .nav-overview div {
+    font-family: FCBayernSans, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.1;
+    font-weight: normal;
+    font-size: 12px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin: 0px;
+    color: rgb(255, 255, 255);
+  }
+
+  header .nav-overview a:has(.icon-telekom)::after {
+    content: ' ';
+    width: 1px;
+    margin: 0 12px;
+    font-size: 20px;
+    height: 200px;
+    border-left: 1px solid rgba(240, 240, 240, .5);
+  }
+
+  header .nav-overview a:has(.icon-telekom) span {
+    margin-left: 12px;
+    position: relative;
+    top: 4px;
+  }
+
+  header .nav-overview a:has(.icon-shop) {
+    color: rgb(220, 5, 45);
+    height: 25px;
+    line-height: 25px;
+    font-size: 14px;
+    border-radius: 4px;
+    padding: 0px 8px;
+    background: rgb(255, 255, 255);
+    display: inline-flex;
+    position: relative;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    font-family: FCBayernSans, "Helvetica Neue", Arial, sans-serif;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  header .nav-overview a .icon-shop {
+    margin-right: 6px;
+    display: flex;
+  }
+
   header .nav-main {
     margin: 0;
     clip-path: none;
@@ -762,8 +927,10 @@ header .nav-menu .lang-sel select option {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
+    justify-content: flex-start;
     width: fit-content;
     margin: 0;
+    overflow: hidden;
   }
 
   header .nav-main .nav-sections ul:first-of-type li a {
@@ -792,8 +959,21 @@ header .nav-menu .lang-sel select option {
     display: block;
   }
 
-  header .nav-main .nav-sections form input{
+  header .nav-main .nav-sections form input {
+    display: none;
     background: transparent;
+  }
+
+  header .nav-main .nav-sections form.is-expanded input {
+    display: inline;
+  }
+
+  header .nav-main .nav-sections form.is-expanded button:has(.icon-search) {
+    left: 0;
+  }
+
+  header .nav-main .nav-sections form.is-expanded button:has(.icon-close) {
+    right: 0;
   }
 
   header .nav-main .nav-sections ul:last-of-type {
@@ -824,8 +1004,62 @@ header .nav-menu .lang-sel select option {
     display: inline-flex;
   }
 
-  header .nav-main li:has(.icon-store) {
-    display: none !important;
+  header .nav-main .nav-sections ul:first-of-type > li:has(.icon-store) {
+    display: none;
+  }
+
+  header .nav-sections form.is-expanded {
+    width: 100%;
+    left: 0;
+  }
+
+  header .nav-sections:has(form.is-expanded) ul:first-of-type {
+    width: 0;
+  }
+
+  header .nav-sections a:has(.icon-fcbayern) {
+    display: block;
+    height: 28px;
+    margin-right: 0px;
+    transition: margin-right 0.1s ease 0s;
+  }
+
+  header .nav-sections a:has(.icon-fcbayern) img {
+    height: 28px;
+    width: 0px;
+    transition: width 0.1s ease 0s;
+  }
+
+  header .nav-sections a:has(.icon-fcbayern) .icon {
+    display: flex;
+  }
+
+  header .nav-sections a:has(.icon-fcbayern) div span {
+    display: none;
+  }
+
+  header.is-sticky .nav-main {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 100;
+  }
+
+  header.is-sticky .nav-sections a:has(.icon-fcbayern) {
+    margin-right: 20px;
+  }
+
+  header.is-sticky .nav-sections a:has(.icon-fcbayern) img {
+    width: 28px;
+  }
+
+  header.is-sticky:has(form.is-expanded) .nav-sections a:has(.icon-fcbayern) {
+    margin-right: 0;
+  }
+
+  header.is-sticky:has(form.is-expanded) .nav-sections .icon-fcbayern img {
+    width: 0;
   }
 }
 
