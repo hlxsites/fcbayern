@@ -50,7 +50,7 @@ export default async function decorate(block) {
       const news = await lookupPages([pathname], newsBucket);
       if (news.length) {
         const [newsItem] = news;
-        const card = createStageCard(newsItem, 'stage-news', true, i == 0 ? true : false);
+        const card = createStageCard(newsItem, 'stage-news', true, i <=1 ? true : false);
         card.classList.add('card-' + (i + 1));
         contents.push(card.outerHTML);
       }
