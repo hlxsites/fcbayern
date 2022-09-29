@@ -1,8 +1,4 @@
-import { lookupPages, getLanguage } from '../../scripts/scripts.js';
-
-function formatDate(dateStr) {
-  return new Date(Math.round((+dateStr - (1 + 25567 + 1)) * 86400 * 1000));
-}
+import { lookupPages, getLanguage, parseDate } from '../../scripts/scripts.js';
 
 export function createMatchCard(matchItem) {
   let stripeInfo = '';
@@ -16,7 +12,7 @@ export function createMatchCard(matchItem) {
 
   /* details for upcoming match */
   if (matchItem.matchtime) {
-    const matchDate = formatDate(matchItem.matchtime);
+    const matchDate = parseDate(matchItem.matchtime);
     const matchDay = new Intl.DateTimeFormat(getLanguage(), {
       weekday: 'short',
       month: '2-digit',
