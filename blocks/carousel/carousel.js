@@ -68,6 +68,31 @@ async function fetchEvents() {
   return cards;
 }
 
+async function fetchResults() {
+  const cards = [];
+  const resultsBucket = 'results-' + getLanguage();
+  await lookupPages([], resultsBucket);
+  const index = window.pageIndex[resultsBucket];
+
+  for (let i = 0; i < index.data.length; i += 1) {
+    const result = index.data[i];
+    
+    const card = document.createElement('a');
+    card.href = 'https://fcbayern.com/de/club/erfolge';
+    card.innerHTML = `
+      <div class="result-card-content">
+        <img src="${result.image}" alt="${result.name}" />
+        <span>
+          ${result.name}
+          <strong>${result.number}</strong>
+        </span>
+      </div>
+    `;
+    cards.push(card);
+  }
+  return cards;
+}
+
 export default async function decorate(block) {
   /* get block type and load content */
   let contents = [];
@@ -76,6 +101,8 @@ export default async function decorate(block) {
     contents = await fetchNews(block);
   } else if (block.classList.contains('events')) {
     contents = await fetchEvents();
+  } else if (block.classList.contains('results')) {
+    contents = await fetchResults();
   }
 
   /* decorate carousel cards */

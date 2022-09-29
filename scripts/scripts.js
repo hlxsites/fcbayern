@@ -743,6 +743,7 @@ export async function lookupPages(pathnames, collection, sheets = []) {
     'news-en': '/en/news/query-index.json',
     'matches-de': '/de/data.json?sheet=matches&sheet=matches-upcoming',
     'events-de': '/de/data.json?sheet=dates',
+    'results-de': '/de/data.json?sheet=results',
   };
   const indexPath = indexPaths[collection];
   window.pageIndex = window.pageIndex || {};
