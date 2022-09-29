@@ -36,7 +36,7 @@ export default async function decorate(block) {
 
     // generate the dom
     const dom = document.createRange().createContextualFragment(`
-    <a class='teaser-link' href='${entry.path}.html'>
+    <a class='teaser-link' href='${entry.path}'>
       <div class='teaser-image'>
       </div>
       <div class='teaser-info'>
