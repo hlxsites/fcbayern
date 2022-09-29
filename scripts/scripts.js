@@ -670,8 +670,17 @@ function loadFooter(footer) {
  * Builds all synthetic blocks in a container element.
  * @param {Element} main The container element
  */
-function buildAutoBlocks(main) {
+async function buildAutoBlocks(main) {
   try {
+    const template = toClassName(getMetadata('template'));
+    const templates = ['liveticker'];
+    if (templates.includes(template)) {
+      const mod = await import(`./${template}.js`);
+      if (mod.default) {
+        await mod.default(main);
+      }
+    }
+
     buildHeroBlock(main);
   } catch (error) {
     // eslint-disable-next-line no-console
