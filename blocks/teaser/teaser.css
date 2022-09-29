@@ -1,0 +1,119 @@
+main .teaser-wrapper {
+  padding:0;
+}
+main .teaser-container.section .teaser-wrapper {
+  position: relative;
+  height: fit-content;
+  width: 100%;
+  overflow: hidden;
+  padding:0;
+}
+
+main .teaser .teaser-image {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  background-color: var(--card-background-color);
+  background-clip: content-box;
+  outline: none;
+}
+
+main .teaser .teaser-image:hover {
+  transition: opacity 0.2s ease-in-out 0s;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 4px 16px;
+}
+
+main .teaser .teaser-image picture {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+main .teaser .teaser-image picture img {
+  backface-visibility: hidden;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+main .teaser .teaser-image picture img:hover {
+  transform-origin: center center;
+  transition: transform 0.2s ease-in-out 0s;
+  transform: scale(1.05);
+}
+
+main .teaser .teaser-info {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+  padding: 0;
+  flex: 1 1 auto;
+}
+
+@media (min-width: 764px) {
+  main .teaser .teaser-info {
+    height: auto;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 60%;
+    z-index: 4;
+    justify-content: flex-end;
+    padding: 24px calc(80px) 24px 24px;
+  }
+}
+
+main .teaser .teaser-info .teaser-metadata {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-bottom: 8px;
+}
+
+main .teaser .teaser-info .teaser-metadata .teaser-subtitle {
+  font-family: var(--body-font-family);
+  line-height: 1.1;
+  font-weight: 600;
+  font-size: 14px;
+  margin: 0px;
+  color: rgb(255, 255, 255);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+}
+
+@media (min-width: 764px) {
+  main .teaser .teaser-info .teaser-metadata .teaser-date {
+    text-align: start;
+    text-shadow: rgb(0 0 0 / 20%) 1px -1px 0px, rgb(0 0 0 / 20%) -1px -1px 0px, rgb(0 0 0 / 20%) -1px 1px 0px, rgb(0 0 0 / 20%) 1px 1px 0px;
+  }
+}
+
+main .teaser .teaser-info .teaser-metadata .teaser-date {
+  font-family: var(--body-font-family);
+  line-height: 1.1;
+  font-weight: normal;
+  font-size: 14px;
+  margin: 0px 0px 0px 12px;
+  color: rgba(255, 255, 255, 0.55);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: end;
+}
+
+main .teaser .teaser-info h3.teaser-title {
+  font-family: var(--body-font-family);
+  line-height: 1.1;
+  margin-bottom: 0px;
+  font-weight: 600;
+  font-size: 24px;
+  overflow: hidden;
+  margin: 0px;
+  color: rgb(255, 255, 255);
+}

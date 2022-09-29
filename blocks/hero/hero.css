@@ -1,13 +1,13 @@
 /* block specific CSS goes here */
 
-main .hero-container > div {
+main .hero-container>div {
     max-width: unset;
 }
-  
+
 main .hero-container {
     padding: 0;
 }
-  
+
 main .hero {
     position: relative;
     padding: 32px;
@@ -37,4 +37,153 @@ main .hero img {
     object-fit: cover;
     width: 100%;
     height: 100%;
+}
+
+/* ----- css for news hero image -----*/
+
+/* news image */
+.newstheme main .news-image {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-width: 100vw;
+    margin: 0px 0px 32px;
+    margin-top: -1px;
+    -webkit-box-pack: center;
+    justify-content: center;
+    flex: 1 1 100%;
+}
+
+@media (min-width: 764px) {
+    .newstheme main .news-image {
+        margin-bottom: 48px;
+    }
+}
+
+.newstheme main .news-image picture {
+    position: relative;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index:1;
+}
+
+.newstheme main .news-image img {
+    position: relative;
+    top: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 100%;
+}
+
+/* news header */
+.newstheme main .news-header {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 calc(100% - 32px);
+    width: calc(100% - 32px);
+    align-content: flex-start;
+    max-width: 816px;
+    padding: 0px;
+    margin-bottom: 24px;
+}
+
+@media (min-width: 680px) {
+    .newstheme main .news-header {
+        flex: 1 1 100%;
+    }
+}
+
+@media (min-width: 1368px) {
+    .newstheme main .news-header {
+    max-width: 816px;
+    }
+}
+
+.newstheme main .news-header .metadata {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+
+@media (min-width: 680px) {
+    .newstheme main .news-header .metadata {
+        margin-bottom: 8px;
+    }
+}
+
+.newstheme main .news-header .subtitle {
+    font-family: var(--body-font-family);
+    line-height: 1.1;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--colors-text-category);
+    margin: 0px 8px 4px 0px;
+}
+
+.newstheme main .news-header .date {
+    font-family: var(--body-font-family);
+    line-height: 1.1;
+    font-weight: normal;
+    font-size: 14px;
+    color: var(--colors-text-secondary);
+    min-width: 70px;
+    margin: 0px 12px 4px 0px;
+}
+
+.newstheme main .news-header .title {
+    font-family: var(--body-font-family);
+    line-height: 1.1;
+    margin: 0;
+    margin-bottom: 24px;
+    font-weight: 600;
+    font-size: 32px;
+    color: var(--colors-text-title);
+}
+
+/* accessiblity links */
+.newstheme main .news-header .a11y {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    margin-bottom: 14px;
+}
+
+@media (min-width: 680px) {
+    .newstheme main .news-header .a11y {
+        margin-bottom: 8px;
+    }
+}
+
+.newstheme main .news-header .a11y .read,.resize {
+    color: var(--colors-text-link);
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    margin-right: 24px !important;
+}
+
+.newstheme main .news-header .a11y .read .read-descr,.resize-descr {
+    font-family: var(--body-font-family);
+    line-height: 1.1;
+    font-weight: 600;
+    font-size: 14px;
+    display: inline;
+    box-sizing: border-box;
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1.5px solid transparent;
+    outline: none;
+    margin: 0px -2px -3px !important;
+    padding: 0px 2px !important;
+}
+
+.newstheme main .news-header .a11y .read .icon-speaker,.icon-text-resize {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    fill: currentColor;
 }

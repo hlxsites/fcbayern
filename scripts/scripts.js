@@ -190,7 +190,7 @@ export function decorateIcons(element = document) {
       }
     }
   });
-  
+
   return element;
 }
 
