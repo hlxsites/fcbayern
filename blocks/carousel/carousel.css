@@ -44,11 +44,44 @@ main .events .carousel-content > a {
   display: flex;
   flex-direction: column;
   position: relative;
-
   overflow: hidden;
 }
 
-main .events .carousel-content > a:hover {
+main .results .carousel-content > a {
+  width: 120px;
+  height: 197px;
+  padding: 36px 20px 24px 20px;
+  transition: box-shadow 0.2s ease-in-out 0s;
+  background: var(--colors-canvas-cardLayoutCard-background);
+  box-shadow: var(--colors-canvas-cardLayoutCard-boxShadow);
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+main .results .result-card-content {
+  line-height: 1.1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: var(--colors-text-default);
+  text-align: center;
+}
+
+main .results .result-card-content img {
+  width: 120px;
+  height: 120px;
+}
+
+main .results .result-card-content strong {
+  display: block;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+main .events .carousel-content > a:hover, main .results .carousel-content > a:hover {
   background: var(--colors-canvas-cardLayoutCard-hover-background);
   box-shadow: var(--colors-canvas-cardLayoutCard-hover-boxShadow);
 }
@@ -92,11 +125,11 @@ main .events .event-card-icon {
 }
 
 @media (max-width: 763px) {
-  main .carousel-content {
+  main .featured-news .carousel-content, main .events .carousel-content {
     flex-direction: column;
   }
 
-  main .carousel-content > a {
+  main .featured-news .carousel-content > a, main .events .carousel-content > a {
     width: 100% !important;
     min-width: unset !important;
     max-width: unset !important;
