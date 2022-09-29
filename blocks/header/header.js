@@ -16,6 +16,32 @@ function toggleNav(nav) {
   nav.setAttribute('aria-expanded', !expanded);
 }
 
+function createThemeSel() {
+  const themeSel = document.createElement('div');
+  themeSel.className = 'theme-sel';
+  themeSel.innerHTML = `<select>
+      <option value="auto">Auto Dark Mode</option>
+      <option value="fcb-light-theme" selected>Light Mode</option>
+      <option value="fcb-dark-theme">Dark Mode</option
+    ></select>
+    <svg height="21" width="21" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"><path d="M12 15L8 8H16L12 15Z"></path></svg>`;
+  return themeSel;
+}
+
+function createLangSel() {
+  const langSel = document.createElement('div');
+  langSel.className = 'lang-sel';
+  langSel.innerHTML = `
+    <svg height="21" width="21" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"><path d="M11.2929 14.7071L7.29289 10.7071L8.70711 9.29289L12 12.5858L15.2929 9.29289L16.7071 10.7071L12.7071 14.7071C12.3166 15.0976 11.6834 15.0976 11.2929 14.7071Z"></path></svg>
+    <select>
+      <option value="fcbayern.com-en-gb">English</option>
+      <option value="fcbayern.com-es-es">Español</option>
+      <option value="fcbayern.com-zh-cn">中文</option>
+      <option selected="" value="fcbayern.com-de-de">Deutsch</option>
+    </select>`;
+  return langSel;
+}
+
 /**
  * decorates the header, mainly the nav
  * @param {Element} block The header block element
@@ -90,6 +116,38 @@ export default async function decorate(block) {
           form.appendChild(clearButton);
           
           navMain.appendChild(form);
+        }
+        else if (type === 'overview') {
+          const userItem = section.querySelector('li:has(.icon-user)');
+          const dialog = document.createElement('div');
+          dialog.setAttribute('aria-modal', 'true');
+          dialog.setAttribute('role', 'dialog');
+          dialog.className = 'nav-user-dialog';
+          dialog.appendChild(userItem.querySelector('.icon-user').cloneNode(true));
+          dialog.appendChild(userItem.querySelector('.icon-user + ul').cloneNode(true));
+          
+          const themeSelItem = document.createElement('li');
+          themeSelItem.appendChild(createThemeSel());
+          dialog.querySelector('ul').appendChild(themeSelItem);
+          
+          section.appendChild(dialog);
+  
+          userItem.onclick = () => {
+            const isOpen = !dialog.classList.contains('is-open');
+            if (isOpen) {
+              const pos = userItem.getBoundingClientRect();
+              dialog.style.right = `${window.innerWidth - pos.left  - pos.width}px`;
+            }
+            dialog.classList.toggle('is-open', isOpen);
+          };
+          
+          document.body.addEventListener('click', (e) => {
+            if (!e.target.closest('li:has(.icon-user)') &&
+              !e.target.closest('.nav-user-dialog') &&
+              dialog.classList.contains('is-open')) {
+              dialog.classList.remove('is-open');
+            }
+          });
         }
         else if (type === 'sections') {
           const sections = section.cloneNode(true);
@@ -176,14 +234,8 @@ export default async function decorate(block) {
     };
     user.appendChild(navUser.querySelector('.icon-user'));
     navMenuHeader.appendChild(user);
-    const themeSel = document.createElement('div');
-    themeSel.className = 'theme-sel';
-    themeSel.innerHTML = `<select>
-      <option value="auto">Auto Dark Mode</option>
-      <option value="fcb-light-theme" selected>Light Mode</option>
-      <option value="fcb-dark-theme">Dark Mode</option
-    ></select>
-    <svg height="21" width="21" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"><path d="M12 15L8 8H16L12 15Z"></path></svg>`;
+    
+    const themeSel = createThemeSel();
     navSettings.appendChild(themeSel);
     
     navMenu.appendChild(decorateIcons(navMenuHeader));
@@ -216,17 +268,7 @@ export default async function decorate(block) {
     const store = nav.querySelector('.nav-brand a:has(.icon-shop)');
     const storeClone = store.cloneNode(true);
   
-    const langSel = document.createElement('div');
-    langSel.className = 'lang-sel';
-    langSel.innerHTML = `
-    <svg height="21" width="21" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"><path d="M11.2929 14.7071L7.29289 10.7071L8.70711 9.29289L12 12.5858L15.2929 9.29289L16.7071 10.7071L12.7071 14.7071C12.3166 15.0976 11.6834 15.0976 11.2929 14.7071Z"></path></svg>
-    <select>
-      <option value="fcbayern.com-en-gb">English</option>
-      <option value="fcbayern.com-es-es">Español</option>
-      <option value="fcbayern.com-zh-cn">中文</option>
-      <option selected="" value="fcbayern.com-de-de">Deutsch</option>
-    </select>`;
-  
+    const langSel = createLangSel();
     const subOverview = document.createElement('div');
     subOverview.appendChild(telekom);
     subOverview.appendChild(store);
@@ -253,8 +295,8 @@ export default async function decorate(block) {
     decorateIcons(nav);
     decorateIcons(navMain);
   
-    window.onscroll = () => {
+    window.addEventListener('scroll', () => {
       header.classList.toggle('is-sticky', window.scrollY > 96)
-    }
+    });
   }
 }

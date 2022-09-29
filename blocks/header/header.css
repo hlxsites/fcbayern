@@ -762,14 +762,110 @@ header .nav-menu .lang-sel select option {
     gap: 8px;
   }
 
-  header nav .nav-overview ul {
+  header nav .nav-overview .nav-user-dialog {
+    display: none;
+    position: absolute;
+    top: 55px;
+    z-index: 10;
+    flex-direction: column;
+    width: 228px;
+    background: rgb(220, 5, 45);
+    box-shadow: rgb(0 0 0 / 80%) 0px 2px 32px 0px;
+  }
+
+  header nav .nav-overview .nav-user-dialog.is-open {
+    display: flex;
+  }
+
+  header nav .nav-overview .nav-user-dialog .icon-user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 171px;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  header nav .nav-overview .nav-user-dialog .icon-user svg {
+    height: 80px;
+    width: 80px;
+  }
+
+  header nav .nav-overview .nav-user-dialog ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0;
+    list-style: none;
+    margin: 0;
+  }
+
+  header nav .nav-overview .nav-user-dialog ul li {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    font-family: FCBayernSans, "Helvetica Neue", Arial, sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    height: 40px;
+    width: 100%;
+    display: flex;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  header nav .nav-overview .nav-user-dialog ul li a {
+    text-decoration: none;
+  }
+
+  header nav .nav-overview .nav-user-dialog .theme-sel {
+    color: rgb(255, 255, 255);
+    background: rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    position: relative;
+    min-width: max-content;
+    border-radius: 3px;
+    height: 28px;
+    font-family: FCBayernSans, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.1;
+    font-weight: 600;
+    font-size: 14px;
+    margin: 12px;
+    width: 100%;
+  }
+
+  header nav .nav-overview .nav-user-dialog .theme-sel select {
+    width: 100%;
+    border: none;
+    border-radius: 0px;
+    background: transparent;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: 1;
+    outline: none;
+    appearance: none;
+    padding: 7px 34px 7px 10px;
+  }
+
+  header nav .nav-overview .nav-user-dialog .theme-sel svg {
+    fill: currentColor;
+    position: absolute;
+    right: 4px;
+  }
+
+  header nav .nav-overview > ul {
     margin: 0;
     display: flex;
     gap: 20px;
     align-items: center;
   }
 
-  header nav .nav-overview ul li {
+  header nav .nav-overview > ul li {
     display: inline-flex;
     flex-direction: row;
     align-items: center;
@@ -787,24 +883,24 @@ header .nav-menu .lang-sel select option {
     cursor: pointer;
   }
 
-  header nav .nav-overview ul li:not(:has(.lang-sel)):not(:has(.icon-user)):hover {
+  header nav .nav-overview > ul li:not(:has(.lang-sel)):not(:has(.icon-user)):hover {
     border-color: currentColor;
   }
 
-  header nav .nav-overview ul li a {
+  header nav .nav-overview > ul li a {
     white-space: nowrap;
     text-decoration: none;
   }
 
-  header nav .nav-overview ul li:has(.icon-handicap) {
+  header nav .nav-overview > ul li:has(.icon-handicap) {
     font-size: 0;
   }
 
-  header nav .nav-overview ul li .icon-handicap svg {
+  header nav .nav-overview > ul li .icon-handicap svg {
     fill: currentColor;
   }
 
-  header nav .nav-overview ul li .icon-user + ul {
+  header nav .nav-overview > ul li .icon-user + ul {
     display: none;
   }
 
