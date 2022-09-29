@@ -1,0 +1,25 @@
+<svg
+    height="24"
+    width="24"
+    viewBox="0 0 24 24"
+    preserveAspectRatio="xMidYMid meet"
+    role="img"
+    xmlns="http://www.w3.org/2000/svg"
+    class="base-icon__StyledIconSvg-sc-fzrbhv-0 iWWHoq">
+  <title>icon</title>
+  <rect
+      x="5"
+      y="2"
+      width="14"
+      height="20"
+      rx="2"
+      fill="#FFF58C"></rect>
+  <rect
+      x="5.5"
+      y="2.5"
+      width="13"
+      height="19"
+      rx="1.5"
+      stroke="black"
+      stroke-opacity="0.25"></rect>
+</svg>
