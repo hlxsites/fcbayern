@@ -29,7 +29,7 @@ main .section .newspagefooter-wrapper {
   row-gap: 31px;  
 }
 
-.newspagefooter .tagsinfo,.social-bar p {
+.newspagefooter .tagsinfo p, .newspagefooter .social-bar p {
   color: var(--colors-text-secondary);
   margin: 0px 0px 24px;
   font-family: FCBayernSans, "Helvetica Neue", Arial, sans-serif;
