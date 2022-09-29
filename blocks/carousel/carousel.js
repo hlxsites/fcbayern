@@ -4,7 +4,7 @@ import { createNewsCard } from '../news/news.js';
 
 async function fetchNews(block) {
   const cards = [];
-  const newsBucket = 'news-' + getLanguage();
+  const newsBucket = `news-${getLanguage()}`;
   const rows = [...block.children];
   for (let i = 0; i < rows.length; i += 1) {
     const row = rows[i];
@@ -28,7 +28,7 @@ async function fetchNews(block) {
 
 async function fetchEvents() {
   const cards = [];
-  const eventsBucket = 'events-' + getLanguage();
+  const eventsBucket = `events-${getLanguage()}`;
   await lookupPages([], eventsBucket);
   const index = window.pageIndex[eventsBucket];
 
@@ -70,13 +70,13 @@ async function fetchEvents() {
 
 async function fetchResults() {
   const cards = [];
-  const resultsBucket = 'results-' + getLanguage();
+  const resultsBucket = `results-${getLanguage()}`;
   await lookupPages([], resultsBucket);
   const index = window.pageIndex[resultsBucket];
 
   for (let i = 0; i < index.data.length; i += 1) {
     const result = index.data[i];
-    
+
     const card = document.createElement('a');
     card.href = 'https://fcbayern.com/de/club/erfolge';
     card.innerHTML = `
