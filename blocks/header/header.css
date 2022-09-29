@@ -629,6 +629,10 @@ header .nav-menu a .icon-shop {
   display: flex;
 }
 
+header .nav-menu .nav-user-dialog {
+  display: none;
+}
+
 header .nav-menu .nav-overview ul {
   display: flex;
   flex-wrap: wrap;
