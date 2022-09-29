@@ -620,4 +620,34 @@ main .section.highlight {
   font-family: var(--body-font-family);
   margin-top: 0px;
   padding: 0px;
+  max-width: 716px;
+}
+
+.liveticker main .section > div > div {
+  display: flex;
+  align-items: baseline;
+  align-content: flex-start;
+}
+
+.liveticker main .section .time {
+  margin-left: -84px;
+  width: 64px;
+  text-align: right;
+  padding-right: 20px;
+
+  align-self: flex-start;
+}
+
+.liveticker main .section h2 {
+  margin-top: 0;
+}
+
+.liveticker main .section h2,
+.liveticker main .section .time {
+  font-size: 1.17em;
+  font-weight: 700;
+  font-size: var(--heading-font-size-l);
+  font-family: var(--heading-font-family);
+  color: var(--text-title-color);
+  line-height: 1.25;
 }
