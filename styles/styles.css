@@ -514,8 +514,8 @@ main .section.highlight {
   text-decoration: none;
   border-bottom: 2px solid transparent;
   outline: none;
-  margin: 0px -2px -3px !important;
-  padding: 0px 2px !important;
+  margin: 0px -2px -3px ;
+  padding: 0px 2px ;
 }
 
 .newstheme main a:hover {
