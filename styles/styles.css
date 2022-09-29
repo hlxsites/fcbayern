@@ -629,10 +629,20 @@ main .section.highlight {
   align-content: flex-start;
 }
 
+.liveticker main .section .left {
+  width: 120px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.liveticker main .section .left,
+.liveticker main .section .right {
+  align-self: flex-start;
+}
+
 .liveticker main .section .time {
-  margin-left: -84px;
-  width: 64px;
   text-align: right;
+  padding-left: 10px;
   padding-right: 20px;
 
   align-self: flex-start;
@@ -650,4 +660,9 @@ main .section.highlight {
   font-family: var(--heading-font-family);
   color: var(--text-title-color);
   line-height: 1.25;
+}
+
+.liveticker main .section .yellow,
+.liveticker main .section .red {
+  fill: none;
 }
