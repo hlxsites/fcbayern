@@ -503,7 +503,7 @@ main .section.highlight {
   background-color: white;
 }
 
-.newstheme a {
+.newstheme main a {
   font-family: var(--body-font-family);
   line-height: 1.1;
   font-weight: 600;
@@ -518,13 +518,13 @@ main .section.highlight {
   padding: 0px 2px !important;
 }
 
-.newstheme a:hover {
+.newstheme main a:hover {
   color: var(--colors-text-link);
   border-bottom: 2px solid currentcolor;
 }
 
 
-.newstheme :not(.news-header) h2 {
+.newstheme main :not(.news-header) h2 {
   font-family: var(--body-font-family);
   font-weight: 600;
   font-size: 20px;
