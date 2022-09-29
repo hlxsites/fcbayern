@@ -38,6 +38,12 @@ export default async function decorate(block) {
   mainNavigation.classList.add('footer-main-navigation');
   const socialMediaContainer = block.children[0].children[5];
   socialMediaContainer.classList.add('socialmedia-container');
-  const pageFooter = block.children[0].children[6];
-  pageFooter.classList.add('page-footer');
+  const footerBottom = block.children[0].children[6];
+  footerBottom.classList.add('footer-bottom');
+  const footerLegal = document.createElement('div');
+  footerLegal.classList.add('footer-legal');
+  footerLegal.append(footerBottom.firstElementChild);
+  footerLegal.append(footerBottom.firstElementChild);
+  footerBottom.firstElementChild.classList.add('bottom-partners');
+  footerBottom.insertBefore(footerLegal, footerBottom.firstElementChild);
 }

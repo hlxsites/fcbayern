@@ -751,6 +751,7 @@ export async function lookupPages(pathnames, collection, sheets = []) {
     'news-de': '/de/news/query-index.json',
     'news-en': '/en/news/query-index.json',
     'matches-de': '/de/data.json?sheet=matches&sheet=matches-upcoming',
+    'events-de': '/de/data.json?sheet=dates',
   };
   const indexPath = indexPaths[collection];
   window.pageIndex = window.pageIndex || {};
@@ -780,4 +781,8 @@ export async function lookupPages(pathnames, collection, sheets = []) {
   const { lookup } = window.pageIndex[collection];
   const result = pathnames.map((path) => lookup[path]).filter((e) => e);
   return result;
+}
+
+export function parseDate(dateStr) {
+  return new Date(Math.round((+dateStr - (1 + 25567 + 1)) * 86400 * 1000));
 }
