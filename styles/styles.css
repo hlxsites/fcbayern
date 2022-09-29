@@ -136,6 +136,8 @@
   --colors-sonderotto-matchBarBackground: rgba(0, 47, 108, 0.2);
   --colors-sonderotto-matchSubFor: rgba(0, 72, 133, 0.55);
   --colors-sonderotto-matchLineupIcons: #000;
+  --colors-liveticker-background: rgb(0, 14, 41);
+  --colors-liveticker-color: #fff;
 
   /* colors */
   --link-color: #035fe6;
@@ -489,4 +491,25 @@ main .section[data-section-status='initialized'] {
 
 main .section.highlight {
   background-color: var(--highlight-background-color);
+}
+
+.liveticker main .section {
+  background-color: var(--colors-liveticker-background);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  color: var(--colors-liveticker-color);
+}
+
+.liveticker main .section > div {
+  max-width: 816px;
+}
+
+.liveticker main .section p {
+  padding-right: 22px;
+  font-family: var(--body-font-family);
+  line-height: 1.5;
+  margin-bottom: 12px;
+  font-weight: normal;
+  font-size: 16px;
 }
