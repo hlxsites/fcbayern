@@ -648,11 +648,13 @@ main .section.highlight {
   align-self: flex-start;
 }
 
-.liveticker main .section h2 {
+.liveticker main .section h2, 
+.liveticker main .section h3  {
   margin-top: 0;
 }
 
 .liveticker main .section h2,
+.liveticker main .section h3,
 .liveticker main .section .time {
   font-size: 1.17em;
   font-weight: 700;
