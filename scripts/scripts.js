@@ -641,6 +641,12 @@ window.addEventListener('error', (event) => {
 
 loadPage(document);
 
+function buildNewsPageFooterBlock(main) {
+  const section = document.createElement('div');
+  section.append(buildBlock('newspagefooter',{elems:[]}));
+  main.append(section);
+}
+
 function buildHeroBlock(main) {
   const h1 = main.querySelector('h1');
   const picture = main.querySelector('picture');
@@ -681,6 +687,9 @@ async function buildAutoBlocks(main) {
       }
     }
 
+    if(getMetadata('theme') === 'newstheme'){
+      buildNewsPageFooterBlock(main);
+    }
     buildHeroBlock(main);
   } catch (error) {
     // eslint-disable-next-line no-console
