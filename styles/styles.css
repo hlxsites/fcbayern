@@ -483,6 +483,7 @@ main img {
 }
 
 /* progressive section appearance */
+main .section[data-section-status='loaded-below-the-fold'],
 main .section[data-section-status='loading'],
 main .section[data-section-status='initialized'] {
   display: none;

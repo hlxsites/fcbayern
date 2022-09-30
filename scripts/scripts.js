@@ -331,13 +331,29 @@ export function updateSectionsStatus(main) {
   for (let i = 0; i < sections.length; i += 1) {
     const section = sections[i];
     const status = section.getAttribute('data-section-status');
+
     if (status !== 'loaded') {
       const loadingBlock = section.querySelector('.block[data-block-status="initialized"], .block[data-block-status="loading"]');
       if (loadingBlock) {
         section.setAttribute('data-section-status', 'loading');
         break;
       } else {
-        section.setAttribute('data-section-status', 'loaded');
+        const { bottom } = main.getBoundingClientRect();
+        console.log(bottom, section);
+        if (bottom < window.innerHeight) section.setAttribute('data-section-status', 'loaded');
+        else {
+          if (window.hlx.aboveTheFold) {
+            window.hlx.aboveTheFold = false;
+            console.log(window.hlx.aboveTheFold);
+            const atfComplete = new Event('block-loader-atf-complete');
+            console.log('atf complete triggered');
+            document.dispatchEvent(atfComplete);
+          }
+          section.setAttribute('data-section-status', 'loaded-below-the-fold');
+          if (i === sections.length) {
+            sections.forEach((s) => { s.dataSet.sectionStatus = 'loaded'; });
+          }
+        }
       }
     }
   }
@@ -623,7 +639,7 @@ initHlx();
  * ------------------------------------------------------------
  */
 
-const LCP_BLOCKS = ['hero']; // add your LCP blocks to the list
+const LCP_BLOCKS = ['hero', 'stage']; // add your LCP blocks to the list
 const RUM_GENERATION = 'project-1'; // add your RUM generation information here
 const ICON_ROOT = '/icons';
 
@@ -717,6 +733,14 @@ async function loadEager(doc) {
  * loads everything that doesn't need to be delayed.
  */
 async function loadLazy(doc) {
+
+  window.hlx.aboveTheFold = true;
+  document.addEventListener('block-loader-atf-complete', (e) => {
+    console.log('atf complete');
+    loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
+    loadHeader(doc.querySelector('header'));
+  }, false);
+
   const main = doc.querySelector('main');
   await loadBlocks(main);
 
@@ -724,10 +748,8 @@ async function loadLazy(doc) {
   const element = hash ? main.querySelector(hash) : false;
   if (hash && element) element.scrollIntoView();
 
-  loadHeader(doc.querySelector('header'));
   loadFooter(doc.querySelector('footer'));
 
-  loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   addFavIcon(`${window.hlx.codeBasePath}/icons/fcbayern.svg`);
   sampleRUM('lazy');
   sampleRUM.observe(main.querySelectorAll('div[data-block-name]'));
