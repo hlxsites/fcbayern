@@ -1,17 +1,20 @@
+
 main .teaser-wrapper {
   padding: 0;
 }
 
-main .teaser a:hover {
+main .teaser a.teaser-link {
   text-decoration: none;
   border-bottom: 0;
+  margin:0;
+  padding: 0;
 }
 
 main .teaser-container.section .teaser-wrapper {
   position: relative;
   height: fit-content;
   width: 100%;
-  overflow: hidden;
+  overflow: visible;
   padding: 0;
 }
 
@@ -26,17 +29,22 @@ main .teaser .teaser-image {
   outline: none;
 }
 
-main .teaser .teaser-image:hover {
-  transition: opacity 0.2s ease-in-out 0s;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 4px 16px;
-}
-
 main .teaser .teaser-image picture {
   position: relative;
   height: 100%;
   width: 100%;
-  overflow: hidden;
+  overflow:hidden;
 }
+
+main .teaser .teaser-link .teaser-image:hover  {
+  overflow:visible;
+}
+
+main .teaser .teaser-image:hover  {
+  transition: opacity 0.2s ease-in-out 0s;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 4px 16px;
+}
+
 
 main .teaser .teaser-image picture img {
   backface-visibility: hidden;
@@ -45,7 +53,7 @@ main .teaser .teaser-image picture img {
   height: 100%;
 }
 
-main .teaser .teaser-image picture img:hover {
+main .teaser a:hover .teaser-image picture img:hover {
   transform-origin: center center;
   transition: transform 0.2s ease-in-out 0s;
   transform: scale(1.05);
