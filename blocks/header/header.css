@@ -74,6 +74,8 @@ header nav .nav-actions {
   display: flex;
   gap: 6px;
   place-content: center center;
+  height: 24px;
+  width: 74px;
 }
 
 header nav .nav-actions a:has(.icon-telekom) {
@@ -261,6 +263,11 @@ header .nav-main li a {
 
 header .nav-main li a span {
   margin-bottom: 8px;
+}
+
+header .nav-main li a span.icon {
+  height: 42.9px;
+  width: 40px;
 }
 
 header .nav-main li:not(:has(> a > .icon)) {
