@@ -656,7 +656,7 @@ loadPage(document);
 
 function buildNewsPageFooterBlock(main) {
   const section = document.createElement('div');
-  section.append(buildBlock('newspagefooter',{elems:[]}));
+  section.append(buildBlock('newspagefooter', { elems: [] }));
   main.append(section);
 }
 
@@ -700,9 +700,10 @@ async function buildAutoBlocks(main) {
       }
     }
 
-    if(getMetadata('theme') === 'newstheme'){
+    if (getMetadata('theme') === 'newstheme') {
       buildNewsPageFooterBlock(main);
     }
+
     buildHeroBlock(main);
   } catch (error) {
     // eslint-disable-next-line no-console
