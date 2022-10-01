@@ -270,7 +270,7 @@ header .nav-main li a span.icon {
   width: 40px;
 }
 
-header .nav-main li:not(:has(> a > .icon)) {
+header .nav-main li:not(:has( a > .icon)) {
   display: none;
 }
 

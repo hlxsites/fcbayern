@@ -339,14 +339,11 @@ export function updateSectionsStatus(main) {
         break;
       } else {
         const { bottom } = main.getBoundingClientRect();
-        console.log(bottom, section);
         if (bottom < window.innerHeight) section.setAttribute('data-section-status', 'loaded');
         else {
           if (window.hlx.aboveTheFold) {
             window.hlx.aboveTheFold = false;
-            console.log(window.hlx.aboveTheFold);
             const atfComplete = new Event('block-loader-atf-complete');
-            console.log('atf complete triggered');
             document.dispatchEvent(atfComplete);
           }
           section.setAttribute('data-section-status', 'loaded-below-the-fold');
@@ -733,10 +730,8 @@ async function loadEager(doc) {
  * loads everything that doesn't need to be delayed.
  */
 async function loadLazy(doc) {
-
   window.hlx.aboveTheFold = true;
-  document.addEventListener('block-loader-atf-complete', (e) => {
-    console.log('atf complete');
+  document.addEventListener('block-loader-atf-complete', () => {
     loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
     loadHeader(doc.querySelector('header'));
   }, false);

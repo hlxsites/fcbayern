@@ -8,14 +8,12 @@ export default async function decorate(block) {
   // get teaser news path and fetch the news item
   const rows = [...block.children];
   const teaserConfigRow = rows[0];
-  const [content] = [...teaserConfigRow.children].map((e, j) =>
-    j ? e.textContent : e,
-  );
+  const [content] = [...teaserConfigRow.children].map((e, j) => (j ? e.textContent : e));
   let news = {};
   if (content.textContent.includes('://')) {
     // handle straight link
     const { pathname } = new URL(content.querySelector('a').href);
-    const newsBucket = 'news-' + getLanguage();
+    const newsBucket = `news-${getLanguage()}`;
     news = await lookupPages([pathname], newsBucket);
   }
 
@@ -31,7 +29,7 @@ export default async function decorate(block) {
 
     // convert timeinmillis
     const date = new Date(
-      parseInt(`${entry.publicationDate}000`),
+      parseInt(`${entry.publicationDate}000`, 10),
     ).toLocaleDateString('de-de');
 
     // generate the dom

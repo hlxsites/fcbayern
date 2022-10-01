@@ -213,6 +213,9 @@ header:has(img) {
     height: 140px;
     padding: 0;
   }
+  header:has(img) {
+    background-color: var(--colors-brand);
+  }
 }
 
 h1,
