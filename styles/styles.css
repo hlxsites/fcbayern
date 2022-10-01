@@ -506,7 +506,7 @@ main .section.highlight {
 .newstheme main {
   font-family: var(--body-font-family);
   line-height: 1.5;
-  margin-bottom: 12px;
+  margin-bottom: 0;
   font-weight: normal;
   font-size: 16px;
   background-color: white;
@@ -523,8 +523,8 @@ main .section.highlight {
   text-decoration: none;
   border-bottom: 2px solid transparent;
   outline: none;
-  margin: 0px -2px -3px !important;
-  padding: 0px 2px !important;
+  margin: 0px -2px -3px ;
+  padding: 0px 2px ;
 }
 
 .newstheme main a:hover {
@@ -543,17 +543,6 @@ main .section.highlight {
 }
 
 /* widths */
-.newstheme main .section {
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 100%;
-  width: 100%;
-  margin: 0px auto;
-  min-height: inherit;
-  color: var(--colors-text-default);
-  background-color: white;
-}
-
 @media (min-width: 764px) {
   .newstheme main {
     padding-top: 0px;
@@ -571,36 +560,37 @@ main .section.highlight {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: white;
 }
 
 .newstheme main .hero-wrapper {
   padding: 0;
 }
 
-.newstheme main .section.hero-container + .section {
+.newstheme main .section:not(.hero-container) {
   display: flex;
   flex-direction: column;
-  flex: 1 1 calc(100% - 32px);
-  width: calc(100% - 32px);
-  align-content: flex-start;
-  align-items: center;
-  max-width: 816px;
-  padding: 0;
+  flex: 1 1 100%;
+  width: 100%;
+  margin: 0px auto;
+  min-height: inherit;
+  color: var(--colors-text-default);
+  background-color: white;
 }
 
 @media (min-width: 680px) {
-  .newstheme main .section.hero-container + .section {
+  .newstheme main .section:not(.hero-container) {
     flex: 1 1 100%;
   }
 }
 
 @media (min-width: 1368px) {
-  .newstheme main .section.hero-container + .section {
+  .newstheme main .section:not(.hero-container) {
     max-width: 816px;
   }
 }
 
-.newstheme main .section.hero-container + .section .default-content-wrapper {
+.newstheme main .section:not(.hero-container) .default-content-wrapper {
   padding: 0;
 }
 
@@ -657,11 +647,13 @@ main .section.highlight {
   align-self: flex-start;
 }
 
-.liveticker main .section h2 {
+.liveticker main .section h2, 
+.liveticker main .section h3  {
   margin-top: 0;
 }
 
 .liveticker main .section h2,
+.liveticker main .section h3,
 .liveticker main .section .time {
   font-size: 1.17em;
   font-weight: 700;

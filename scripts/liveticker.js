@@ -20,7 +20,7 @@ const getIcon = async (name) => {
 };
 
 const decorate = async () => {
-  document.querySelectorAll('.liveticker main .section p, .liveticker main .section h2').forEach(async (el) => {
+  document.querySelectorAll('.liveticker main .section p, .liveticker main .section h2, .liveticker main .section h3').forEach(async (el) => {
     const container = document.createElement('div');
     const left = document.createElement('div');
     left.classList.add('left');
