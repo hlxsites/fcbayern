@@ -809,3 +809,9 @@ export async function lookupPages(pathnames, collection, sheets = []) {
 export function parseDate(dateStr) {
   return new Date(Math.round((+dateStr - (1 + 25567 + 1)) * 86400 * 1000));
 }
+
+if (window.name.includes('performance')) {
+  import('./performance.js').then((mod) => {
+    if (mod.default) mod.default();
+  });
+}
