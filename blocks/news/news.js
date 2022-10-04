@@ -12,7 +12,7 @@ export function createNewsCard(newsItem, classPrefix, large = false) {
   const cardContent = document.createElement('div');
   cardContent.classList.add(`${classPrefix}-card`);
   if (large) {
-    cardContent.classList.add(`large`);
+    cardContent.classList.add('large');
   }
 
   const pictureString = createOptimizedPicture(
@@ -61,7 +61,7 @@ export async function filterNewsItems(config, feed, limit) {
     }
   });
 
-  const newsBucket = 'news-' + getLanguage();
+  const newsBucket = `news-${getLanguage()}`;
   await lookupPages([], newsBucket);
   const index = window.pageIndex[newsBucket];
 
@@ -130,7 +130,7 @@ async function decorateNewsFeed(
 
 function createNewsFilters(items) {
   const filter = document.createElement('div');
-  filter.classList.add(`news-feed-filters`);
+  filter.classList.add('news-feed-filters');
 
   if (Array.isArray(items)) {
     const filterList = document.createElement('ul');
@@ -168,27 +168,24 @@ function updateNewsFilters(buttons, newSelection) {
 
 export default async function decorate(block) {
   const config = readBlockConfig(block);
-  block.innerHTML = ``;
+  block.innerHTML = '';
 
   /* create buttons for filter options */
-  let filterItems = [
+  const filterItems = [
     { label: 'all', selected: true },
     ...config.tags.split(',').map((f) => ({ label: f })),
   ];
   const newsFilters = createNewsFilters(filterItems);
-  newsFilters.querySelectorAll('button').forEach((b) =>
-    b.addEventListener('click', () => {
-      const selectedFilter =
-        b.getAttribute('data-value') === 'all'
-          ? config
-          : { tags: b.getAttribute('data-value') };
-      updateNewsFilters(
-        newsFilters.querySelectorAll('button'),
-        b.getAttribute('data-value'),
-      );
-      decorateNewsFeed(block, selectedFilter);
-    }),
-  );
+  newsFilters.querySelectorAll('button').forEach((b) => b.addEventListener('click', () => {
+    const selectedFilter = b.getAttribute('data-value') === 'all'
+      ? config
+      : { tags: b.getAttribute('data-value') };
+    updateNewsFilters(
+      newsFilters.querySelectorAll('button'),
+      b.getAttribute('data-value'),
+    );
+    decorateNewsFeed(block, selectedFilter);
+  }));
   block.appendChild(newsFilters);
 
   /* load and decorate news feed */

@@ -199,6 +199,11 @@ header {
   position: relative;
   z-index: 100;
   overflow: hidden;
+  background-color: var(--colors-brand);
+}
+
+header:has(img) {
+  background-color: unset;
 }
 
 /* tablet */
@@ -207,6 +212,9 @@ header {
     background-color: var(--colors-brand);
     height: 140px;
     padding: 0;
+  }
+  header:has(img) {
+    background-color: var(--colors-brand);
   }
 }
 
@@ -483,6 +491,7 @@ main img {
 }
 
 /* progressive section appearance */
+main .section[data-section-status='loaded-below-the-fold'],
 main .section[data-section-status='loading'],
 main .section[data-section-status='initialized'] {
   display: none;

@@ -1,10 +1,10 @@
-import { decorateIcons, getMetadata } from "../../scripts/scripts.js";
+import { decorateIcons, getMetadata } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
   block.textContent = '';
-  
+
   // create the dom
-  const dom  = document.createRange().createContextualFragment(`
+  const dom = document.createRange().createContextualFragment(`
     <hr class='newspage-pagebreak'>
     <div class='newspage-footer'>
       <div class='tagsinfo'> 
@@ -47,7 +47,7 @@ export default function decorate(block) {
     </div>
     <div class='newspage-also'>
     </div>
-  `)
+  `);
 
   // append the list of tags
   const tags = getMetadata('article:tag');
@@ -55,9 +55,9 @@ export default function decorate(block) {
   taglist.classList = 'tags';
 
   tags.split(',').forEach((element) => {
-    let a = document.createElement('a');
-    a.setAttribute('href','');
-    let tag = document.createElement('span');
+    const a = document.createElement('a');
+    a.setAttribute('href', '');
+    const tag = document.createElement('span');
     tag.innerHTML = element;
     a.append(tag);
     taglist.append(a);

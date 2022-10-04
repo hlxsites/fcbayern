@@ -331,13 +331,26 @@ export function updateSectionsStatus(main) {
   for (let i = 0; i < sections.length; i += 1) {
     const section = sections[i];
     const status = section.getAttribute('data-section-status');
+
     if (status !== 'loaded') {
       const loadingBlock = section.querySelector('.block[data-block-status="initialized"], .block[data-block-status="loading"]');
       if (loadingBlock) {
         section.setAttribute('data-section-status', 'loading');
         break;
       } else {
-        section.setAttribute('data-section-status', 'loaded');
+        const { bottom } = main.getBoundingClientRect();
+        if (bottom < window.innerHeight) section.setAttribute('data-section-status', 'loaded');
+        else {
+          if (window.hlx.aboveTheFold) {
+            window.hlx.aboveTheFold = false;
+            const atfComplete = new Event('block-loader-atf-complete');
+            document.dispatchEvent(atfComplete);
+          }
+          section.setAttribute('data-section-status', 'loaded-below-the-fold');
+          if (i === sections.length) {
+            sections.forEach((s) => { s.dataSet.sectionStatus = 'loaded'; });
+          }
+        }
       }
     }
   }
@@ -623,7 +636,7 @@ initHlx();
  * ------------------------------------------------------------
  */
 
-const LCP_BLOCKS = ['hero']; // add your LCP blocks to the list
+const LCP_BLOCKS = ['hero', 'stage']; // add your LCP blocks to the list
 const RUM_GENERATION = 'project-1'; // add your RUM generation information here
 const ICON_ROOT = '/icons';
 
@@ -643,7 +656,7 @@ loadPage(document);
 
 function buildNewsPageFooterBlock(main) {
   const section = document.createElement('div');
-  section.append(buildBlock('newspagefooter',{elems:[]}));
+  section.append(buildBlock('newspagefooter', { elems: [] }));
   main.append(section);
 }
 
@@ -687,9 +700,10 @@ async function buildAutoBlocks(main) {
       }
     }
 
-    if(getMetadata('theme') === 'newstheme'){
+    if (getMetadata('theme') === 'newstheme') {
       buildNewsPageFooterBlock(main);
     }
+
     buildHeroBlock(main);
   } catch (error) {
     // eslint-disable-next-line no-console
@@ -726,6 +740,12 @@ async function loadEager(doc) {
  * loads everything that doesn't need to be delayed.
  */
 async function loadLazy(doc) {
+  window.hlx.aboveTheFold = true;
+  document.addEventListener('block-loader-atf-complete', () => {
+    loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
+    loadHeader(doc.querySelector('header'));
+  }, false);
+
   const main = doc.querySelector('main');
   await loadBlocks(main);
 
@@ -733,10 +753,8 @@ async function loadLazy(doc) {
   const element = hash ? main.querySelector(hash) : false;
   if (hash && element) element.scrollIntoView();
 
-  loadHeader(doc.querySelector('header'));
   loadFooter(doc.querySelector('footer'));
 
-  loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   addFavIcon(`${window.hlx.codeBasePath}/icons/fcbayern.svg`);
   sampleRUM('lazy');
   sampleRUM.observe(main.querySelectorAll('div[data-block-name]'));
@@ -795,4 +813,10 @@ export async function lookupPages(pathnames, collection, sheets = []) {
 
 export function parseDate(dateStr) {
   return new Date(Math.round((+dateStr - (1 + 25567 + 1)) * 86400 * 1000));
+}
+
+if (window.name.includes('performance')) {
+  import('./performance.js').then((mod) => {
+    if (mod.default) mod.default();
+  });
 }

@@ -6,7 +6,7 @@ function toggleHidden(el) {
 
 function addToggleClear(input) {
   input.oninput = () => {
-    input.nextElementSibling.toggleAttribute('hidden', input.value.length === 0)
+    input.nextElementSibling.toggleAttribute('hidden', input.value.length === 0);
   };
 }
 
@@ -62,20 +62,21 @@ export default async function decorate(block) {
     const nav = document.createElement('nav');
     nav.setAttribute('aria-expanded', 'false');
     nav.innerHTML = html;
-    
+
     const types = ['brand', 'overview', 'sections'];
     const navMain = document.createElement('div');
     navMain.className = 'nav-main';
-    
+
     types.forEach((type, i) => {
       const section = nav.children[i];
       if (section) {
         section.classList.add(`nav-${type}`);
-        
+
         if (type === 'brand') {
           const brandLink = section.querySelector('a:has(.icon-fcbayern)');
-          
-          const brandTextNode = [...brandLink.childNodes].find(n => n.nodeType === Node.TEXT_NODE);
+
+          // eslint-disable-next-line max-len
+          const brandTextNode = [...brandLink.childNodes].find((n) => n.nodeType === Node.TEXT_NODE);
           const brandText = document.createElement('div');
           if (brandTextNode) {
             brandTextNode.textContent.split(' ').forEach((w) => {
@@ -86,38 +87,37 @@ export default async function decorate(block) {
             brandTextNode.textContent = '';
             brandLink.appendChild(brandText);
           }
-          
+
           const searchLink = section.querySelector('a:has(.icon-search)');
           searchLink.remove();
-          
+
           const form = document.createElement('form');
           form.action = searchLink.href;
-          
+
           const searchButton = document.createElement('button');
           const clearButton = searchButton.cloneNode();
           clearButton.type = 'reset';
           clearButton.hidden = true;
-          
-          const searchIcon = searchLink.querySelector('.icon')
+
+          const searchIcon = searchLink.querySelector('.icon');
           const clearIcon = document.createElement('span');
           clearIcon.className = 'icon icon-close';
-          
+
           const input = document.createElement('input');
           input.name = 'query';
           input.type = 'search';
           input.autocomplete = 'off';
           addToggleClear(input);
-          
+
           searchButton.appendChild(searchIcon);
           clearButton.appendChild(clearIcon);
-          
+
           form.appendChild(searchButton);
           form.appendChild(input);
           form.appendChild(clearButton);
-          
+
           navMain.appendChild(form);
-        }
-        else if (type === 'overview') {
+        } else if (type === 'overview') {
           const userItem = section.querySelector('li:has(.icon-user)');
           const dialog = document.createElement('div');
           dialog.setAttribute('aria-modal', 'true');
@@ -125,38 +125,37 @@ export default async function decorate(block) {
           dialog.className = 'nav-user-dialog';
           dialog.appendChild(userItem.querySelector('.icon-user').cloneNode(true));
           dialog.appendChild(userItem.querySelector('.icon-user + ul').cloneNode(true));
-          
+
           const themeSelItem = document.createElement('li');
           themeSelItem.appendChild(createThemeSel());
           dialog.querySelector('ul').appendChild(themeSelItem);
-          
+
           section.appendChild(dialog);
-  
+
           userItem.onclick = () => {
             const isOpen = !dialog.classList.contains('is-open');
             if (isOpen) {
               const pos = userItem.getBoundingClientRect();
-              dialog.style.right = `${window.innerWidth - pos.left  - pos.width}px`;
+              dialog.style.right = `${window.innerWidth - pos.left - pos.width}px`;
             }
             dialog.classList.toggle('is-open', isOpen);
           };
-          
+
           document.body.addEventListener('click', (e) => {
-            if (!e.target.closest('li:has(.icon-user)') &&
-              !e.target.closest('.nav-user-dialog') &&
-              dialog.classList.contains('is-open')) {
+            if (!e.target.closest('li:has(.icon-user)')
+              && !e.target.closest('.nav-user-dialog')
+              && dialog.classList.contains('is-open')) {
               dialog.classList.remove('is-open');
             }
           });
-        }
-        else if (type === 'sections') {
+        } else if (type === 'sections') {
           const sections = section.cloneNode(true);
-  
+
           const secondaryList = document.createElement('ul');
           [...sections.querySelectorAll('li:has(.icon-fans), li:has(.icon-store), li:has(.icon-tickets)')]
             .slice(-3)
-            .forEach(el => secondaryList.appendChild(el.cloneNode(true)));
-          
+            .forEach((el) => secondaryList.appendChild(el.cloneNode(true)));
+
           const form = navMain.querySelector('form').cloneNode(true);
           form.querySelector('button').onclick = (e) => {
             if (!form.querySelector('input').value.length) {
@@ -171,19 +170,19 @@ export default async function decorate(block) {
             form.querySelector('button[type="reset"]').hidden = true;
           };
           addToggleClear(form.querySelector('input'));
-          
+
           sections.prepend(nav.querySelector('a:has(.icon-fcbayern)').cloneNode(true));
           sections.appendChild(form);
           sections.appendChild(secondaryList);
-          
+
           navMain.appendChild(sections);
         }
       }
     });
-    
+
     const navActions = document.createElement('div');
     navActions.className = 'nav-actions';
-    
+
     // telekom
     const telekom = nav.querySelector('a:has(.icon-telekom)');
     navActions.append(telekom.cloneNode(true));
@@ -200,26 +199,26 @@ export default async function decorate(block) {
       toggleNav(nav);
     });
     navActions.append(hamburger);
-    
+
     // menu for mobile
     const navMenu = document.createElement('div');
     navMenu.className = 'nav-menu';
-    
+
     const navMenuBackdrop = document.createElement('div');
     navMenuBackdrop.className = 'nav-menu-backdrop';
     navMenuBackdrop.onclick = () => {
       toggleNav(nav);
     };
-    
+
     const navMenuClose = document.createElement('button');
     navMenuClose.className = 'nav-menu-close';
     navMenuClose.setAttribute('aria-label', 'close menu');
     navMenuClose.innerHTML = '<svg height="26" width="26" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" role="img" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 13.0607L17.4697 18.5303L18.5303 17.4697L13.0607 12L18.5303 6.53033L17.4697 5.46967L12 10.9393L6.53033 5.46967L5.46967 6.53033L10.9393 12L5.46968 17.4697L6.53033 18.5303L12 13.0607Z"></path></svg>';
-    
+
     const navMenuHeader = document.createElement('div');
     navMenuHeader.className = 'nav-menu-header';
     navMenuHeader.appendChild(nav.querySelector('a:has(.icon-fcbayern)').cloneNode(true));
-    
+
     // Settings
     const navSettings = document.createElement('div');
     navSettings.className = 'nav-settings';
@@ -234,10 +233,10 @@ export default async function decorate(block) {
     };
     user.appendChild(navUser.querySelector('.icon-user'));
     navMenuHeader.appendChild(user);
-    
+
     const themeSel = createThemeSel();
     navSettings.appendChild(themeSel);
-    
+
     navMenu.appendChild(decorateIcons(navMenuHeader));
     navMenu.appendChild(navSettings);
     navMenu.appendChild(decorateIcons(form));
@@ -246,7 +245,7 @@ export default async function decorate(block) {
     const navMenuList = nav.querySelector('.nav-sections ul');
     navMenuList.className = 'nav-menu-list';
     const navMenuListItems = nav.querySelectorAll('.nav-sections > ul > li');
-    for (const navMenuItem of navMenuListItems) {
+    navMenuListItems.forEach((navMenuItem) => {
       const subItems = navMenuItem.querySelector('ul');
       if (subItems) {
         const link = navMenuItem.querySelector('a');
@@ -256,47 +255,47 @@ export default async function decorate(block) {
           button.classList.toggle('is-open', !button.classList.contains('is-open'));
         };
         link.replaceWith(button);
-        
+
         decorateIcons(subItems);
       }
-    }
+    });
     nav.querySelector('.nav-sections').remove();
-    
+
     // overview & online store & lang sel
     const overview = nav.querySelector('.nav-overview');
     const overviewClone = overview.cloneNode(true);
     const store = nav.querySelector('.nav-brand a:has(.icon-shop)');
     const storeClone = store.cloneNode(true);
-  
+
     const langSel = createLangSel();
     const subOverview = document.createElement('div');
     subOverview.appendChild(telekom);
     subOverview.appendChild(store);
     overview.appendChild(subOverview);
     overview.querySelector('li:has(.icon-handicap)').prepend(langSel);
-    
+
     navMenu.appendChild(navMenuList);
     navMenu.appendChild(storeClone);
     navMenu.appendChild(overviewClone);
     navMenu.appendChild(langSel.cloneNode(true));
-    
+
     navMenuBackdrop.appendChild(navMenuClose);
-    
+
     nav.appendChild(navActions);
-    
+
     block.append(nav);
     block.append(navMenu);
     block.append(navMenuBackdrop);
-    
+
     header.append(navMain);
-  
+
     decorateIcons(overviewClone);
     decorateIcons(storeClone);
     decorateIcons(nav);
     decorateIcons(navMain);
-  
+
     window.addEventListener('scroll', () => {
-      header.classList.toggle('is-sticky', window.scrollY > 96)
+      header.classList.toggle('is-sticky', window.scrollY > 96);
     });
   }
 }

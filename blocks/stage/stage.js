@@ -11,13 +11,13 @@ function createStageCard(newsItem, classPrefix, large = false, first = false) {
   const cardContent = document.createElement('div');
   cardContent.classList.add(`${classPrefix}-card`);
   if (large) {
-    cardContent.classList.add(`large`);
+    cardContent.classList.add('large');
   }
 
   const pictureString = createOptimizedPicture(
     newsItem.image,
     newsItem.imageAlt,
-    first ? true : false,
+    !!first,
     [
       { media: '(max-width: 679px)', width: '700' },
       { media: '(min-width: 680px) and (max-width: 763px)', width: '945' },
@@ -37,7 +37,7 @@ function createStageCard(newsItem, classPrefix, large = false, first = false) {
 }
 
 export default async function decorate(block) {
-  const newsBucket = 'news-' + getLanguage();
+  const newsBucket = `news-${getLanguage()}`;
   const rows = [...block.children];
   const contents = [];
   for (let i = 0; i < rows.length; i += 1) {
@@ -50,8 +50,8 @@ export default async function decorate(block) {
       const news = await lookupPages([pathname], newsBucket);
       if (news.length) {
         const [newsItem] = news;
-        const card = createStageCard(newsItem, 'stage-news', true, i < 1 ? true : false);
-        card.classList.add('card-' + (i + 1));
+        const card = createStageCard(newsItem, 'stage-news', true, i < 1);
+        card.classList.add(`card-${i + 1}`);
         contents.push(card.outerHTML);
       }
     } else {
@@ -78,7 +78,7 @@ export default async function decorate(block) {
   cards.forEach((card) => {
     card.addEventListener('mouseover', (event) => {
       block.querySelectorAll('a').forEach((c) => c.classList.remove('active'));
-      let currentTarget = event.currentTarget;
+      let { currentTarget } = event;
       currentTarget.classList.add('active');
       while (currentTarget.previousElementSibling) {
         currentTarget = currentTarget.previousElementSibling;

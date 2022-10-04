@@ -14,6 +14,7 @@ main .carousel .carousel-wrapper {
   scroll-behavior: smooth;
   overflow: auto hidden;
 }
+
 main .carousel .carousel-wrapper ::-webkit-scrollbar {
   display: none;
 }
@@ -34,6 +35,7 @@ main .featured-news .carousel-content > a {
   min-width: 292px;
   max-width: 355px;
 }
+
 main .events .carousel-content > a {
   width: 248px;
   background-color: red;
