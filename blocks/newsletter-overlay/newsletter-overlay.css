@@ -55,6 +55,14 @@ main .newsletter-overlay :any-link {
   color: white;
 }
 
+main .newsletter-overlay > div:last-of-type {
+  font-size: .8rem;
+}
+
+main .newsletter-overlay > div:last-of-type :any-link {
+  font-weight: bold;
+}
+
 main .newsletter-overlay-close {
   position: absolute;
   top: 0;
