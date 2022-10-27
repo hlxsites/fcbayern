@@ -747,7 +747,7 @@ export function getExperiment() {
  * @returns {object} containing the experiment manifest
  */
 export async function getExperimentConfig(experimentId) {
-  const path = `/express/experiments/${experimentId}/manifest.json`;
+  const path = `/experiments/${experimentId}/manifest.json`;
   try {
     const config = {};
     const resp = await fetch(path);
