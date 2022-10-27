@@ -197,7 +197,7 @@ body.appear {
 header {
   height: 386px;
   position: relative;
-  z-index: 100;
+  z-index: 99;
   overflow: hidden;
   background-color: var(--colors-brand);
 }

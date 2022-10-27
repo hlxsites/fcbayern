@@ -1,9 +1,10 @@
 main .newsletter-overlay-wrapper {
+  box-sizing: border-box;
   display: none;
   position: fixed;
   top: 0;
   height: 100%;
-  width: 100%;
+  width: calc(100% - 24px);
   background: rgba(0,0,0,.8);
   z-index: 99;
 
@@ -12,17 +13,20 @@ main .newsletter-overlay-wrapper {
   justify-content: center;
 }
 
+main .section .newsletter-overlay-wrapper {
+  padding: 0;
+}
+
 main .newsletter-overlay-wrapper--visible {
   display: flex;
 }
 
 main .newsletter-overlay {
   position: relative;
+  max-width: 90%;
   box-sizing: border-box;
-  height: 390px;
-  width: 700px;
-  padding: 24px 24px 24px 190px;
-  background: url('/styles/overlay-background.webp') no-repeat 30px bottom, radial-gradient(circle at 600px 0, #c9292e 0, #66252a 115%) #c9292e;
+  padding: 24px;
+  background: radial-gradient(circle at 600px 0, #c9292e 0, #66252a 115%) #c9292e;
   border-radius: 6px;
   color: white;
 }
@@ -36,7 +40,7 @@ main .newsletter-overlay h2 {
 
 main .newsletter-overlay ul {
   padding: 0;
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: #fdd;
   list-style-type: none;
 }
@@ -55,8 +59,32 @@ main .newsletter-overlay :any-link {
   color: white;
 }
 
+main .newsletter-overlay form input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px;
+  margin-right: 10px;
+  font-size: 1rem;
+  background: #6b161e;
+  border: none;
+  color: white;
+}
+
+main .newsletter-overlay form button {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border: none;
+  margin-bottom: 12px;
+}
+
+main .newsletter-overlay input::placeholder {
+  color: white;
+}
+
 main .newsletter-overlay > div:last-of-type {
   font-size: .8rem;
+  line-height: .9rem;
 }
 
 main .newsletter-overlay > div:last-of-type :any-link {
@@ -77,4 +105,31 @@ main .newsletter-overlay-close::before {
   padding: 1rem 1.4rem;
   list-style: 1rem;
   color: #fdd;
+}
+
+@media (min-width: 600px) {
+
+  main .newsletter-overlay-wrapper {
+    width: 100%;
+  }
+
+  main .newsletter-overlay {
+    height: 390px;
+    width: 700px;
+    padding: 24px 24px 24px 190px;
+    background: url('/styles/overlay-background.webp') no-repeat 25px bottom, radial-gradient(circle at 600px 0, #c9292e 0, #66252a 115%) #c9292e;
+  }
+
+  main .newsletter-overlay .field-wrapper {
+    display: inline-block;
+  }
+
+  main .newsletter-overlay form input {
+    width: 360px;
+  }
+  
+  main .newsletter-overlay form button {
+    width: auto;
+  }
+
 }
