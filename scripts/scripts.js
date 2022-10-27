@@ -712,6 +712,238 @@ async function buildAutoBlocks(main) {
 }
 
 /**
+ * Gets the experiment name, if any for the page based on env, useragent, queyr params
+ * @returns {string} experimentid
+ */
+ export function getExperiment() {
+  let experiment = toClassName(getMetadata('experiment'));
+
+  if (!window.location.host.includes('adobe.com') && !window.location.host.includes('.hlx.live')) {
+    experiment = '';
+    // reason = 'not prod host';
+  }
+  if (window.location.hash) {
+    experiment = '';
+    // reason = 'suppressed by #';
+  }
+
+  if (navigator.userAgent.match(/bot|crawl|spider/i)) {
+    experiment = '';
+    // reason = 'bot detected';
+  }
+
+  const usp = new URLSearchParams(window.location.search);
+  if (usp.has('experiment')) {
+    [experiment] = usp.get('experiment').split('/');
+  }
+
+  return experiment;
+}
+/**
+ * Gets experiment config from the manifest
+ * and transforms it to more easily consumable structure.
+ *
+ * the manifest consists of two sheets "settings" and "experiences"
+ *
+ * "settings" is applicable to the entire test and contains information
+ * like "Audience", "Status" or "Blocks".
+ *
+ * "experience" hosts the experiences in columns, consisting of:
+ * a "Percentage Split", "Label" and a set of "Pages".
+ *
+ *
+ * @param {string} experimentId
+ * @returns {object} containing the experiment manifest
+ */
+export async function getExperimentConfig(experimentId) {
+  const path = `/express/experiments/${experimentId}/manifest.json`;
+  try {
+    const config = {};
+    const resp = await fetch(path);
+    const json = await resp.json();
+    json.settings.data.forEach((line) => {
+      const key = toCamelCase(line.Name);
+      config[key] = line.Value;
+    });
+    config.id = experimentId;
+    config.manifest = path;
+    const variants = {};
+    let variantNames = Object.keys(json.experiences.data[0]);
+    variantNames.shift();
+    variantNames = variantNames.map((vn) => toCamelCase(vn));
+    variantNames.forEach((variantName) => {
+      variants[variantName] = {};
+    });
+    let lastKey = 'default';
+    json.experiences.data.forEach((line) => {
+      let key = toCamelCase(line.Name);
+      if (!key) key = lastKey;
+      lastKey = key;
+      const vns = Object.keys(line);
+      vns.shift();
+      vns.forEach((vn) => {
+        const camelVN = toCamelCase(vn);
+        if (key === 'pages' || key === 'blocks') {
+          variants[camelVN][key] = variants[camelVN][key] || [];
+          if (key === 'pages') variants[camelVN][key].push(new URL(line[vn]).pathname);
+          else variants[camelVN][key].push(line[vn]);
+        } else {
+          variants[camelVN][key] = line[vn];
+        }
+      });
+    });
+    config.variants = variants;
+    config.variantNames = variantNames;
+    console.log(config);
+    return config;
+  } catch (e) {
+    console.log(`error loading experiment manifest: ${path}`, e);
+  }
+  return null;
+}
+
+/**
+ * Replaces element with content from path
+ * @param {string} path
+ * @param {HTMLElement} element
+ */
+async function replaceInner(path, element) {
+  const plainPath = `${path}.plain.html`;
+  try {
+    const resp = await fetch(plainPath);
+    const html = await resp.text();
+    element.innerHTML = html;
+  } catch (e) {
+    console.log(`error loading experiment content: ${plainPath}`, e);
+  }
+  return null;
+}
+
+/**
+ * this is an extensible stub to take on audience mappings
+ * @param {string} audience
+ * @return {boolean} is member of this audience
+ */
+
+function checkExperimentAudience(audience) {
+  if (audience === 'mobile') {
+    return window.innerWidth < 600;
+  }
+  if (audience === 'desktop') {
+    return window.innerWidth > 600;
+  }
+  return true;
+}
+
+/**
+ * gets the variant id that this visitor has been assigned to if any
+ * @param {string} experimentId
+ * @return {string} assigned variant or empty string if none set
+ */
+
+function getLastExperimentVariant(experimentId) {
+  console.log('get last experiment', experimentId);
+  const experimentsStr = localStorage.getItem('hlx-experiments');
+  if (experimentsStr) {
+    const experiments = JSON.parse(experimentsStr);
+    if (experiments[experimentId]) {
+      return experiments[experimentId].variant;
+    }
+  }
+  return '';
+}
+
+/**
+ * sets/updates the variant id that is assigned to this visitor,
+ * also cleans up old variant ids
+ * @param {string} experimentId
+ * @param {variant} variant
+ */
+
+function setLastExperimentVariant(experimentId, variant) {
+  const experimentsStr = localStorage.getItem('hlx-experiments');
+  const experiments = experimentsStr ? JSON.parse(experimentsStr) : {};
+
+  const now = new Date();
+  const expKeys = Object.keys(experiments);
+  expKeys.forEach((key) => {
+    const date = new Date(experiments[key].date);
+    if (now - date > (1000 * 86400 * 30)) {
+      delete experiments[key];
+    }
+  });
+  const [date] = now.toISOString().split('T');
+
+  experiments[experimentId] = { variant, date };
+  localStorage.setItem('hlx-experiments', JSON.stringify(experiments));
+}
+
+/**
+ * checks if a test is active on this page and if so executes the test
+ */
+ async function decorateTesting() {
+  try {
+    const experiment = getExperiment();
+    if (!experiment) {
+      return;
+    }
+
+    const usp = new URLSearchParams(window.location.search);
+    const [forcedExperiment, forcedVariant] = usp.get('experiment') ? usp.get('experiment').split('/') : [];
+    const mode = usp.get('mode') || 'franklin';
+
+    console.log('experiment', experiment);
+    if (mode === 'franklin') {
+      const config = await getExperimentConfig(experiment);
+      console.log(config);
+      if (toCamelCase(config.status) === 'active' || forcedExperiment) {
+        config.run = forcedExperiment || checkExperimentAudience(toClassName(config.audience));
+        console.log('run', config.run, config.audience);
+
+        window.hlx = window.hlx || {};
+        window.hlx.experiment = config;
+        if (config.run) {
+          const forced = forcedVariant || getLastExperimentVariant(config.id);
+          if (forced && config.variantNames.includes(forced)) {
+            config.selectedVariant = forced;
+          } else {
+            let random = Math.random();
+            let i = config.variantNames.length;
+            while (random > 0 && i > 0) {
+              i -= 1;
+              console.log(random, i);
+              random -= +config.variants[config.variantNames[i]].percentageSplit;
+            }
+            config.selectedVariant = config.variantNames[i];
+          }
+          setLastExperimentVariant(config.id, config.selectedVariant);
+          sampleRUM('experiment', { source: config.id, target: config.selectedVariant });
+          console.log(`running experiment (${window.hlx.experiment.id}) -> ${window.hlx.experiment.selectedVariant}`);
+          if (config.selectedVariant !== 'control') {
+            const currentPath = window.location.pathname;
+            const pageIndex = config.variants.control.pages.indexOf(currentPath);
+            console.log(pageIndex, config.variants.control.pages, currentPath);
+            if (pageIndex >= 0) {
+              const page = config.variants[config.selectedVariant].pages[pageIndex];
+              if (page) {
+                const experimentPath = new URL(page, window.location.href).pathname.split('.')[0];
+                if (experimentPath && experimentPath !== currentPath) {
+                  await replaceInner(experimentPath, document.querySelector('main'));
+                }
+              }
+            }
+          }
+        }
+      }
+    } else if (mode === 'target') {
+
+    }
+  } catch (e) {
+    console.log('error testing', e);
+  }
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
@@ -728,6 +960,7 @@ export function decorateMain(main) {
  * loads everything needed to get to LCP.
  */
 async function loadEager(doc) {
+  await decorateTesting();
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {
