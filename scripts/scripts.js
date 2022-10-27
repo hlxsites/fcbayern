@@ -718,15 +718,6 @@ async function buildAutoBlocks(main) {
 export function getExperiment() {
   let experiment = toClassName(getMetadata('experiment'));
 
-  if (!window.location.host.includes('adobe.com') && !window.location.host.includes('.hlx.live')) {
-    experiment = '';
-    // reason = 'not prod host';
-  }
-  if (window.location.hash) {
-    experiment = '';
-    // reason = 'suppressed by #';
-  }
-
   if (navigator.userAgent.match(/bot|crawl|spider/i)) {
     experiment = '';
     // reason = 'bot detected';
