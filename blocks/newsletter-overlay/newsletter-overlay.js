@@ -1,4 +1,11 @@
-export default function decorate(block) {
+import { createForm } from '../form/form.js';
+
+export default async function decorate(block) {
+
+  const form = block.querySelector('a[href$=".json"]');
+  if (form) {
+    form.replaceWith(await createForm(form.href));
+  }
 
   // The Close button
   const closeButton = document.createElement('button');
