@@ -18,14 +18,37 @@ main .newsletter-overlay-wrapper--visible {
 
 main .newsletter-overlay {
   position: relative;
-  background: url('/styles/overlay-background.webp') no-repeat 40px bottom, radial-gradient(circle at top right, #c9292e 0, #66252a 100%) #c9292e;
-  padding: 1rem 1rem 1rem 200px;
+  box-sizing: border-box;
+  height: 390px;
+  width: 700px;
+  padding: 24px 24px 24px 190px;
+  background: url('/styles/overlay-background.webp') no-repeat 30px bottom, radial-gradient(circle at 600px 0, #c9292e 0, #66252a 115%) #c9292e;
+  border-radius: 6px;
   color: white;
-  width: 600px;
 }
 
 main .newsletter-overlay h2 {
+  margin: 0;
+  font-weight: 800;
+  letter-spacing: .02rem;
   color: white;
+}
+
+main .newsletter-overlay ul {
+  padding: 0;
+  font-size: 1.1rem;
+  color: #fdd;
+  list-style-type: none;
+}
+
+
+main .newsletter-overlay li {
+  margin: 8px 0;
+}
+
+main .newsletter-overlay li::before {
+  margin-right: 8px;
+  content: '-';
 }
 
 main .newsletter-overlay :any-link {
@@ -43,7 +66,7 @@ main .newsletter-overlay-close {
 
 main .newsletter-overlay-close::before {
   content: '✕';
-  padding: .5rem .7rem;
+  padding: 1rem 1.4rem;
   list-style: 1rem;
-  color: white;
+  color: #fdd;
 }
