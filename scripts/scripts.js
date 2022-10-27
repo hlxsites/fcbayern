@@ -881,7 +881,7 @@ function setLastExperimentVariant(experimentId, variant) {
 /**
  * checks if a test is active on this page and if so executes the test
  */
- async function decorateTesting() {
+async function decorateTesting() {
   try {
     const experiment = getExperiment();
     if (!experiment) {
