@@ -18,8 +18,18 @@ main .newsletter-overlay-wrapper--visible {
 
 main .newsletter-overlay {
   position: relative;
-  background: red;
+  background: radial-gradient(circle at top right, #c9292e 0, #66252a 100%) #c9292e;
+  padding: 1rem 1rem 1rem 200px;
+  color: white;
   width: 600px;
+}
+
+main .newsletter-overlay h2 {
+  color: white;
+}
+
+main .newsletter-overlay :any-link {
+  color: white;
 }
 
 main .newsletter-overlay-close {
