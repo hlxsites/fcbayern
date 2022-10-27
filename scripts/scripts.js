@@ -715,7 +715,7 @@ async function buildAutoBlocks(main) {
  * Gets the experiment name, if any for the page based on env, useragent, queyr params
  * @returns {string} experimentid
  */
- export function getExperiment() {
+export function getExperiment() {
   let experiment = toClassName(getMetadata('experiment'));
 
   if (!window.location.host.includes('adobe.com') && !window.location.host.includes('.hlx.live')) {
