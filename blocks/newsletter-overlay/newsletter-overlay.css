@@ -1,3 +1,39 @@
+main .newsletter-overlay-wrapper {
+  display: none;
+  position: fixed;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0,0,0,.8);
+  z-index: 99;
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+main .newsletter-overlay-wrapper--visible {
+  display: flex;
+}
+
 main .newsletter-overlay {
-  
+  position: relative;
+  background: red;
+  width: 600px;
+}
+
+main .newsletter-overlay-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+main .newsletter-overlay-close::before {
+  content: '✕';
+  padding: .5rem .7rem;
+  list-style: 1rem;
+  color: white;
 }
