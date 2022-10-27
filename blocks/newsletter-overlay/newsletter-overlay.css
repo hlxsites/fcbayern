@@ -18,8 +18,7 @@ main .newsletter-overlay-wrapper--visible {
 
 main .newsletter-overlay {
   position: relative;
-  background: url('/styles/overlay-background.png') no-repeat 40px bottom, radial-gradient(circle at top right, #c9292e 0, #66252a 100%) #c9292e;
-  mix-blend-mode: color-;
+  background: url('/styles/overlay-background.webp') no-repeat 40px bottom, radial-gradient(circle at top right, #c9292e 0, #66252a 100%) #c9292e;
   padding: 1rem 1rem 1rem 200px;
   color: white;
   width: 600px;
