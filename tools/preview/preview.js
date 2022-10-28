@@ -51,8 +51,9 @@ const bigcountformat = {
 async function createExperiment() {
   const selectedVariant = (window.hlx && window.hlx.experiment && window.hlx.experiment.selectedVariant) ? window.hlx.experiment.selectedVariant : 'control';
   const experiment = toClassName(getMetadata('experiment'));
+  const engine = getMetadata("experimentation-engine") || 'franklin';
   console.log('preview experiment', experiment);
-  if (experiment) {
+  if (experiment && engine === 'franklin') {
     const config = await getExperimentConfig(experiment);
     const createVariant = (variantName) => {
       const variant = config.variants[variantName];

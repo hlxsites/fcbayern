@@ -128,7 +128,7 @@ export function getLanguage() {
  */
 export function getMetadata(name) {
   const attr = name && name.includes(':') ? 'property' : 'name';
-  const meta = [...document.head.querySelectorAll(`meta[${attr}="${name}"]`)].map((m) => m.content).join(', ');
+  const meta = [...document.head.querySelectorAll(`meta[${attr}="${name}"]`)].map((m) => m.content).join(', ');  
   return meta || null;
 }
 
@@ -876,7 +876,7 @@ function setLastExperimentVariant(experimentId, variant) {
 /**
  * checks if a test is active on this page and if so executes the test
  */
-async function decorateTesting() {
+async function decorateTesting() {  
   try {
     const experiment = getExperiment();
     if (!experiment) {
@@ -885,10 +885,21 @@ async function decorateTesting() {
 
     const usp = new URLSearchParams(window.location.search);
     const [forcedExperiment, forcedVariant] = usp.get('experiment') ? usp.get('experiment').split('/') : [];
-    const mode = usp.get('mode') || 'franklin';
+    //const mode = usp.get('mode') || 'franklin';
+    const engine = getMetadata("experimentation-engine") || 'franklin';
 
-    console.log('experiment', experiment);
-    if (mode === 'franklin') {
+    console.log('experiment', experiment, 'engine', engine);
+    if (engine === 'target') {
+      const targetData = await getTargetExperience(experiment).then((res) => res.json());
+      const targetExperimentUrl = targetData?.execute?.mboxes[0]?.options[0]?.content?.url;
+      console.log("Target experiment url " + targetExperimentUrl);
+      const experimentPath = new URL(targetExperimentUrl, window.location.href).pathname.split('.')[0];        
+      const currentPath = window.location.pathname;      
+      if (experimentPath && experimentPath !== currentPath) {
+        await replaceInner(experimentPath, document.querySelector('main'));
+      }     
+    }
+    else {
       const config = await getExperimentConfig(experiment);
       console.log(config);
       if (toCamelCase(config.status) === 'active' || forcedExperiment) {
@@ -930,13 +941,37 @@ async function decorateTesting() {
           }
         }
       }
-    } else if (mode === 'target') {
-
     }
   } catch (e) {
     console.log('error testing', e);
   }
 }
+
+async function getTargetExperience(experiment) {
+  const sessionId = 'franklin-' + Math.round(Math.random() * 1000);
+  const targetClientCode = 'sitesinternal';
+  return fetch(`https://sitesinternal.tt.omtrdc.net/rest/v1/delivery?client=${targetClientCode}&sessionId=${sessionId}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Cache-control': 'no-cache, no-store'
+    },
+    body: JSON.stringify({    
+        context: {
+          channel: 'web'
+        },
+        execute: {
+          mboxes: [
+              { 
+                index: 0,
+                name: experiment
+              }
+           ]
+        }
+     })
+  });  
+}
+
 
 /**
  * Decorates the main element.
