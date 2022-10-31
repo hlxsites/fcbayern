@@ -604,6 +604,52 @@ main .section.highlight {
 
 
 /* ----------- liveticker page specific settings ------------*/
+
+/* -- liveticker header --*/
+.liveticker main .liveticker-header {
+  display: flex;
+  gap: 0;
+  align-items: center;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+  background: rgb(18, 31, 56);
+}
+
+.liveticker main .liveticker-header .image {
+  max-width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.liveticker main .liveticker-header .matchinfo  {
+  width: 100%;
+}
+
+.liveticker main .liveticker-header .matchinfo .date-and-matchday {
+  display:flex;
+  flex-direction: row;
+  font-family: FCBayernSans, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.1;
+  margin-bottom: 8px;
+  font-weight: normal;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.liveticker main .liveticker-header .matchinfo .date-and-matchday .left {
+  width: 50%;
+  text-align: right;
+  padding: 0px 15px;
+}
+
+.liveticker main .liveticker-header .matchinfo .date-and-matchday .right {
+  width: 50%;
+  text-align: left;
+  padding: 0px 15px;
+}
+/* -- liveticker entries --*/
+
 .liveticker main .section {
   display: flex;
   align-items: center;
