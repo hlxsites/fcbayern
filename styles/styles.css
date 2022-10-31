@@ -614,6 +614,15 @@ main .section.highlight {
   padding: 0;
   margin: 0;
   background: rgb(18, 31, 56);
+  font-family: FCBayernSans, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.1;
+  font-weight: normal;
+  font-size: 14px;
+  color: rgba(255, 255, 255);
+}
+
+.liveticker main .liveticker-header .icon {
+  fill: rgba(255, 255, 255);
 }
 
 .liveticker main .liveticker-header .image {
@@ -632,6 +641,7 @@ main .section.highlight {
   font-family: FCBayernSans, "Helvetica Neue", Arial, sans-serif;
   line-height: 1.1;
   margin-bottom: 8px;
+  padding-top: 12px;
   font-weight: normal;
   font-size: 14px;
   color: rgba(255, 255, 255, 0.55);
@@ -647,6 +657,94 @@ main .section.highlight {
   width: 50%;
   text-align: left;
   padding: 0px 15px;
+}
+
+.liveticker main .liveticker-header .matchinfo .details {
+  display:flex;
+  flex-direction: row;
+  max-width: 100%;
+  align-items: center;
+  min-height:88px; 
+}
+
+.liveticker main .liveticker-header .matchinfo .details .home {
+  padding: 0px 12px;
+  flex: 1 1 150px;
+  text-align: left;
+  min-width: 150px;
+}
+
+.liveticker main .liveticker-header .matchinfo .details .guest {
+  padding: 0px 12px;
+  flex: 1 1 150px;
+  text-align: right;
+  min-width: 150px;
+}
+
+.liveticker main .liveticker-header .matchinfo .details .score-info {
+  display: flex;
+  flex: 2 2 auto;
+  align-items: center;
+  max-width: 100%;
+}
+.liveticker main .liveticker-header .matchinfo .details .score-info .score {
+  display: inline-flex;
+    padding: 0px 16px;
+}
+
+.liveticker main .liveticker-header .matchinfo .details .score-info .score .home-logo,
+.liveticker main .liveticker-header .matchinfo .details .score-info .score .guest-logo
+ {
+  width: 32px;
+  height: 32px;
+  max-width: 32px;
+  max-height: 32px;
+}
+
+.liveticker main .liveticker-header .matchinfo .details .score-info .goals {
+  font-family: FCBayernSans, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.1;
+  margin-bottom: 0px;
+  font-weight: bold;
+  font-size: 24px;
+  min-width: 78px;
+}
+
+.liveticker main .liveticker-header .matchinfo .details .cards {
+  display:none;
+}
+
+.liveticker main .liveticker-header .matchinfo .details .changes {
+  display:none;
+}
+
+.liveticker main .liveticker-header .location-visitors {
+  display: none;
+}
+
+.liveticker main .liveticker-header .tabs {
+  color: rgb(255, 255, 255);
+  font-family: FCBayernSans, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.1;
+  font-weight: normal;
+  font-size: 14px;  
+  width: 100%;
+}
+
+.liveticker main .liveticker-header .tabs nav{
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  white-space: nowrap;
+  padding-bottom: 12px;
+}
+
+.liveticker main .liveticker-header .tabs nav div{
+  border-top: 1px solid rgb(255, 255, 255);
+  margin-top: -1px;
+  padding-top: 11px;
+  cursor: pointer;
 }
 /* -- liveticker entries --*/
 

@@ -90,10 +90,13 @@ async function addLiveTickerHeader(main) {
         
         <div class='details'>
           <div class='goals home'>
+          <span class='icon icon-ball'></span>Hernández
           </div>
           <div class='cards home'>
+          cards home
           </div>
           <div class='changes home'>
+          <span class='icon icon-changes'></span>Noussair Mazraoui für Benjamin Pava
           </div>
           <div class='score-info'>
             <div class='home-name'>${home}</div>
@@ -105,45 +108,50 @@ async function addLiveTickerHeader(main) {
             <div class='guest-name'>${guest}</div>
           </div>
           <div class='goals guest'>
+          keine goals
           </div>
           <div class='cards guest'>
+          keine cards
           </div>
           <div class='changes guest'>
+          keine changes
           </div>
         </div>
 
       </div>
 
-      <div class='location_visitiors'>
+      <div class='location-visitors'>
         <div>Stadion/Zuschauerzahl</div>
         <div>${location}</div>
         <div>${visitors}</div>
       </div>
 
-      <nav role='tablist'>
-        <div role='tab'>
-          Tore
-        </div>
-        <div role='tab'>
-          Karten
-        </div>
-        <div role='tab'>
-          Auswechslungen
-        </div>
-        <div role='tab'>
-          Spieleinfos
-        </div>
-      </nav>
+      <div class='tabs'>
+        <nav role='tablist'>
+          <div role='tab'>Tore</div>
+          <div role='tab'>Karten</div>
+          <div role='tab'>Auswechslungen</div>
+          <div role='tab'>Spieleinfos</div>
+        </nav>
+      </div>
     </div>
   `)
 
-  const picture = createOptimizedPicture(image, imageAlt, false, [
+  const headerimage = createOptimizedPicture(image, imageAlt, false, [
     { media: '(max-width: 763px)', width: '320' },
     { media: '(min-width: 764px) and (max-width: 1015px)', width: '640' },
     { media: '(min-width: 1016px)', width: '1600' },
   ]);
+  const homelogo = createOptimizedPicture(home_logo, home, false);
+  const guestlogo = createOptimizedPicture(guest_logo, guest, false);
+
   // add the image to the liveticker header from metadata
-  dom.querySelector('.image').append(picture);
+  dom.querySelector('.image').append(headerimage);
+  // add the 2 logos
+  dom.querySelector('.home-logo').append(homelogo);
+  dom.querySelector('.guest-logo').append(guestlogo);
+
+  await decorateIcons(dom);
   main.prepend(dom);
 }
 
