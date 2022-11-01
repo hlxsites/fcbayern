@@ -81,7 +81,6 @@ async function addLiveTickerHeader(main) {
       </div>
 
       <div class='matchinfo'>
-      
         <div class='date-and-matchday'>
           <div class='left'>${date}, ${time}</div>
           <div>·</div>
