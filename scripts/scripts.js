@@ -789,7 +789,7 @@ export async function getExperimentConfig(experimentId) {
     });
     config.variants = variants;
     config.variantNames = variantNames;
-    console.log(config);
+    console.log('return experiment ', config);
     return config;
   } catch (e) {
     console.log(`error loading experiment manifest: ${path}`, e);
@@ -891,7 +891,10 @@ async function decorateTesting() {
     console.log('experiment', experiment, 'engine', engine);
     if (engine === 'target') {
       const targetData = await getTargetExperience(experiment).then((res) => res.json());
-      const targetExperimentUrl = targetData?.execute?.mboxes[0]?.options[0]?.content?.url;
+      const mboxContent = targetData?.execute?.mboxes[0]?.options[0]?.content;
+      const targetExperimentUrl = mboxContent?.url;
+      let targetVariantId = toClassName(mboxContent?.offerId);      
+      sampleRUM('experiment', { source: experiment, target: targetVariantId });
       console.log("Target experiment url " + targetExperimentUrl);
       const experimentPath = new URL(targetExperimentUrl, window.location.href).pathname.split('.')[0];        
       const currentPath = window.location.pathname;      
