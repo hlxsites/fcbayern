@@ -8,6 +8,15 @@
   font-size: 24px;
 }
 
+.hlx-preview-overlay h1,
+.hlx-preview-overlay h2,
+.hlx-preview-overlay h3,
+.hlx-preview-overlay h4,
+.hlx-preview-overlay h5,
+.hlx-preview-overlay h6 {
+  color: #eee;
+}
+
 .hlx-badge {
   border-radius: 32px; 
   background-color: #888;
@@ -110,7 +119,8 @@
   display: none;
 }
 
-.hlx-badge.hlx-experiment-status-active {
+.hlx-badge.hlx-experiment-status-active,
+.hlx-badge.hlx-experiment-status-approved {
   background-color: #280;
 }
 

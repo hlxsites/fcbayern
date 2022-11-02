@@ -15,7 +15,7 @@ import {
   loadCSS,
   toClassName,
   getMetadata,
-  getExperimentConfig,
+  getExperimentConfig
 } from '../../scripts/scripts.js';
 
 const percentformat = new Intl.NumberFormat('en-US', { style: 'percent', maximumSignificantDigits: 2 });
@@ -53,8 +53,14 @@ async function createExperiment() {
   const experiment = toClassName(getMetadata('experiment'));
   const engine = getMetadata("experimentation-engine") || 'franklin';
   console.log('preview experiment', experiment);
-  if (experiment && engine === 'franklin') {
-    const config = await getExperimentConfig(experiment);
+  if (experiment) {
+    let config;
+    if(engine === 'franklin') {      
+      config = await getExperimentConfig(experiment);
+    } else {
+      config = await getTargetExperimentConfig(experiment);
+    }
+    
     const createVariant = (variantName) => {
       const variant = config.variants[variantName];
       const split = +variant.percentageSplit
@@ -64,7 +70,10 @@ async function createExperiment() {
 
       const experimentURL = new URL(window.location.href);
       // this will retain other query params such as ?rum=on
-      experimentURL.searchParams.set('experiment', `${experiment}/${variantName}`);
+      experimentURL.searchParams.set('experiment', `${experiment}/${engine === 'target' ? Object.keys(config.variants).indexOf(variantName) + 1 : variantName}`);
+      if (engine === 'target') {
+        experimentURL.searchParams.set('token', 'yTcxjStWI3w5WBa6dFjUuZxhtLuBN4RrU0E8h4UVBzA');
+      }
 
       div.className = `hlx-variant${selectedVariant === variantName ? ' hlx-variant-selected' : ' '}`;
       div.innerHTML = `<div>
@@ -76,6 +85,7 @@ async function createExperiment() {
       <div class="hlx-button"><a href="${experimentURL.href}">Simulate</a></div>`;
       return (div);
     };
+    
 
     const manifestButton = config.manifest ? `<div class="hlx-button"><a href="${config.manifest}">Manifest</a></div>` : '';
 
@@ -240,6 +250,55 @@ async function decoratePreviewMode() {
   overlay.append(await createExperiment());
   document.body.append(overlay);
 }
+
+async function getTargetExperimentConfig(experimentId) {
+  let targetExpConfig = {};
+  const mapOffers = new Map();
+  targetActivityJson?.options?.forEach( o => mapOffers.set(o.optionLocalId, o.offerId));
+
+  const experiences = targetActivityJson?.experiences?.map( exp => { 
+    const experience = {};
+    experience.percentage = exp.visitorPercentage;
+    const offerId = mapOffers.get(exp.optionLocations[0].optionLocalId);
+    let offerJson = '';
+    if (offerId == 322724) {
+      offerJson = offer322724;
+    } else if (offerId == 322723) {
+      offerJson = offer322723;
+    }
+  
+    experience.url = offerJson.content.url;
+    experience.offerName = offerJson.content.offerId;        
+    if(experience.offerName.toLowerCase().includes('control')) {
+      experience.offerId = 'control';
+    }
+    else {
+      experience.offerId = toClassName(experience.offerName);
+    } 
+    return experience;
+  })
+
+  targetExpConfig.audience = "Desktop";
+  targetExpConfig.experimentName = targetActivityJson?.name;
+  targetExpConfig.id = experimentId;
+  targetExpConfig.manifest = '';
+  targetExpConfig.status = targetActivityJson?.state;
+  targetExpConfig.variantNames = experiences.map(exp => exp.offerId);
+  targetExpConfig.variants = {};
+  experiences.forEach(exp => {
+    targetExpConfig.variants[exp.offerId] = {
+        blocks: [''],
+        label: exp.offerName,
+        pages: [exp.url],
+        percentageSplit: exp.percentage / 100
+    };
+  });
+  return targetExpConfig;
+}
+
+const targetActivityJson = JSON.parse('{\r\n    \"id\": 148141,\r\n    \"thirdPartyId\": \"ca5b2ab3-26e4-4d67-a0cc-8128876f0365\",\r\n    \"name\": \"FCBayern Newsletter Overlay A\/B Test\",\r\n    \"state\": \"approved\",\r\n    \"priority\": 0,\r\n    \"options\": [\r\n        {\r\n            \"optionLocalId\": 2,\r\n            \"name\": \"Offer2\",\r\n            \"offerId\": 322724,\r\n            \"offerTemplates\": []\r\n        },\r\n        {\r\n            \"optionLocalId\": 3,\r\n            \"name\": \"Offer3\",\r\n            \"offerId\": 322723,\r\n            \"offerTemplates\": []\r\n        }\r\n    ],\r\n    \"locations\": {\r\n        \"mboxes\": [\r\n            {\r\n                \"locationLocalId\": 0,\r\n                \"name\": \"target-newsletter-overlay\",\r\n                \"audienceIds\": []\r\n            }\r\n        ],\r\n        \"selectors\": []\r\n    },\r\n    \"experiences\": [\r\n        {\r\n            \"experienceLocalId\": 0,\r\n            \"name\": \"Experience A - Control\",\r\n            \"audienceIds\": [],\r\n            \"visitorPercentage\": 50,\r\n            \"optionLocations\": [\r\n                {\r\n                    \"locationLocalId\": 0,\r\n                    \"optionLocalId\": 2\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"experienceLocalId\": 1,\r\n            \"name\": \"Experience B - Newsletter Overlay\",\r\n            \"audienceIds\": [],\r\n            \"visitorPercentage\": 50,\r\n            \"optionLocations\": [\r\n                {\r\n                    \"locationLocalId\": 0,\r\n                    \"optionLocalId\": 3\r\n                }\r\n            ]\r\n        }\r\n    ],\r\n    \"metrics\": [\r\n        {\r\n            \"metricLocalId\": 32767,\r\n            \"name\": \"MY PRIMARY GOAL\",\r\n            \"conversion\": true,\r\n            \"engagement\": \"score\",\r\n            \"action\": {\r\n                \"type\": \"count_once\"\r\n            },\r\n            \"mboxes\": [\r\n                {\r\n                    \"name\": \"target-newsletter-overlay\",\r\n                    \"successEvent\": \"mbox_shown\"\r\n                },\r\n                {\r\n                    \"name\": \"target-global-mbox\",\r\n                    \"successEvent\": \"mbox_shown\"\r\n                }\r\n            ],\r\n            \"clickTrackSelectors\": []\r\n        }\r\n    ],\r\n    \"reportingAudiences\": [],\r\n    \"workspace\": \"62749073\",\r\n    \"modifiedAt\": \"2022-10-28T16:06:38Z\"\r\n}');
+const offer322724 = JSON.parse('{\r\n    \"id\": 322724,\r\n    \"name\": \"FCBayern - Newsletter Control\",\r\n    \"content\": {\r\n        \"offerId\": \"Target Newsletter Control\",\r\n        \"url\": \"https:\/\/main--fcbayern--hlxsites.hlx.live\/de\/\"\r\n    },\r\n    \"workspace\": \"62749073\",\r\n    \"modifiedAt\": \"2022-10-31T15:22:48Z\"\r\n}');
+const offer322723 = JSON.parse('{\r\n  \"id\": 322723,\r\n  \"name\": \"FCBayern - Newsletter Overlay\",\r\n  \"content\": {\r\n      \"offerId\": \"Target Newsletter Overlay\",\r\n      \"url\": \"https:\/\/main--fcbayern--hlxsites.hlx.live\/experiments\/newsletter-overlay\/challenger-1\"\r\n  },\r\n  \"workspace\": \"62749073\",\r\n  \"modifiedAt\": \"2022-10-31T15:23:03Z\"\r\n}');
 
 try {
   decoratePreviewMode();

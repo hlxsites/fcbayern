@@ -803,7 +803,7 @@ export async function getExperimentConfig(experimentId) {
  * @param {HTMLElement} element
  */
 async function replaceInner(path, element) {
-  const plainPath = `${path}.plain.html`;
+  const plainPath = `${path.replace(/\/$/, '')}.plain.html`;
   try {
     const resp = await fetch(plainPath);
     const html = await resp.text();
@@ -885,13 +885,17 @@ async function decorateTesting() {
 
     const usp = new URLSearchParams(window.location.search);
     const [forcedExperiment, forcedVariant] = usp.get('experiment') ? usp.get('experiment').split('/') : [];
+    const token = usp.get('token'); 
     //const mode = usp.get('mode') || 'franklin';
     const engine = getMetadata("experimentation-engine") || 'franklin';
 
     console.log('experiment', experiment, 'engine', engine);
     if (engine === 'target') {
-      const targetData = await getTargetExperience(experiment).then((res) => res.json());
-      const targetExperimentUrl = targetData?.execute?.mboxes[0]?.options[0]?.content?.url;
+      const targetData = await getTargetExperience(experiment, forcedVariant, token).then((res) => res.json());
+      const mboxContent = targetData?.execute?.mboxes[0]?.options[0]?.content;
+      const targetExperimentUrl = mboxContent?.url;
+      let targetVariantId = toClassName(mboxContent?.offerId);      
+      sampleRUM('experiment', { source: experiment, target: targetVariantId });
       console.log("Target experiment url " + targetExperimentUrl);
       const experimentPath = new URL(targetExperimentUrl, window.location.href).pathname.split('.')[0];        
       const currentPath = window.location.pathname;      
@@ -947,7 +951,7 @@ async function decorateTesting() {
   }
 }
 
-async function getTargetExperience(experiment) {
+async function getTargetExperience(experiment, variant, token) {
   const sessionId = 'franklin-' + Math.round(Math.random() * 1000);
   const targetClientCode = 'sitesinternal';
   return fetch(`https://sitesinternal.tt.omtrdc.net/rest/v1/delivery?client=${targetClientCode}&sessionId=${sessionId}`, {
@@ -967,7 +971,17 @@ async function getTargetExperience(experiment) {
                 name: experiment
               }
            ]
-        }
+        },
+        qaMode: variant ? {
+          token,
+          listedActivitiesOnly: true,
+          previewIndexes: [
+              {
+               activityIndex: 1,
+               experienceIndex: Number(variant)
+              }
+          ]
+        } : undefined,
      })
   });  
 }
