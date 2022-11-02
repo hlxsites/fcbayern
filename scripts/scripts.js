@@ -895,6 +895,12 @@ async function decorateTesting() {
       const mboxContent = targetData?.execute?.mboxes[0]?.options[0]?.content;
       const targetExperimentUrl = mboxContent?.url;
       let targetVariantId = toClassName(mboxContent?.offerId);      
+      window.hlx.experiment = {
+        id: experiment,
+        variants: [],
+        variantNames: [],
+        selectedVariant: targetVariantId,
+      };
       sampleRUM('experiment', { source: experiment, target: targetVariantId });
       console.log("Target experiment url " + targetExperimentUrl);
       const experimentPath = new URL(targetExperimentUrl, window.location.href).pathname.split('.')[0];        

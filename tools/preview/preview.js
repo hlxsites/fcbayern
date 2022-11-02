@@ -49,16 +49,22 @@ const bigcountformat = {
  * @return {Object} returns a badge or empty string
  */
 async function createExperiment() {
-  const selectedVariant = (window.hlx && window.hlx.experiment && window.hlx.experiment.selectedVariant) ? window.hlx.experiment.selectedVariant : 'control';
-  const experiment = toClassName(getMetadata('experiment'));
+  let selectedVariant;
   const engine = getMetadata("experimentation-engine") || 'franklin';
+  if(engine === 'target') {
+    const usp = new URLSearchParams(window.location.search);
+    [, selectedVariant] = usp.get('experiment') ? usp.get('experiment').split('/') : [];
+  } else {
+    selectedVariant = (window.hlx && window.hlx.experiment && window.hlx.experiment.selectedVariant) ? window.hlx.experiment.selectedVariant : 'control'
+  };
+  const experiment = toClassName(getMetadata('experiment'));
   console.log('preview experiment', experiment);
   if (experiment) {
     let config;
-    if(engine === 'franklin') {      
-      config = await getExperimentConfig(experiment);
-    } else {
+    if(engine === 'target') {
       config = await getTargetExperimentConfig(experiment);
+    } else {
+      config = await getExperimentConfig(experiment);
     }
     
     const createVariant = (variantName) => {
@@ -75,7 +81,12 @@ async function createExperiment() {
         experimentURL.searchParams.set('token', 'yTcxjStWI3w5WBa6dFjUuZxhtLuBN4RrU0E8h4UVBzA');
       }
 
-      div.className = `hlx-variant${selectedVariant === variantName ? ' hlx-variant-selected' : ' '}`;
+      if (engine === 'target') {
+        div.className = `hlx-variant${config.variantNames.indexOf(variantName) === (Number(selectedVariant) - 1) ? ' hlx-variant-selected' : ' '}`;
+      }
+      else {
+        div.className = `hlx-variant${selectedVariant === variantName ? ' hlx-variant-selected' : ' '}`;
+      }
       div.innerHTML = `<div>
       <h5><code>${variantName}</code></h5>
         <p>${variant.label}</p>
