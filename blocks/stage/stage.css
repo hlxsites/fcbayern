@@ -1,6 +1,7 @@
-main .stage-wrapper {
-  padding: 0 !important;
+main .section > div.stage-wrapper {
+  padding: 0;
 }
+
 main .stage {
   text-decoration: none;
   outline: none;
