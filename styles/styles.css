@@ -605,6 +605,10 @@ main .section.highlight {
 
 /* ----------- liveticker page specific settings ------------*/
 
+.liveticker main  {
+  border-top: solid 1px rgb(18, 31, 56);;
+}
+
 /* -- to avoid CLS allocate distance for dynamic header until header appears---*/
 .liveticker main .section {
   margin-top: 869px;
