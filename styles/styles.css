@@ -607,7 +607,7 @@ main .section.highlight {
 
 /* -- to avoid CLS allocate distance for dynamic header until header appears---*/
 .liveticker main .section {
-  margin-top: 796px;
+  margin-top: 869px;
 }
 
 .liveticker main .liveticker-header ~ .section {
@@ -908,6 +908,7 @@ main .section.highlight {
   width:100%;
   border-bottom: 1px solid var(--colors-interactions-stroke);
   z-index: 2;
+  min-height: 73px;
 }
 
 .liveticker main .nav-bar button{
@@ -950,6 +951,7 @@ main .section.highlight {
   background: rgb(255, 255, 255);
   width:100%;
   margin-top: 32px;
+  min-height: 177px;
 }
 
 .liveticker main .section .liveticker-filter h2 {
