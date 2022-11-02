@@ -36,8 +36,8 @@
   --colors-interactions-tertiary-hover-background: rgba(0, 102, 178, 0.05);
   --colors-interactions-tertiary-disabled-color: rgba(0, 102, 178, 0.55);
   --colors-interactions-tertiary-disabled-background: rgba(
-    255,
-    255,
+      255,
+      255,
     255,
     0.001
   );
@@ -86,7 +86,7 @@
   --colors-canvas-playerCard: linear-gradient(180deg, #76232f 0%, #dc052d 100%);
   --colors-canvas-playerCardAwayTeam: linear-gradient(
     180deg,
-    #002f6c 0%,
+      #002f6c 0%,
     #2b6bbd 100%
   );
   --colors-canvas-contentLayoutCard-background: #f2f5f8;
@@ -100,7 +100,7 @@
     rgba(0, 0, 0, 0.16);
   --colors-canvas-promotionCard-background: linear-gradient(
     0deg,
-    #76232f 0%,
+      #76232f 0%,
     #dc052d 100%
   );
   --colors-canvas-skeleton-backgroundColor: #dce1e6;
@@ -108,13 +108,13 @@
   --colors-canvas-skeleton-backgroundSize: 300% 300%;
   --colors-canvas-skeleton-backgroundImage: linear-gradient(
     135deg,
-    rgba(249, 250, 251, 0) 40%,
-    rgba(249, 250, 251, 0.4) 50%,
+      rgba(249, 250, 251, 0) 40%,
+      rgba(249, 250, 251, 0.4) 50%,
     rgba(249, 250, 251, 0) 60%
   );
   --colors-canvas-placeholder: linear-gradient(
     134.82deg,
-    rgba(220, 225, 230, 0) 0%,
+      rgba(220, 225, 230, 0) 0%,
     #dce1e6 100%
   );
   --colors-text-title: #002f6c;
@@ -129,7 +129,7 @@
   --colors-text-linkFocus: #ffffff;
   --colors-sonderotto-accordionHover: linear-gradient(
     180deg,
-    rgba(0, 102, 178, 0.05) 0%,
+      rgba(0, 102, 178, 0.05) 0%,
     rgba(0, 102, 178, 0) 100%
   );
   --colors-sonderotto-matchCenterJersey: rgba(255, 255, 255, 0.55);
@@ -621,26 +621,46 @@ main .section.highlight {
   color: rgba(255, 255, 255);
 }
 
+/* icon colors */
 .liveticker main .liveticker-header .icon {
   fill: rgba(255, 255, 255);
 }
 
+/* image */
 .liveticker main .liveticker-header .image {
   max-width: 100%;
   padding: 0;
   margin: 0;
 }
 
-.liveticker main .liveticker-header .matchinfo  {
+/* -- base size for the 2 main info views --*/
+.liveticker main .liveticker-header .matchinfo,
+.liveticker main .liveticker-header .location-visitors
+ {
   width: 100%;
+  min-height: 115px;
 }
 
+/* -- visitor info */
+.liveticker main .liveticker-header .location-visitors .title{
+  font-weight: bold;
+  line-height: 2;
+}
+.liveticker main .liveticker-header .location-visitors  {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 115px;
+}
+
+/* -- match day info --*/
 .liveticker main .liveticker-header .matchinfo .date-and-matchday {
-  display:flex;
+  display: flex;
   flex-direction: row;
   font-family: FCBayernSans, "Helvetica Neue", Arial, sans-serif;
   line-height: 1.1;
-  margin-bottom: 8px;
+
   padding-top: 12px;
   font-weight: normal;
   font-size: 14px;
@@ -659,79 +679,146 @@ main .section.highlight {
   padding: 0px 15px;
 }
 
+/* -- match details --*/
 .liveticker main .liveticker-header .matchinfo .details {
-  display:flex;
+  display: flex;
   flex-direction: row;
   max-width: 100%;
   align-items: center;
-  min-height:88px; 
 }
 
 .liveticker main .liveticker-header .matchinfo .details .home {
   padding: 0px 12px;
   flex: 1 1 150px;
-  text-align: left;
-  min-width: 150px;
+  justify-content: left;
+  max-height: fit-content;
 }
 
 .liveticker main .liveticker-header .matchinfo .details .guest {
   padding: 0px 12px;
   flex: 1 1 150px;
-  text-align: right;
+  justify-content: right;
   min-width: 150px;
+  min-height:80px;
 }
 
+/* -- lists --*/
+.liveticker main .liveticker-header .matchinfo .details ol {
+  display: flex;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  justify-content: center;
+  list-style: none;
+  padding: 0px 0px;
+  margin: 0px;
+}
+
+.liveticker main .liveticker-header .matchinfo .details ol li {
+  display: flex;
+  flex-flow: row nowrap;
+  -webkit-box-pack: start;
+  justify-content: flex-start;
+  -webkit-box-align: center;
+  align-items: center;
+  margin: 0px;
+  color: rgb(255, 255, 255);
+}
+
+.liveticker main .liveticker-header .matchinfo .details ol li .desc{
+  margin: 0px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width:200px;
+}
+
+.liveticker main .liveticker-header .matchinfo .details .guest ol li {
+  justify-content: flex-end;
+}
+
+.liveticker main .liveticker-header .matchinfo .details ol li b {
+  padding-left:6px;
+  padding-right:6px;
+}
+
+/*-- sccore info --*/
 .liveticker main .liveticker-header .matchinfo .details .score-info {
   display: flex;
   flex: 2 2 auto;
   align-items: center;
+  justify-content: center;
   max-width: 100%;
+  font-family: FCBayernSans, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.1;
+  font-weight: 600;
+  font-size: 16px;
+  position: relative;
+}
+.liveticker main .liveticker-header .matchinfo .details .score-info .halftime {
+  font-family: FCBayernSans, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.1;
+  margin-bottom: 8px;
+  font-weight: normal;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.55);
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 40px;
+}
+
+.liveticker main .liveticker-header .matchinfo .details .score-info .home-name {
+  width: 50%;
+  text-align: right;
+}
+.liveticker main .liveticker-header .matchinfo .details .score-info .guest-name {
+  text-align: left;
+  width: 50%;
 }
 .liveticker main .liveticker-header .matchinfo .details .score-info .score {
   display: inline-flex;
-    padding: 0px 16px;
+  padding: 0px 16px;
 }
 
-.liveticker main .liveticker-header .matchinfo .details .score-info .score .home-logo,
-.liveticker main .liveticker-header .matchinfo .details .score-info .score .guest-logo
- {
-  width: 32px;
-  height: 32px;
-  max-width: 32px;
-  max-height: 32px;
-}
-
-.liveticker main .liveticker-header .matchinfo .details .score-info .goals {
+.liveticker main .liveticker-header .matchinfo .details .score-info .score .goals {
   font-family: FCBayernSans, "Helvetica Neue", Arial, sans-serif;
   line-height: 1.1;
   margin-bottom: 0px;
   font-weight: bold;
   font-size: 24px;
   min-width: 78px;
+  text-align: center;
 }
 
-.liveticker main .liveticker-header .matchinfo .details .cards {
-  display:none;
-}
-
-.liveticker main .liveticker-header .matchinfo .details .changes {
-  display:none;
+.liveticker main .liveticker-header .matchinfo .details .score-info .score .home-logo,
+.liveticker main .liveticker-header .matchinfo .details .score-info .score .guest-logo {
+  width: 32px;
+  height: 32px;
+  max-width: 32px;
+  max-height: 32px;
 }
 
 .liveticker main .liveticker-header .location-visitors {
   display: none;
 }
 
+/* ---- tabs navigation ---- */
 .liveticker main .liveticker-header .tabs {
   color: rgb(255, 255, 255);
   font-family: FCBayernSans, "Helvetica Neue", Arial, sans-serif;
   line-height: 1.1;
   font-weight: normal;
-  font-size: 14px;  
+  font-size: 14px;
   width: 100%;
 }
+/* hide input checkboxes */
+.liveticker main .liveticker-header input {
+  display:none;
+}
 
-.liveticker main .liveticker-header .tabs nav{
+/* style the tab nav line */
+.liveticker main .liveticker-header .tabs nav {
   display: flex;
   gap: 16px;
   justify-content: center;
@@ -740,42 +827,207 @@ main .section.highlight {
   padding-bottom: 12px;
 }
 
-.liveticker main .liveticker-header .tabs nav div{
-  border-top: 1px solid rgb(255, 255, 255);
-  margin-top: -1px;
+/* default styling for tabs */
+.liveticker main .liveticker-header .tabs nav label {
   padding-top: 11px;
   cursor: pointer;
 }
+
+/* -- switch goals on/off --*/
+.liveticker main .liveticker-header #goals:checked ~ .tabs nav .goals {
+  border-top: 1px solid rgb(255, 255, 255);
+  margin-top: -1px;
+}
+.liveticker main .liveticker-header #goals ~.matchinfo .details .goals-info {
+  display: none;
+}
+.liveticker main .liveticker-header #goals:checked ~.matchinfo .details .goals-info {
+  display: flex;
+}
+
+/* -- switch cards on/off --*/
+.liveticker main .liveticker-header #cards:checked ~ .tabs nav .cards {
+  border-top: 1px solid rgb(255, 255, 255);
+  margin-top: -1px;
+}
+.liveticker main .liveticker-header #cards ~.matchinfo .details .cards-info {
+  display: none;
+}
+.liveticker main .liveticker-header #cards:checked ~.matchinfo .details .cards-info {
+  display: flex;
+}
+/* -- switch changes on/off --*/
+.liveticker main .liveticker-header #changes:checked ~ .tabs nav .changes {
+  border-top: 1px solid rgb(255, 255, 255);
+  margin-top: -1px;
+}
+.liveticker main .liveticker-header #changes ~.matchinfo .details .changes-info {
+  display: none;
+}
+.liveticker main .liveticker-header #changes:checked ~.matchinfo .details .changes-info {
+  display: flex;
+}
+
+/* -- switch game info on/off --*/
+.liveticker main .liveticker-header #gameinfo:checked ~ .tabs nav .gameinfo {
+  border-top: 1px solid rgb(255, 255, 255);
+  margin-top: -1px;
+}
+.liveticker main .liveticker-header #gameinfo ~ .matchinfo {
+  display: block;
+}
+.liveticker main .liveticker-header #gameinfo:checked ~ .matchinfo {
+  display: none;
+}
+.liveticker main .liveticker-header #gameinfo:checked ~ .location-visitors  {
+  display: flex;
+}
+
+/* --- navbar ---*/
+.liveticker main .nav-bar {
+  display:flex;
+  position: sticky;
+  top:40px;
+  flex-flow: row wrap;
+  flex: 1 1 calc(100% - 32px);
+  -webkit-box-pack: center;
+  justify-content: center;
+  padding: 20px 0px 12px;
+  background: rgb(255, 255, 255);
+  width:100%;
+  border-bottom: 1px solid var(--colors-interactions-stroke);
+  z-index: 2;
+}
+
+.liveticker main .nav-bar button{
+  margin: 0px 8px 8px 0px;
+  color: var(--colors-interactions-secondary-color);
+  background: var(--colors-interactions-secondary-background);
+  border-radius: 3px;
+  font-family: FCBayernSans, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  height: 32px;
+  line-height: 1;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.liveticker main .nav-bar button:hover{
+  margin: 0px 8px 8px 0px;
+  color: var(--colors-interactions-secondary-hover-color);
+  background: var(--colors-interactions-secondary-hover-background);
+}
+
+.liveticker main .nav-bar button.active{
+  color: var(--colors-interactions-secondary-selected-color);
+  background: var(--colors-interactions-secondary-selected-background);
+}
+.liveticker main .nav-bar button span{
+  display: inline;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* -- liveticker heading and filter --*/
+.liveticker main .section .liveticker-filter {
+  display:flex;
+  flex-flow: row wrap;
+  -webkit-box-pack: center;
+  padding: 20px 0px 12px;
+  background: rgb(255, 255, 255);
+  width:100%;
+  margin-top: 32px;
+}
+
+.liveticker main .section .liveticker-filter h2 {
+  font-family: FCBayernSans, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.1;
+  font-weight: bold;
+  font-size: 28px;
+  color: var(--colors-text-title);
+  margin-bottom: 8px;
+}
+
+.liveticker main .section .liveticker-filter div {
+  margin-top: 12px;
+  display: flex;
+  overflow-x: auto;
+  margin-bottom: 24px;
+}
+
+.liveticker main .section .liveticker-filter button{
+  margin: 0px 8px 8px 0px;
+  color: var(--colors-interactions-secondary-color);
+  background: var(--colors-interactions-secondary-background);
+  border-radius: 3px;
+  font-family: FCBayernSans, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  height: 32px;
+  line-height: 1;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.liveticker main .section .liveticker-filter button:hover{
+  margin: 0px 8px 8px 0px;
+  color: var(--colors-interactions-secondary-hover-color);
+  background: var(--colors-interactions-secondary-hover-background);
+}
+
+.liveticker main .section .liveticker-filter button.active{
+  color: var(--colors-interactions-secondary-selected-color);
+  background: var(--colors-interactions-secondary-selected-background);
+}
+.liveticker main .section .liveticker-filter button span{
+  display: inline;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
 /* -- liveticker entries --*/
 
 .liveticker main .section {
   display: flex;
   align-items: center;
   flex-direction: column;
+  background-color: white;
 }
 
-.liveticker main .section > div {
+.liveticker main .section>div {
   max-width: 816px;
+  width: 100%;
 }
 
 .liveticker main .section p {
   padding-right: 22px;
   font-family: var(--body-font-family);
   margin-top: 0px;
-  padding: 0px;
-  max-width: 716px;
+  font-family: FCBayernSans, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.5;
+  margin-bottom: 12px;
+  font-weight: normal;
+  font-size: 16px;
+
 }
 
-.liveticker main .section > div > div {
+.liveticker main .section>div>div {
   display: flex;
   align-items: baseline;
   align-content: flex-start;
+  position: relative;
 }
 
 .liveticker main .section .left {
-  width: 120px;
+  position: absolute;
+  left: -80px;
+  width: 80px;
   display: flex;
   justify-content: flex-end;
+
 }
 
 .liveticker main .section .left,
@@ -785,14 +1037,13 @@ main .section.highlight {
 
 .liveticker main .section .time {
   text-align: right;
-  padding-left: 10px;
   padding-right: 20px;
-
+  padding-left:20px;
   align-self: flex-start;
 }
 
-.liveticker main .section h2, 
-.liveticker main .section h3  {
+.liveticker main .section h2,
+.liveticker main .section h3 {
   margin-top: 0;
 }
 
@@ -801,7 +1052,7 @@ main .section.highlight {
 .liveticker main .section .time {
   font-size: 1.17em;
   font-weight: 700;
-  font-size: var(--heading-font-size-l);
+  font-size: var(--heading-font-size-m);
   font-family: var(--heading-font-family);
   color: var(--text-title-color);
   line-height: 1.25;
