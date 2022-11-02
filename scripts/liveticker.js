@@ -173,7 +173,7 @@ async function addLiveTickerHeader(main) {
     </div>
   `);
 
-  const headerimage = createOptimizedPicture(image, desc, false, [
+  const headerimage = createOptimizedPicture(image, desc, true, [
     { media: '(max-width: 763px)', width: '320' },
     { media: '(min-width: 764px) and (max-width: 1015px)', width: '640' },
     { media: '(min-width: 1016px)', width: '1600' },
