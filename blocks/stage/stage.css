@@ -1,5 +1,6 @@
 main .section > div.stage-wrapper {
   padding: 0;
+  border-bottom: solid 10px yellow;
 }
 
 main .stage {
